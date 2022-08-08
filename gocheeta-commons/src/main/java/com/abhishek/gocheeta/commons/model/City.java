@@ -1,5 +1,6 @@
 package com.abhishek.gocheeta.commons.model;
 
+import com.abhishek.gocheeta.commons.util.Transformer;
 import lombok.*;
 
 import javax.persistence.Entity;
@@ -21,7 +22,7 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @Builder
 @ToString
-public class City {
+public class City implements Transformer {
 
     @Id
     @GeneratedValue
