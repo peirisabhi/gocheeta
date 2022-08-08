@@ -3,6 +3,7 @@ package com.abhishek.gocheeta.commons.model;
 import com.abhishek.gocheeta.commons.util.Transformer;
 import lombok.*;
 
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
