@@ -2,6 +2,7 @@ package com.abhishek.gocheeta.commons.model;
 
 import com.abhishek.gocheeta.commons.util.Transformer;
 import lombok.*;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -32,7 +33,7 @@ public class Driver implements Transformer {
     @Column(unique = true, length = 16)
     private String nic;
 
-    @Column(name = "registered_at", nullable = false)
+    @Column(name = "dob", nullable = false)
     @Temporal(TemporalType.DATE)
     private Date dob;
 
@@ -57,7 +58,7 @@ public class Driver implements Transformer {
     @Column(name = "driving_licence_back", length = 512)
     private String drivingLicenceBack;
 
-    @Column(name = "registered_at", nullable = false)
+    @Column(name = "registered_at", nullable = false, insertable = false, updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date registeredAt;
 
