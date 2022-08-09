@@ -11,6 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import static com.abhishek.gocheeta.adminservice.constant.ErrorMessage.CITY_ALREADY_EXISTS;
 import static com.abhishek.gocheeta.adminservice.constant.ErrorMessage.GENERAL_ERROR;
 
@@ -41,6 +44,21 @@ public class CityServiceImpl implements CityService {
             throw new GeneralException(GENERAL_ERROR);
         }
 
+
+    }
+
+    @Override
+    public List<CityDto> getCities() {
+
+        try {
+           return cityRepository.findAllByStatus(true)
+                    .stream()
+                    .map(city -> city.toDto(CityDto.class))
+                    .collect(Collectors.toList());
+        }catch (Exception e){
+            log.error(e.getLocalizedMessage());
+            throw new GeneralException(GENERAL_ERROR);
+        }
 
     }
 }

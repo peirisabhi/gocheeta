@@ -6,10 +6,9 @@ import com.abhishek.gocheeta.commons.model.City;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * Created by Intellij.
@@ -28,6 +27,11 @@ public class CityController {
     @PostMapping()
     public ResponseEntity<CityDto> saveCity(@RequestBody CityDto cityDto){
         return ResponseEntity.status(HttpStatus.CREATED).body(cityService.saveCity(cityDto));
+    }
+
+    @GetMapping
+    public ResponseEntity<List<CityDto>> getCities(){
+        return ResponseEntity.ok(cityService.getCities());
     }
 
 }
