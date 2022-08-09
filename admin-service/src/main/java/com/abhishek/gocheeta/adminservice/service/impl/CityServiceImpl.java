@@ -22,7 +22,7 @@ public class CityServiceImpl implements CityService {
     CityRepository cityRepository;
 
     @Override
-    public City saveCity(CityDto cityDto) {
+    public CityDto saveCity(CityDto cityDto) {
         log.info(cityDto.toString());
 
         try{
@@ -31,7 +31,7 @@ public class CityServiceImpl implements CityService {
                     .status(true)
                     .build();
 
-            return cityRepository.save(city);
+            return cityRepository.save(city).toDto(CityDto.class);
 
         }catch (DataIntegrityViolationException e){
             log.error(e.getLocalizedMessage());

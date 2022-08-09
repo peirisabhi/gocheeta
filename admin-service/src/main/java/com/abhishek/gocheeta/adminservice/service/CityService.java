@@ -5,6 +5,6 @@ import com.abhishek.gocheeta.commons.model.City;
 
 public interface CityService {
 
-    City saveCity(CityDto cityDto);
+    CityDto saveCity(CityDto cityDto);
 
 }
