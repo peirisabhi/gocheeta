@@ -11,4 +11,8 @@ public interface CityService {
 
     List<CityDto> getCities();
 
+    CityDto updateCity(CityDto cityDto);
+
+    CityDto removeCity(int id);
+
 }

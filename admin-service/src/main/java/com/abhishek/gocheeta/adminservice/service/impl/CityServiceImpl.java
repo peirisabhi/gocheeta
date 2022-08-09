@@ -1,6 +1,7 @@
 package com.abhishek.gocheeta.adminservice.service.impl;
 
 import com.abhishek.gocheeta.adminservice.dto.CityDto;
+import com.abhishek.gocheeta.adminservice.exception.DataNotFoundException;
 import com.abhishek.gocheeta.adminservice.exception.DuplicateDataFoundException;
 import com.abhishek.gocheeta.adminservice.exception.GeneralException;
 import com.abhishek.gocheeta.adminservice.repository.CityRepository;
@@ -14,8 +15,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.abhishek.gocheeta.adminservice.constant.ErrorMessage.CITY_ALREADY_EXISTS;
-import static com.abhishek.gocheeta.adminservice.constant.ErrorMessage.GENERAL_ERROR;
+import static com.abhishek.gocheeta.adminservice.constant.ErrorMessage.*;
 
 @Slf4j
 @Service
@@ -60,5 +60,40 @@ public class CityServiceImpl implements CityService {
             throw new GeneralException(GENERAL_ERROR);
         }
 
+    }
+
+    @Override
+    public CityDto updateCity(CityDto cityDto) {
+
+        City city = cityRepository.findById(cityDto.getId())
+                .orElseThrow(() -> new DataNotFoundException(CITY_NOT_FOUND));
+
+        try{
+             city.setCity(cityDto.getCity());
+
+            return cityRepository.save(city).toDto(CityDto.class);
+
+        }catch (DataIntegrityViolationException e){
+            log.error(e.getLocalizedMessage());
+            throw new DuplicateDataFoundException(CITY_ALREADY_EXISTS);
+        }catch (Exception e) {
+            log.error(e.getLocalizedMessage());
+            throw new GeneralException(GENERAL_ERROR);
+        }
+    }
+
+    @Override
+    public CityDto removeCity(int id) {
+        City city = cityRepository.findById(id)
+                .orElseThrow(() -> new DataNotFoundException(CITY_NOT_FOUND));
+
+        try{
+            city.setStatus(false);
+            return cityRepository.save(city).toDto(CityDto.class);
+
+        }catch (Exception e) {
+            log.error(e.getLocalizedMessage());
+            throw new GeneralException(GENERAL_ERROR);
+        }
     }
 }

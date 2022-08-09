@@ -11,7 +11,7 @@ import lombok.ToString;
 @ToString
 public class CityDto implements Transformer {
 
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+//    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private int id;
 
     private String city;

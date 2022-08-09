@@ -3,6 +3,7 @@ package com.abhishek.gocheeta.adminservice.controller;
 import com.abhishek.gocheeta.adminservice.dto.CityDto;
 import com.abhishek.gocheeta.adminservice.service.CityService;
 import com.abhishek.gocheeta.commons.model.City;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +20,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/city")
+@Slf4j
 public class CityController {
 
     @Autowired
@@ -34,4 +36,14 @@ public class CityController {
         return ResponseEntity.ok(cityService.getCities());
     }
 
+    @PutMapping
+    public ResponseEntity<CityDto> updateCity(@RequestBody CityDto cityDto){
+        log.info(cityDto.toString());
+        return ResponseEntity.status(HttpStatus.OK).body(cityService.updateCity(cityDto));
+    }
+
+    @DeleteMapping
+    public ResponseEntity<CityDto> removeCity(@RequestParam Integer cityId){
+        return ResponseEntity.status(HttpStatus.OK).body(cityService.removeCity(cityId));
+    }
 }
