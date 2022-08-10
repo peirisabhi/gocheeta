@@ -15,4 +15,5 @@ public interface CityService {
 
     CityDto removeCity(int id);
 
+    CityDto getCity(int id);
 }

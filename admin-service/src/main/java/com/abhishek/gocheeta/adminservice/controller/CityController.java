@@ -47,4 +47,9 @@ public class CityController {
         log.info(String.valueOf(cityId));
         return ResponseEntity.status(HttpStatus.OK).body(cityService.removeCity(cityId));
     }
+
+    @GetMapping("{cityId}")
+    public ResponseEntity<CityDto> getCity(@PathVariable(value = "cityId") int cityId){
+        return ResponseEntity.ok(cityService.getCity(cityId));
+    }
 }

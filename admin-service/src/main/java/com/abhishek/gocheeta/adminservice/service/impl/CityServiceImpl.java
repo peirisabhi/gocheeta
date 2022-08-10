@@ -96,4 +96,11 @@ public class CityServiceImpl implements CityService {
             throw new GeneralException(GENERAL_ERROR);
         }
     }
+
+    @Override
+    public CityDto getCity(int id) {
+        return cityRepository.findById(id)
+                .orElseThrow(() -> new DataNotFoundException(CITY_NOT_FOUND))
+                .toDto(CityDto.class);
+    }
 }
