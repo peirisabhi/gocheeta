@@ -7,4 +7,5 @@ public class ErrorMessage {
     public static final String CITY_NOT_FOUND = "Can not found this city!";
     public static final String GENERAL_ERROR = "Something Went Wrong!";
 
+    public static final String USER_ROLE_NOT_FOUND = "Can not found this user role!";
 }
