@@ -42,8 +42,9 @@ public class CityController {
         return ResponseEntity.status(HttpStatus.OK).body(cityService.updateCity(cityDto));
     }
 
-    @DeleteMapping
-    public ResponseEntity<CityDto> removeCity(@RequestParam Integer cityId){
+    @DeleteMapping("{cityId}")
+    public ResponseEntity<CityDto> removeCity(@PathVariable(value = "cityId") int cityId){
+        log.info(String.valueOf(cityId));
         return ResponseEntity.status(HttpStatus.OK).body(cityService.removeCity(cityId));
     }
 }
