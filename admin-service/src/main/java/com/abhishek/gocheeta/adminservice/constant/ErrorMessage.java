@@ -12,4 +12,6 @@ public class ErrorMessage {
     public static final String VEHICLE_CATEGORY_NOT_FOUND = "Can not found this vehicle category!";
 
     public static final String VEHICLE_CATEGORY_ALREADY_EXISTS = "This vehicle category already exists!";
+
+    public static final String LICENCE_TYPE_NOT_FOUND = "Can not found this licence type!";
 }
