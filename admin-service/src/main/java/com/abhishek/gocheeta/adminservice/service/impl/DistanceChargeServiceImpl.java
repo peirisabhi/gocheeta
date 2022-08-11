@@ -2,20 +2,22 @@ package com.abhishek.gocheeta.adminservice.service.impl;
 
 import com.abhishek.gocheeta.adminservice.dto.DistanceChargeDto;
 import com.abhishek.gocheeta.adminservice.exception.DataNotFoundException;
-import com.abhishek.gocheeta.adminservice.exception.DuplicateDataFoundException;
 import com.abhishek.gocheeta.adminservice.exception.GeneralException;
 import com.abhishek.gocheeta.adminservice.repository.DistanceChargeRepository;
 import com.abhishek.gocheeta.adminservice.service.DistanceChargeService;
+import com.abhishek.gocheeta.adminservice.util.DateUtil;
 import com.abhishek.gocheeta.commons.model.DistanceCharge;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
-import static com.abhishek.gocheeta.adminservice.constant.ErrorMessage.*;
+import static com.abhishek.gocheeta.adminservice.constant.ErrorMessage.DISTANCE_CHARGE_NOT_FOUND;
+import static com.abhishek.gocheeta.adminservice.constant.ErrorMessage.GENERAL_ERROR;
 
 /**
  * Created by Intellij.
@@ -55,14 +57,14 @@ public class DistanceChargeServiceImpl implements DistanceChargeService {
 
         try {
             distanceCharge.setKmFrom(distanceChargeDto.getKmFrom());
-            distanceCharge.setKmTo(distanceCharge.getKmTo());
+            distanceCharge.setKmTo(distanceChargeDto.getKmTo());
             distanceCharge.setPrice(distanceChargeDto.getPrice());
             distanceCharge.setLastUpdate(new Date());
 
             return distanceChargeRepository.save(distanceCharge)
                     .toDto(DistanceChargeDto.class);
 
-        }catch (Exception e) {
+        } catch (Exception e) {
             log.error(e.getLocalizedMessage());
             throw new GeneralException(GENERAL_ERROR);
         }
@@ -75,20 +77,34 @@ public class DistanceChargeServiceImpl implements DistanceChargeService {
         final DistanceCharge distanceCharge = distanceChargeRepository.findById(id)
                 .orElseThrow(() -> new DataNotFoundException(DISTANCE_CHARGE_NOT_FOUND));
 
-//       try {
-//          return distanceChargeRepository.delete(distanceCharge).toDto(DistanceChargeDto.class);
-//       }
+        try {
+            distanceChargeRepository.delete(distanceCharge);
+            return distanceCharge.toDto(DistanceChargeDto.class);
+        } catch (EmptyResultDataAccessException e) {
+            log.error(e.getLocalizedMessage());
+            throw new DataNotFoundException(DISTANCE_CHARGE_NOT_FOUND);
+        }
 
-        return null;
     }
 
     @Override
     public List<DistanceChargeDto> getDistanceCharges() {
-        return null;
+        return distanceChargeRepository.findAll().stream()
+                .map((distanceCharge) -> {
+                    final DistanceChargeDto distanceChargeDto = distanceCharge.toDto(DistanceChargeDto.class);
+                    distanceChargeDto.setLastUpdate(DateUtil.getStringDateWith12Time(distanceCharge.getLastUpdate()));
+                    return distanceChargeDto;
+                })
+                .collect(Collectors.toList());
     }
 
     @Override
     public DistanceChargeDto getDistanceCharge(int id) {
-        return null;
+        final DistanceCharge distanceCharge = distanceChargeRepository.findById(id)
+                .orElseThrow(() -> new DataNotFoundException(DISTANCE_CHARGE_NOT_FOUND));
+        final DistanceChargeDto distanceChargeDto = distanceCharge.toDto(DistanceChargeDto.class);
+        distanceChargeDto.setLastUpdate(DateUtil.getStringDateWith12Time(distanceCharge.getLastUpdate()));
+
+        return distanceChargeDto;
     }
 }

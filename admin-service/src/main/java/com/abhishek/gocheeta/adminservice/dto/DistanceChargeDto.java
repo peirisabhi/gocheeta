@@ -1,6 +1,7 @@
 package com.abhishek.gocheeta.adminservice.dto;
 
 import com.abhishek.gocheeta.commons.util.Transformer;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -18,11 +19,14 @@ public class DistanceChargeDto implements Transformer {
 
     private int id;
 
+    @JsonProperty("km_from")
     private int kmFrom;
 
+    @JsonProperty("km_to")
     private int kmTo;
 
     private double price;
 
+    @JsonProperty("last_update")
     private String lastUpdate;
 }
