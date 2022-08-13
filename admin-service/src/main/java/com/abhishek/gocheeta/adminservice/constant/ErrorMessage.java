@@ -21,4 +21,8 @@ public class ErrorMessage {
     public static final String USER_ALREADY_EXISTS = "This user already exists!";
 
     public static final String USER_NOT_FOUND = "Can not found this user!";
+
+    public static final String CUSTOMER_ALREADY_EXISTS = "This customer already exists!";
+
+    public static final String CUSTOMER_NOT_FOUND = "Can not found this Customer!";
 }
