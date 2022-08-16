@@ -25,4 +25,8 @@ public class ErrorMessage {
     public static final String CUSTOMER_ALREADY_EXISTS = "This customer already exists!";
 
     public static final String CUSTOMER_NOT_FOUND = "Can not found this Customer!";
+
+    public static final String DRIVER_NOT_FOUND = "Can not found this Driver!";
+
+    public static final String DRIVER_ALREADY_EXISTS = "This driver already exists!";
 }

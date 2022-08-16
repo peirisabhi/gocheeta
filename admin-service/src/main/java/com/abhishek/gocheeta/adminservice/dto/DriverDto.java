@@ -2,9 +2,11 @@ package com.abhishek.gocheeta.adminservice.dto;
 
 import com.abhishek.gocheeta.commons.util.Transformer;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.sun.xml.internal.ws.developer.Serialization;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * Created by Intellij.
@@ -16,6 +18,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
+@Serialization
 public class DriverDto implements Transformer {
 
     private int id;
@@ -36,28 +39,28 @@ public class DriverDto implements Transformer {
 
     private String contact2;
 
-    @JsonProperty("licence_type_id")
+    @JsonProperty("")
     private int licenceTypeId;
 
     @JsonProperty("licence_type")
     private int licenceType;
 
     @JsonProperty("nic_front")
-    private String nicFront;
+    private MultipartFile nicFront;
 
     @JsonProperty("nic_back")
-    private String nicBack;
+    private MultipartFile nicBack;
 
     @JsonProperty("driving_licence_front")
-    private String drivingLicenceFront;
+    private MultipartFile drivingLicenceFront;
 
     @JsonProperty("driving_licence_back")
-    private String drivingLicenceBack;
+    private MultipartFile drivingLicenceBack;
 
     @JsonProperty("registered_at")
     private String registeredAt;
 
     @JsonProperty("registered_by")
-    private String registeredBy;
+    private int registeredBy;
 
 }
