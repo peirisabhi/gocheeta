@@ -58,7 +58,7 @@ public class Driver implements Transformer {
     @Column(name = "driving_licence_back", length = 512)
     private String drivingLicenceBack;
 
-    @Column(name = "registered_at", nullable = false, insertable = false, updatable = false)
+    @Column(name = "registered_at", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date registeredAt;
 
