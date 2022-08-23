@@ -1667,7 +1667,7 @@ html.menu-opened body {
 -----------------------*/
 
 .sidebar {
-    background-color: #1b5a90;
+    background-color: #f6f6f6;
    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);*/
     bottom: 0;
     left: 0;
@@ -1699,7 +1699,7 @@ html.menu-opened body {
 	position: relative;
 }
 .sidebar-menu li a {
-	color: #fff;
+	color: #0e1726;
 	display: block;
 	font-size: 16px;
 	height: auto;
@@ -1709,7 +1709,7 @@ html.menu-opened body {
     color: #5ae8ff;
 }
 .sidebar-menu > ul > li > a:hover {
-	background-color: #19c1dc;
+	background-color: #f2b600;
     color: #fff;
 }
 .sidebar-menu > ul > li.active > a:hover {
@@ -1718,10 +1718,10 @@ html.menu-opened body {
 }
 .sidebar-menu li.active a {
     background-color: #f2b600;
-    color: #fff;
+    color: #0e1726;
 }
 .menu-title {
-    color: #ebebeb;
+    color: #0e1726;
     display: flex;
     font-size: 14px;
     opacity: 1;
@@ -1739,7 +1739,7 @@ html.menu-opened body {
     padding: 0;
 }
 .sidebar-menu li.menu-title a.btn {
-    color: #fff;
+    color: #0e1726;
     display: block;
     float: none;
     font-size: 15px;
@@ -1786,6 +1786,9 @@ html.menu-opened body {
 .sidebar-menu > ul > li {
     margin-bottom: 3px;
     position: relative;
+  /*box-shadow: 0 1px 3px 0 rgba(0,0,0,.1), 0 1px 2px 0 rgba(0,0,0,.06);*/
+  /*border-radius: 6px;*/
+  /*background-color: #FFFFFF;*/
 }
 .sidebar-menu > ul > li:last-child {
     margin-bottom: 0;
@@ -1830,7 +1833,7 @@ html.menu-opened body {
     padding: 8px 15px;
     position: relative;
     transition: all 0.2s ease-in-out 0s;
-	color: #f1f1f1;
+	color: #0e1726;
 }
 .sidebar-menu ul li a i {
 	display: inline-block;
@@ -1848,7 +1851,7 @@ html.menu-opened body {
 	width: auto;
 }
 .sidebar-menu li a > .badge {
-    color: #fff;
+    color: #0e1726;
 }
 /*-----------------
 	6. Toggle Button
