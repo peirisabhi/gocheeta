@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
-import { environment } from '../../../environments/environment';
+import {environment} from '../../../environments/environment';
 import {UserRoleService} from "../../service/user-role-service/user-role.service";
 import {UserRole} from "../../model/user-role-model/user-role";
 
@@ -13,7 +13,7 @@ export class UserComponent implements OnInit {
 
   userRoles: UserRole[] = [];
 
-  constructor(private modalService: NgbModal, private userRoleService : UserRoleService) {
+  constructor(private modalService: NgbModal, private userRoleService: UserRoleService) {
   }
 
   ngOnInit(): void {
@@ -26,11 +26,11 @@ export class UserComponent implements OnInit {
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'});
   }
 
-  close(content:any){
+  close(content: any) {
     this.modalService.dismissAll();
   }
 
-  getUserRoles(){
+  getUserRoles() {
     this.userRoleService.getUserRoles().subscribe(data => {
       this.userRoles = data;
       console.log(data);
