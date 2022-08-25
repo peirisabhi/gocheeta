@@ -217,10 +217,9 @@
         <div class="col-12 col-sm-6">
           <div class="form-group">
             <label>User Role</label>
-            <select class="form-control">
+            <select class="form-control" *ngFor="let userRole of userRoles">
               <option>-- Select --</option>
-              <option>Admin</option>
-              <option>User</option>
+              <option >{{userRole.role}}</option>
             </select>
           </div>
         </div>

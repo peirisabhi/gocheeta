@@ -9,6 +9,7 @@ import { TopbarComponent } from './component/common/topbar/topbar.component';
 import { SideNavbarComponent } from './component/common/side-navbar/side-navbar.component';
 import { UserComponent } from './component/user/user.component';
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgbModule
+    NgbModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
