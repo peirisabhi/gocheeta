@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-user',
@@ -7,11 +8,12 @@ import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./user.component.css']
 })
 export class UserComponent implements OnInit {
-  
+
   constructor(private modalService: NgbModal) {
   }
 
   ngOnInit(): void {
+    console.log(environment.title)
   }
 
   open(content: any) {
