@@ -174,42 +174,42 @@
   </div>
 
   <div class="modal-body">
-    <form>
+    <form (ngSubmit)="saveUser()">
       <div class="row form-row">
         <div class="col-12 col-sm-6">
           <div class="form-group">
             <label>First Name</label>
-            <input type="text" class="form-control">
+            <input type="text" name="fname" [(ngModel)]="user.fname" class="form-control">
           </div>
         </div>
         <div class="col-12 col-sm-6">
           <div class="form-group">
             <label>Last Name</label>
-            <input type="text" class="form-control">
+            <input type="text" name="lname" [(ngModel)]="user.lname" class="form-control">
           </div>
         </div>
 
         <div class="col-12">
           <div class="form-group">
             <label>Email</label>
-            <input type="text" class="form-control">
+            <input type="text" name="email" [(ngModel)]="user.email" class="form-control">
           </div>
         </div>
 
         <div class="col-12">
           <div class="form-group">
             <label>Nic</label>
-            <input type="text" class="form-control">
+            <input type="text" name="nic" [(ngModel)]="user.nic" class="form-control">
           </div>
         </div>
 
         <div class="col-12 col-sm-6">
           <div class="form-group">
             <label>Gender</label>
-            <select class="form-control">
-              <option>-- Select --</option>
-              <option>Male</option>
-              <option>Fe-Male</option>
+            <select class="form-control" name="gender" [(ngModel)]="user.gender">
+              <option value="0" selected disabled>-- Select --</option>
+              <option value="male">Male</option>
+              <option value="fe-male">Fe-Male</option>
             </select>
           </div>
         </div>
@@ -217,8 +217,8 @@
         <div class="col-12 col-sm-6">
           <div class="form-group">
             <label>User Role</label>
-            <select class="form-control">
-              <option>-- Select --</option>
+            <select class="form-control" name="user_role_id" [(ngModel)]="user.user_role_id">
+              <option value="0" selected disabled>-- Select --</option>
               <option *ngFor="let userRole of userRoles" value="{{userRole.id}}">{{userRole.role}}</option>
             </select>
           </div>
