@@ -8,20 +8,19 @@ export class NotificationService {
 
   constructor(private toast: ToastrService) { }
 
-  showSuccess(message : String, title : String){
+  showSuccess(message : string, title : string){
     this.toast.success(message, title)
   }
 
-  showError(message : String, title : String){
+  showError(message : string, title : string){
     this.toast.error(message, title)
   }
 
-  showInfo(message : String, title : String){
+  showInfo(message : string, title : string){
     this.toast.info(message, title)
-    this.toast.info(message, title);
   }
 
-  showWarning(message : String, title : String){
+  showWarning(message : string, title : string){
     this.toast.warning(message, title)
   }
 }

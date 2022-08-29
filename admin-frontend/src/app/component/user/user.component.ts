@@ -20,7 +20,7 @@ export class UserComponent implements OnInit {
   constructor(private modalService: NgbModal,
               private userRoleService: UserRoleService,
               private userService: UserService,
-              private notifyService : NotificationService) {
+              private notifyService: NotificationService) {
   }
 
   ngOnInit(): void {
@@ -44,11 +44,15 @@ export class UserComponent implements OnInit {
     })
   }
 
-  saveUser(){
+  saveUser() {
+    console.log("okk")
+
+
     this.userService.saveUser(this.user)
       .subscribe(data => {
-          console.log("saving --- " + data);
-          this.user = new User();
+        console.log("saving --- " + data);
+        this.user = new User();
+        this.notifyService.showSuccess("Successfully User Saved", "Success");
       })
   }
 
