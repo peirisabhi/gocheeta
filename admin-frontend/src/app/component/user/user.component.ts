@@ -5,6 +5,7 @@ import {UserRoleService} from "../../service/user-role-service/user-role.service
 import {UserRole} from "../../model/user-role-model/user-role";
 import {User} from "../../model/user-model/user";
 import {UserService} from "../../service/user-service/user.service";
+import {NotificationService} from "../../service/notification-service/notification.service";
 
 @Component({
   selector: 'app-user',
@@ -18,7 +19,8 @@ export class UserComponent implements OnInit {
 
   constructor(private modalService: NgbModal,
               private userRoleService: UserRoleService,
-              private userService: UserService) {
+              private userService: UserService,
+              private notifyService : NotificationService) {
   }
 
   ngOnInit(): void {
