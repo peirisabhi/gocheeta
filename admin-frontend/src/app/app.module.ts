@@ -13,6 +13,7 @@ import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {HttpClientModule} from "@angular/common/http";
 import {FormsModule} from "@angular/forms";
 import { ToastrModule } from 'ngx-toastr';
+import {DataTablesModule} from "angular-datatables";
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { ToastrModule } from 'ngx-toastr';
     HttpClientModule,
     FormsModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    DataTablesModule
 
   ],
   providers: [],
