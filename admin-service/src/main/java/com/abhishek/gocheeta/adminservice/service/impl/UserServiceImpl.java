@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.abhishek.gocheeta.adminservice.constant.ErrorMessage.*;
 
@@ -33,17 +34,17 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto saveUser(UserDto userDto) {
 
-        try{
+        try {
             final User user = userDto.toEntity(User.class);
             user.setRegisteredAt(new Date());
             user.setStatus(1);
 
             return userRepository.save(user)
                     .toDto(UserDto.class);
-        }catch (DataIntegrityViolationException e){
+        } catch (DataIntegrityViolationException e) {
             log.error(e.getLocalizedMessage());
             throw new DuplicateDataFoundException(USER_ALREADY_EXISTS);
-        }catch (Exception e) {
+        } catch (Exception e) {
             log.error(e.getLocalizedMessage());
             throw new GeneralException(GENERAL_ERROR);
         }
@@ -55,7 +56,7 @@ public class UserServiceImpl implements UserService {
         final User user = userRepository.findById(userDto.getId())
                 .orElseThrow(() -> new DataNotFoundException(USER_NOT_FOUND));
 
-        try{
+        try {
             user.setFname(userDto.getFname());
             user.setLname(userDto.getLname());
             user.setCityId(userDto.getCityId());
@@ -66,10 +67,10 @@ public class UserServiceImpl implements UserService {
 
             return userRepository.save(user)
                     .toDto(UserDto.class);
-        }catch (DataIntegrityViolationException e){
+        } catch (DataIntegrityViolationException e) {
             log.error(e.getLocalizedMessage());
             throw new DuplicateDataFoundException(USER_ALREADY_EXISTS);
-        }catch (Exception e) {
+        } catch (Exception e) {
             log.error(e.getLocalizedMessage());
             throw new GeneralException(GENERAL_ERROR);
         }
@@ -88,26 +89,37 @@ public class UserServiceImpl implements UserService {
         final User user = userRepository.findById(id)
                 .orElseThrow(() -> new DataNotFoundException(USER_NOT_FOUND));
 
-        try{
+        try {
             user.setStatus(0);
 
             return userRepository.save(user)
                     .toDto(UserDto.class);
-        }catch (Exception e) {
+        } catch (Exception e) {
             log.error(e.getLocalizedMessage());
             throw new GeneralException(GENERAL_ERROR);
         }
     }
 
     @Override
-    public List<UserDto> getUsers() {
-//         userRepository.findAllByStatus(1)
-//                .stream().map((user) -> {
-//                    final UserDto userDto = user.toDto(UserDto.class);
-//                    userDto.
-//                });
+    public List<UserDto> getUsers(String value) {
+       return userRepository.findAllByStatus(1)
+                .stream()
+                .filter(user ->
+                        String.valueOf(user.getId()).startsWith(value)
+                                || user.getFname().startsWith(value)
+                                || user.getLname().startsWith(value)
+                                || user.getGender().startsWith(value)
+                                || user.getEmail().startsWith(value)
 
-         return null;
+                )
+                .map((user) -> {
+                    final UserDto userDto = user.toDto(UserDto.class);
+//                    userDto.
+                    return userDto;
+                })
+                .collect(Collectors.toList());
+
+//        return null;
 
     }
 }

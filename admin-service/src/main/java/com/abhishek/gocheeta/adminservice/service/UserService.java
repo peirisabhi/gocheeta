@@ -21,6 +21,6 @@ public interface UserService {
 
     UserDto removeUser(int id);
 
-    List<UserDto> getUsers();
+    List<UserDto> getUsers(String value);
 
 }
