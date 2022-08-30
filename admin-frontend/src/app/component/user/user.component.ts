@@ -6,6 +6,16 @@ import {UserRole} from "../../model/user-role-model/user-role";
 import {User} from "../../model/user-model/user";
 import {UserService} from "../../service/user-service/user.service";
 import {NotificationService} from "../../service/notification-service/notification.service";
+import {HttpClient} from "@angular/common/http";
+
+class DataTablesResponse {
+  data?: any[];
+  draw?: number;
+  recordsFiltered?: number;
+  recordsTotal?: number;
+}
+
+let apiURL = environment.apiURL;
 
 @Component({
   selector: 'app-user',
@@ -16,16 +26,51 @@ export class UserComponent implements OnInit {
 
   userRoles: UserRole[] = [];
   user: User = new User();
+  dtOptions: DataTables.Settings = {};
+  users?: any[];
+
 
   constructor(private modalService: NgbModal,
               private userRoleService: UserRoleService,
               private userService: UserService,
-              private notifyService: NotificationService) {
+              private notifyService: NotificationService,
+              private http: HttpClient) {
   }
 
   ngOnInit(): void {
     console.log(environment.title)
     this.getUserRoles();
+
+    this.dtOptions = {
+      serverSide: true,
+      processing: true,
+      ajax: (dataTablesParameters: any, callback) => {
+        this.http
+          .post<DataTablesResponse>(
+            apiURL + 'user/get',
+            dataTablesParameters, {}
+          ).subscribe(resp => {
+          console.log("data table called")
+          this.users = resp.data;
+
+          callback({
+            recordsTotal: resp.recordsTotal,
+            recordsFiltered: resp.recordsFiltered,
+            data: []
+          });
+        });
+      },
+      columns: [
+        {data: 'id'},
+        {data: 'fname'},
+        {data: 'lname'},
+        {data: 'email'},
+        {data: 'gender'},
+        {data: 'nic'}
+
+      ]
+    };
+
   }
 
   open(content: any) {
