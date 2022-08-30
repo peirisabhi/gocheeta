@@ -2,6 +2,8 @@ package com.abhishek.gocheeta.adminservice.controller;
 
 import com.abhishek.gocheeta.adminservice.dto.DistanceChargeDto;
 import com.abhishek.gocheeta.adminservice.dto.UserDto;
+import com.abhishek.gocheeta.adminservice.dto.datatable.DataTableRequest;
+import com.abhishek.gocheeta.adminservice.dto.datatable.DataTableResponse;
 import com.abhishek.gocheeta.adminservice.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,5 +44,17 @@ public class UserController {
             @PathVariable(value = "userId") int userId){
         return ResponseEntity.status(HttpStatus.OK)
                 .body(userService.removeUser(userId));
+    }
+
+
+    @PostMapping("/get")
+    public DataTableResponse<UserDto> User(@RequestBody DataTableRequest dataTableRequest) {
+
+        System.out.println("value - ");
+
+        System.out.println(" -- dataTableRequest -- " + dataTableRequest.toString());
+
+//        return userService.getUsers(dataTableRequest);
+        return userService.getUsers(dataTableRequest);
     }
 }

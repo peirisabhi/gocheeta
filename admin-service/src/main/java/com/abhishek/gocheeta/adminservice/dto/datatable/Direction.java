@@ -4,5 +4,7 @@ package com.abhishek.gocheeta.adminservice.dto.datatable;/**
  * Date: 2022-08-30
  * Time: 09:20
  */
-public class Direction {
+public enum Direction {
+    asc,
+    desc;
 }

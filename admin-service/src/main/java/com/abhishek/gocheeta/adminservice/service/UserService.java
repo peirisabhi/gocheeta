@@ -1,6 +1,8 @@
 package com.abhishek.gocheeta.adminservice.service;
 
 import com.abhishek.gocheeta.adminservice.dto.UserDto;
+import com.abhishek.gocheeta.adminservice.dto.datatable.DataTableRequest;
+import com.abhishek.gocheeta.adminservice.dto.datatable.DataTableResponse;
 import com.abhishek.gocheeta.commons.model.User;
 
 import java.util.List;
@@ -21,6 +23,6 @@ public interface UserService {
 
     UserDto removeUser(int id);
 
-    List<UserDto> getUsers(String value);
+    DataTableResponse<UserDto> getUsers(DataTableRequest dataTableRequest);
 
 }

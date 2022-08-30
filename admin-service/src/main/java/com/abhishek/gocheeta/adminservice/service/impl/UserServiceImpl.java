@@ -1,6 +1,8 @@
 package com.abhishek.gocheeta.adminservice.service.impl;
 
 import com.abhishek.gocheeta.adminservice.dto.UserDto;
+import com.abhishek.gocheeta.adminservice.dto.datatable.DataTableRequest;
+import com.abhishek.gocheeta.adminservice.dto.datatable.DataTableResponse;
 import com.abhishek.gocheeta.adminservice.exception.DataNotFoundException;
 import com.abhishek.gocheeta.adminservice.exception.DuplicateDataFoundException;
 import com.abhishek.gocheeta.adminservice.exception.GeneralException;
@@ -101,8 +103,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<UserDto> getUsers(String value) {
-       return userRepository.findAllByStatus(1)
+    public DataTableResponse<UserDto> getUsers(DataTableRequest dataTableRequest) {
+        final String value = dataTableRequest.getSearch().getValue();
+        final List<UserDto> userDtoList = userRepository.findAllByStatus(1)
                 .stream()
                 .filter(user ->
                         String.valueOf(user.getId()).startsWith(value)
@@ -119,7 +122,14 @@ public class UserServiceImpl implements UserService {
                 })
                 .collect(Collectors.toList());
 
-//        return null;
+        DataTableResponse<UserDto> userDataTableResponse = new DataTableResponse<>();
+
+        userDataTableResponse.setData(userDtoList);
+        userDataTableResponse.setDraw(dataTableRequest.getDraw());
+        userDataTableResponse.setRecordsTotal(userDtoList.size());
+        userDataTableResponse.setRecordsFiltered(userDtoList.size());
+
+        return userDataTableResponse;
 
     }
 }
