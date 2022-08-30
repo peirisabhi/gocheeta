@@ -1,6 +1,9 @@
 package com.abhishek.gocheeta.adminservice.controller;
 
+import com.abhishek.gocheeta.adminservice.dto.CityDto;
 import com.abhishek.gocheeta.adminservice.dto.VehicleCategoryDto;
+import com.abhishek.gocheeta.adminservice.dto.datatable.DataTableRequest;
+import com.abhishek.gocheeta.adminservice.dto.datatable.DataTableResponse;
 import com.abhishek.gocheeta.adminservice.service.VehicleCategoryService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,8 +57,15 @@ public class VehicleCategoryController {
 
     @DeleteMapping("{vehicleCategoryId}")
     public ResponseEntity<VehicleCategoryDto> removeVehicleCategory(
-            @PathVariable(value = "vehicleCategoryId") int vehicleCategoryId){
+            @PathVariable(value = "vehicleCategoryId") int vehicleCategoryId) {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(vehicleCategoryService.removeVehicleCategory(vehicleCategoryId));
+    }
+
+
+    @PostMapping("/data")
+    public DataTableResponse<VehicleCategoryDto> getVehicleCategoriesForDataTable(
+            @RequestBody DataTableRequest dataTableRequest) {
+        return vehicleCategoryService.getVehicleCategoriesForDataTable(dataTableRequest);
     }
 }

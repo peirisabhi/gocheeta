@@ -1,6 +1,9 @@
 package com.abhishek.gocheeta.adminservice.service.impl;
 
+import com.abhishek.gocheeta.adminservice.dto.CityDto;
 import com.abhishek.gocheeta.adminservice.dto.VehicleCategoryDto;
+import com.abhishek.gocheeta.adminservice.dto.datatable.DataTableRequest;
+import com.abhishek.gocheeta.adminservice.dto.datatable.DataTableResponse;
 import com.abhishek.gocheeta.adminservice.exception.DataNotFoundException;
 import com.abhishek.gocheeta.adminservice.exception.DuplicateDataFoundException;
 import com.abhishek.gocheeta.adminservice.exception.GeneralException;
@@ -105,5 +108,25 @@ public class VehicleCategoryServiceImpl implements VehicleCategoryService {
             log.error(e.getLocalizedMessage());
             throw new GeneralException(GENERAL_ERROR);
         }
+    }
+
+    @Override
+    public DataTableResponse<VehicleCategoryDto> getVehicleCategoriesForDataTable(DataTableRequest dataTableRequest) {
+        final String value = dataTableRequest.getSearch().getValue();
+
+        final List<VehicleCategoryDto> vehicleCategoryDtoList = vehicleCategoryRepository.findAllByStatus(true)
+                .stream()
+                .filter(vehicleCategory -> String.valueOf(vehicleCategory.getId()).startsWith(value)
+                        || vehicleCategory.getCategory().toLowerCase().startsWith(value))
+                .map(vehicleCategory -> vehicleCategory.toDto(VehicleCategoryDto.class))
+                .collect(Collectors.toList());
+
+        DataTableResponse<VehicleCategoryDto> vehicleCategoryDtoDataTableResponse = new DataTableResponse<>();
+        vehicleCategoryDtoDataTableResponse.setData(vehicleCategoryDtoList);
+        vehicleCategoryDtoDataTableResponse.setDraw(dataTableRequest.getDraw());
+        vehicleCategoryDtoDataTableResponse.setRecordsTotal(vehicleCategoryDtoList.size());
+        vehicleCategoryDtoDataTableResponse.setRecordsFiltered(vehicleCategoryDtoList.size());
+
+        return vehicleCategoryDtoDataTableResponse;
     }
 }
