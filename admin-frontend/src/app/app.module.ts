@@ -17,6 +17,7 @@ import {DataTablesModule} from "angular-datatables";
 import { CityComponent } from './component/city/city.component';
 import { DistanceChargeComponent } from './component/distance-charge/distance-charge.component';
 import { VehicleCategoryComponent } from './component/vehicle-category/vehicle-category.component';
+import { DriverComponent } from './component/driver/driver.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { VehicleCategoryComponent } from './component/vehicle-category/vehicle-c
     UserComponent,
     CityComponent,
     DistanceChargeComponent,
-    VehicleCategoryComponent
+    VehicleCategoryComponent,
+    DriverComponent
   ],
   imports: [
     BrowserModule,
