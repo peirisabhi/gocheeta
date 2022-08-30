@@ -1,7 +1,7 @@
 export class DistanceCharge {
   id?: number;
-  kmFrom?: number;
-  kmTo?: number;
+  km_from?: number;
+  km_to?: number;
   price?: number;
-  lastUpdate?: string;
+  last_update?: string;
 }
