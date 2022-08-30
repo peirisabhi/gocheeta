@@ -113,8 +113,8 @@ public class CityServiceImpl implements CityService {
         final List<CityDto> cityDtoList = cityRepository.findAllByStatus(true)
                 .stream()
                 .filter(city ->
-                        String.valueOf(city.getId()).startsWith(value)
-                                || city.getCity().startsWith(value))
+                        String.valueOf(city.getId()).toLowerCase().startsWith(value)
+                                || city.getCity().toLowerCase().startsWith(value))
                 .map(city -> city.toDto(CityDto.class))
                 .collect(Collectors.toList());
 
