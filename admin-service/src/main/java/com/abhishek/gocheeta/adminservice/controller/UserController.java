@@ -48,7 +48,7 @@ public class UserController {
 
 
     @PostMapping("/get")
-    public DataTableResponse<UserDto> User(@RequestBody DataTableRequest dataTableRequest) {
+    public DataTableResponse<UserDto> getUsersForDataTable(@RequestBody DataTableRequest dataTableRequest) {
 
         System.out.println("value - ");
 
