@@ -5,6 +5,8 @@ import {VehicleCategory} from "../../model/vehicle-category-model/vehicle-catego
 import {VehicleCategoryService} from "../../service/vehicle-category-service/vehicle-category.service";
 import {City} from "../../model/city-model/city";
 import {NotificationService} from "../../service/notification-service/notification.service";
+import {DataTablesResponse} from "../../model/data-tables-response-model/data-tables-response";
+import {HttpClient} from "@angular/common/http";
 
 let apiURL = environment.apiURL;
 
@@ -16,14 +18,18 @@ let apiURL = environment.apiURL;
 export class VehicleCategoryComponent implements OnInit {
 
   vehicleCategory: VehicleCategory = new VehicleCategory();
+  dtOptions: DataTables.Settings = {};
+  vehicleCategories ?: any[];
 
   constructor(private modalService: NgbModal,
               private vehicleCategoryService: VehicleCategoryService,
-              private notifyService: NotificationService,) {
+              private notifyService: NotificationService,
+              private http: HttpClient) {
 
   }
 
   ngOnInit(): void {
+    this.loadDataTable()
   }
 
   open(content: any) {
@@ -42,6 +48,32 @@ export class VehicleCategoryComponent implements OnInit {
         this.vehicleCategory = new VehicleCategory();
         this.notifyService.showSuccess("Successfully Category Saved", "Success");
       })
+  }
+
+  loadDataTable() {
+    this.dtOptions = {
+      serverSide: true,
+      processing: true,
+      ajax: (dataTablesParameters: any, callback) => {
+        this.http
+          .post<DataTablesResponse>(
+            apiURL + 'vehicle-category/data',
+            dataTablesParameters, {}
+          ).subscribe(resp => {
+          this.vehicleCategories = resp.data;
+
+          callback({
+            recordsTotal: resp.recordsTotal,
+            recordsFiltered: resp.recordsFiltered,
+            data: []
+          });
+        });
+      },
+      columns: [
+        {data: 'id'},
+        {data: 'city'}
+      ]
+    };
   }
 
 }
