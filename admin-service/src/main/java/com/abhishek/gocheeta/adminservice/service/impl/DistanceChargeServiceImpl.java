@@ -1,6 +1,9 @@
 package com.abhishek.gocheeta.adminservice.service.impl;
 
+import com.abhishek.gocheeta.adminservice.dto.CityDto;
 import com.abhishek.gocheeta.adminservice.dto.DistanceChargeDto;
+import com.abhishek.gocheeta.adminservice.dto.datatable.DataTableRequest;
+import com.abhishek.gocheeta.adminservice.dto.datatable.DataTableResponse;
 import com.abhishek.gocheeta.adminservice.exception.DataNotFoundException;
 import com.abhishek.gocheeta.adminservice.exception.GeneralException;
 import com.abhishek.gocheeta.adminservice.repository.DistanceChargeRepository;
@@ -106,5 +109,31 @@ public class DistanceChargeServiceImpl implements DistanceChargeService {
         distanceChargeDto.setLastUpdate(DateUtil.getStringDateWith12Time(distanceCharge.getLastUpdate()));
 
         return distanceChargeDto;
+    }
+
+    @Override
+    public DataTableResponse<DistanceChargeDto> getDistanceChargesForDataTable(DataTableRequest dataTableRequest) {
+        final String value = dataTableRequest.getSearch().getValue();
+
+        final List<DistanceChargeDto> distanceChargeDtoList = distanceChargeRepository.findAll()
+                .stream()
+                .filter(distanceCharge ->
+                        String.valueOf(distanceCharge.getId()).startsWith(value)
+                                || String.valueOf(distanceCharge.getKmFrom()).startsWith(value)
+                                || String.valueOf(distanceCharge.getKmTo()).startsWith(value)
+                                || String.valueOf(distanceCharge.getPrice()).startsWith(value))
+                .map(distanceCharge -> {
+                    final DistanceChargeDto distanceChargeDto = distanceCharge.toDto(DistanceChargeDto.class);
+                    distanceChargeDto.setLastUpdate(DateUtil.getStringDateWith12Time(distanceCharge.getLastUpdate()));
+                    return distanceChargeDto;
+                }).collect(Collectors.toList());
+
+        DataTableResponse<DistanceChargeDto> distanceChargeDtoDataTableResponse = new DataTableResponse<>();
+        distanceChargeDtoDataTableResponse.setData(distanceChargeDtoList);
+        distanceChargeDtoDataTableResponse.setDraw(dataTableRequest.getDraw());
+        distanceChargeDtoDataTableResponse.setRecordsTotal(distanceChargeDtoList.size());
+        distanceChargeDtoDataTableResponse.setRecordsFiltered(distanceChargeDtoList.size());
+
+        return distanceChargeDtoDataTableResponse;
     }
 }

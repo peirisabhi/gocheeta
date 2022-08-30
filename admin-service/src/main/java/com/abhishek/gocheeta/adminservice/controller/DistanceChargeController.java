@@ -1,6 +1,8 @@
 package com.abhishek.gocheeta.adminservice.controller;
 
 import com.abhishek.gocheeta.adminservice.dto.DistanceChargeDto;
+import com.abhishek.gocheeta.adminservice.dto.datatable.DataTableRequest;
+import com.abhishek.gocheeta.adminservice.dto.datatable.DataTableResponse;
 import com.abhishek.gocheeta.adminservice.service.DistanceChargeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,9 +60,15 @@ public class DistanceChargeController {
 
 
     @GetMapping("{distanceChargeId}")
-    public ResponseEntity<DistanceChargeDto> getCity(
+    public ResponseEntity<DistanceChargeDto> getDistanceCharge(
             @PathVariable(value = "distanceChargeId") int distanceChargeId){
         return ResponseEntity.ok(distanceChargeService.getDistanceCharge(distanceChargeId));
+    }
+
+    @PostMapping("/data")
+    public DataTableResponse<DistanceChargeDto> getDistanceChargesForDataTable(
+            @RequestBody DataTableRequest dataTableRequest) {
+        return distanceChargeService.getDistanceChargesForDataTable(dataTableRequest);
     }
 
 }

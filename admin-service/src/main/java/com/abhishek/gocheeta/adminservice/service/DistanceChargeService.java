@@ -1,7 +1,8 @@
 package com.abhishek.gocheeta.adminservice.service;
 
 import com.abhishek.gocheeta.adminservice.dto.DistanceChargeDto;
-import com.abhishek.gocheeta.commons.model.DistanceCharge;
+import com.abhishek.gocheeta.adminservice.dto.datatable.DataTableRequest;
+import com.abhishek.gocheeta.adminservice.dto.datatable.DataTableResponse;
 
 import java.util.List;
 
@@ -22,5 +23,7 @@ public interface DistanceChargeService {
     List<DistanceChargeDto> getDistanceCharges();
 
     DistanceChargeDto getDistanceCharge(int id);
+
+    DataTableResponse<DistanceChargeDto> getDistanceChargesForDataTable(DataTableRequest dataTableRequest);
 
 }
