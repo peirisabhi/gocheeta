@@ -14,7 +14,7 @@ import {HttpClientModule} from "@angular/common/http";
 import {FormsModule} from "@angular/forms";
 import { ToastrModule } from 'ngx-toastr';
 import {DataTablesModule} from "angular-datatables";
-import { CityComponent } from './component/city/city/city.component';
+import { CityComponent } from './component/city/city.component';
 
 @NgModule({
   declarations: [

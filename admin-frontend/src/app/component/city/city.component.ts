@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {City} from "../../../model/city-model/city";
-import {CityService} from "../../../service/city-service/city.service";
-import {NotificationService} from "../../../service/notification-service/notification.service";
-import {environment} from "../../../../environments/environment";
+import {City} from "../../model/city-model/city";
+import {CityService} from "../../service/city-service/city.service";
+import {NotificationService} from "../../service/notification-service/notification.service";
+import {environment} from "../../../environments/environment";
 import {HttpClient} from "@angular/common/http";
-import {DataTablesResponse} from "../../../model/data-tables-response-model/data-tables-response";
+import {DataTablesResponse} from "../../model/data-tables-response-model/data-tables-response";
 
 let apiURL = environment.apiURL;
 
@@ -56,7 +56,7 @@ export class CityComponent implements OnInit {
       ajax: (dataTablesParameters: any, callback) => {
         this.http
           .post<DataTablesResponse>(
-            apiURL + 'city/data',
+            apiURL + 'city1/data',
             dataTablesParameters, {}
           ).subscribe(resp => {
           this.cities = resp.data;
