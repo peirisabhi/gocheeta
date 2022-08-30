@@ -16,6 +16,7 @@ import { ToastrModule } from 'ngx-toastr';
 import {DataTablesModule} from "angular-datatables";
 import { CityComponent } from './component/city/city.component';
 import { DistanceChargeComponent } from './component/distance-charge/distance-charge.component';
+import { VehicleCategoryComponent } from './component/vehicle-category/vehicle-category.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { DistanceChargeComponent } from './component/distance-charge/distance-ch
     SideNavbarComponent,
     UserComponent,
     CityComponent,
-    DistanceChargeComponent
+    DistanceChargeComponent,
+    VehicleCategoryComponent
   ],
   imports: [
     BrowserModule,
