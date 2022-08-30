@@ -34,33 +34,36 @@
           <div class="card-body">
             <div class="table-responsive">
 
-<!--              <table datatable [dtOptions]="dtOptions" class="datatable table table-stripped">-->
-<!--                <thead>-->
-<!--                <tr>-->
-<!--                  <th>ID</th>-->
-<!--                  <th>First name</th>-->
-<!--                  <th>Last name</th>-->
-<!--                  <th>Email</th>-->
-<!--                  <th>Gender</th>-->
-<!--                  <th>Nic</th>-->
-<!--                </tr>-->
-<!--                </thead>-->
-<!--                <tbody *ngIf="users?.length != 0">-->
-<!--                <tr *ngFor="let user of users">-->
-<!--                  <td>{{ user.id }}</td>-->
-<!--                  <td>{{ user.fname }}</td>-->
-<!--                  <td>{{ user.lname }}</td>-->
-<!--                  <td>{{ user.email }}</td>-->
-<!--                  <td>{{ user.gender }}</td>-->
-<!--                  <td>{{ user.nic }}</td>-->
-<!--                </tr>-->
-<!--                </tbody>-->
-<!--                <tbody *ngIf="users?.length == 0">-->
-<!--                <tr>-->
-<!--                  <td colspan="3" class="no-data-available">No data!</td>-->
-<!--                </tr>-->
-<!--                </tbody>-->
-<!--              </table>-->
+              <table datatable [dtOptions]="dtOptions" class="datatable table table-stripped " width="100%">
+                <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>City</th>
+                  <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody *ngIf="cities?.length != 0">
+                <tr *ngFor="let city of cities">
+                  <td>{{ city.id }}</td>
+                  <td>{{ city.city }}</td>
+                  <td class="">
+                    <div class="actions">
+                      <a class="btn btn-sm bg-success-light" data-toggle="modal" href="#edit_specialities_details">
+                        <i class="fe fe-pencil"></i> Edit
+                      </a>
+                      <a  data-toggle="modal" href="#delete_modal" class="btn btn-sm bg-danger-light ml-1">
+                        <i class="fe fe-trash"></i> Delete
+                      </a>
+                    </div>
+                  </td>
+                </tr>
+                </tbody>
+                <tbody *ngIf="cities?.length == 0">
+                <tr>
+                  <td colspan="3" class="no-data-available">No data!</td>
+                </tr>
+                </tbody>
+              </table>
 
 
             </div>

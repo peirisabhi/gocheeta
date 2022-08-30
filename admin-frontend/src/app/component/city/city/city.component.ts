@@ -1,9 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {User} from "../../../model/user-model/user";
 import {City} from "../../../model/city-model/city";
 import {CityService} from "../../../service/city-service/city.service";
 import {NotificationService} from "../../../service/notification-service/notification.service";
+import {environment} from "../../../../environments/environment";
+import {HttpClient} from "@angular/common/http";
+import {DataTablesResponse} from "../../../model/data-tables-response-model/data-tables-response";
+
+let apiURL = environment.apiURL;
 
 @Component({
   selector: 'app-city',
@@ -12,15 +16,19 @@ import {NotificationService} from "../../../service/notification-service/notific
 })
 export class CityComponent implements OnInit {
 
-  city : City = new City();
+  city: City = new City();
+  dtOptions: DataTables.Settings = {};
+  cities?: any[];
 
   constructor(private modalService: NgbModal,
-              private cityService : CityService,
-              private notifyService: NotificationService) {
+              private cityService: CityService,
+              private notifyService: NotificationService,
+              private http: HttpClient) {
 
   }
 
   ngOnInit(): void {
+    this.loadDataTable();
   }
 
 
@@ -39,5 +47,31 @@ export class CityComponent implements OnInit {
         this.city = new City();
         this.notifyService.showSuccess("Successfully City Saved", "Success");
       })
+  }
+
+  loadDataTable() {
+    this.dtOptions = {
+      serverSide: true,
+      processing: true,
+      ajax: (dataTablesParameters: any, callback) => {
+        this.http
+          .post<DataTablesResponse>(
+            apiURL + 'city/data',
+            dataTablesParameters, {}
+          ).subscribe(resp => {
+          this.cities = resp.data;
+
+          callback({
+            recordsTotal: resp.recordsTotal,
+            recordsFiltered: resp.recordsFiltered,
+            data: []
+          });
+        });
+      },
+      columns: [
+        {data: 'id'},
+        {data: 'city'}
+      ]
+    };
   }
 }
