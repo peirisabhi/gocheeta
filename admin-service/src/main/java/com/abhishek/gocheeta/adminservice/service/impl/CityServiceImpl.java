@@ -1,6 +1,8 @@
 package com.abhishek.gocheeta.adminservice.service.impl;
 
 import com.abhishek.gocheeta.adminservice.dto.CityDto;
+import com.abhishek.gocheeta.adminservice.dto.datatable.DataTableRequest;
+import com.abhishek.gocheeta.adminservice.dto.datatable.DataTableResponse;
 import com.abhishek.gocheeta.adminservice.exception.DataNotFoundException;
 import com.abhishek.gocheeta.adminservice.exception.DuplicateDataFoundException;
 import com.abhishek.gocheeta.adminservice.exception.GeneralException;
@@ -102,5 +104,28 @@ public class CityServiceImpl implements CityService {
         return cityRepository.findById(id)
                 .orElseThrow(() -> new DataNotFoundException(CITY_NOT_FOUND))
                 .toDto(CityDto.class);
+    }
+
+    @Override
+    public DataTableResponse<CityDto> getCitiesForDataTable(DataTableRequest dataTableRequest) {
+        final String value = dataTableRequest.getSearch().getValue();
+
+        final List<CityDto> cityDtoList = cityRepository.findAllByStatus(true)
+                .stream()
+                .filter(city ->
+                        String.valueOf(city.getId()).startsWith(value)
+                                || city.getCity().startsWith(value))
+                .map(city -> city.toDto(CityDto.class))
+                .collect(Collectors.toList());
+
+
+        DataTableResponse<CityDto> cityDtoDataTableResponse = new DataTableResponse<>();
+        cityDtoDataTableResponse.setData(cityDtoList);
+        cityDtoDataTableResponse.setDraw(dataTableRequest.getDraw());
+        cityDtoDataTableResponse.setRecordsTotal(cityDtoList.size());
+        cityDtoDataTableResponse.setRecordsFiltered(cityDtoList.size());
+
+        return cityDtoDataTableResponse;
+
     }
 }

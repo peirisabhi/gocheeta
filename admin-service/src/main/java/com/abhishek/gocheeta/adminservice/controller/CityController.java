@@ -1,6 +1,9 @@
 package com.abhishek.gocheeta.adminservice.controller;
 
 import com.abhishek.gocheeta.adminservice.dto.CityDto;
+import com.abhishek.gocheeta.adminservice.dto.UserDto;
+import com.abhishek.gocheeta.adminservice.dto.datatable.DataTableRequest;
+import com.abhishek.gocheeta.adminservice.dto.datatable.DataTableResponse;
 import com.abhishek.gocheeta.adminservice.service.CityService;
 import com.abhishek.gocheeta.commons.model.City;
 import lombok.extern.slf4j.Slf4j;
@@ -52,5 +55,10 @@ public class CityController {
     @GetMapping("{cityId}")
     public ResponseEntity<CityDto> getCity(@PathVariable(value = "cityId") int cityId){
         return ResponseEntity.ok(cityService.getCity(cityId));
+    }
+
+    @PostMapping("/data")
+    public DataTableResponse<CityDto> getCitiesForDataTable(@RequestBody DataTableRequest dataTableRequest) {
+        return cityService.getCitiesForDataTable(dataTableRequest);
     }
 }
