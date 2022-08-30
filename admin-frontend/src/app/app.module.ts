@@ -15,6 +15,7 @@ import {FormsModule} from "@angular/forms";
 import { ToastrModule } from 'ngx-toastr';
 import {DataTablesModule} from "angular-datatables";
 import { CityComponent } from './component/city/city.component';
+import { DistanceChargeComponent } from './component/distance-charge/distance-charge.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { CityComponent } from './component/city/city.component';
     TopbarComponent,
     SideNavbarComponent,
     UserComponent,
-    CityComponent
+    CityComponent,
+    DistanceChargeComponent
   ],
   imports: [
     BrowserModule,
