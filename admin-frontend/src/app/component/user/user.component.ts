@@ -7,13 +7,8 @@ import {User} from "../../model/user-model/user";
 import {UserService} from "../../service/user-service/user.service";
 import {NotificationService} from "../../service/notification-service/notification.service";
 import {HttpClient} from "@angular/common/http";
+import {DataTablesResponse} from "../../model/data-tables-response-model/data-tables-response";
 
-class DataTablesResponse {
-  data?: any[];
-  draw?: number;
-  recordsFiltered?: number;
-  recordsTotal?: number;
-}
 
 let apiURL = environment.apiURL;
 
