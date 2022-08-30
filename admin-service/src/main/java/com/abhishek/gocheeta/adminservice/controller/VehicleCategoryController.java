@@ -20,6 +20,7 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/vehicle-category")
 @Slf4j
+@CrossOrigin
 public class VehicleCategoryController {
 
     @Autowired
