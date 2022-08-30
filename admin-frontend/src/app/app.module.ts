@@ -14,6 +14,7 @@ import {HttpClientModule} from "@angular/common/http";
 import {FormsModule} from "@angular/forms";
 import { ToastrModule } from 'ngx-toastr';
 import {DataTablesModule} from "angular-datatables";
+import { CityComponent } from './component/city/city/city.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import {DataTablesModule} from "angular-datatables";
     DashboardComponent,
     TopbarComponent,
     SideNavbarComponent,
-    UserComponent
+    UserComponent,
+    CityComponent
   ],
   imports: [
     BrowserModule,
