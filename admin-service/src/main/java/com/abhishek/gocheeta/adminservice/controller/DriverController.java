@@ -26,6 +26,7 @@ public class DriverController {
 
     @PostMapping()
     public ResponseEntity<DriverDto> saveDriver(DriverDto driverDto) {
+        log.info(driverDto.toString());
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(driverService.saveDriver(driverDto));
     }

@@ -18,6 +18,7 @@ import { CityComponent } from './component/city/city.component';
 import { DistanceChargeComponent } from './component/distance-charge/distance-charge.component';
 import { VehicleCategoryComponent } from './component/vehicle-category/vehicle-category.component';
 import { DriverComponent } from './component/driver/driver.component';
+import { TestComponent } from './component/test/test.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { DriverComponent } from './component/driver/driver.component';
     CityComponent,
     DistanceChargeComponent,
     VehicleCategoryComponent,
-    DriverComponent
+    DriverComponent,
+    TestComponent
   ],
   imports: [
     BrowserModule,

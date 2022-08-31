@@ -84,7 +84,7 @@
   </div>
 
   <div class="modal-body">
-    <form (ngSubmit)="saveDriver()">
+    <form (ngSubmit)="saveDriver()" enctype="multipart/form-data">
       <div class="row form-row">
 
         <div class="col-12 col-sm-6">
@@ -130,7 +130,7 @@
         <div class="col-12 col-sm-6">
           <div class="form-group">
             <label>licence Type</label>
-            <select class="form-control" name="user_role_id" [(ngModel)]="driver.licence_type_id">
+            <select class="form-control" name="user_role_id" [(ngModel)]="driver.licenceTypeId">
               <option value="0" selected disabled>-- Select --</option>
               <option *ngFor="let licenceType of licenceTypes" value="{{licenceType.id}}">{{licenceType.type}}</option>
             </select>
@@ -152,21 +152,21 @@
         <div class="col-12">
           <div class="form-group">
             <label>NIC Front Image</label>
-            <input type="file" name="nic_front" [(ngModel)]="driver.nic_front" class="form-control">
+            <input type="file" name="nic_front" [(ngModel)]="driver.nicFront" class="form-control">
           </div>
         </div>
 
         <div class="col-12">
           <div class="form-group">
             <label>NIC Back Image</label>
-            <input type="file" name="nic_back" [(ngModel)]="driver.nic_back" class="form-control">
+            <input type="file" name="nic_back" [(ngModel)]="driver.nicBack" class="form-control">
           </div>
         </div>
 
         <div class="col-12">
           <div class="form-group">
             <label>Driving Licence Front Image</label>
-            <input type="file" name="driving_licence_front" [(ngModel)]="driver.driving_licence_front"
+            <input type="file" name="driving_licence_front" [(ngModel)]="driver.drivingLicenceFront"
                    class="form-control">
           </div>
         </div>
@@ -174,7 +174,7 @@
         <div class="col-12">
           <div class="form-group">
             <label>Driving Licence Back Image</label>
-            <input type="file" name="driving_licence_back" [(ngModel)]="driver.driving_licence_back"
+            <input type="file" name="driving_licence_back" [(ngModel)]="driver.drivingLicenceBack"
                    class="form-control">
           </div>
         </div>

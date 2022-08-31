@@ -20,6 +20,7 @@ export class DriverComponent implements OnInit {
 
   driver: Driver = new Driver();
   licenceTypes?: LicenceType[];
+  // file?: File;
 
   constructor(private modalService: NgbModal,
               private notifyService: NotificationService,
@@ -46,17 +47,38 @@ export class DriverComponent implements OnInit {
   getLicenceTypes() {
     this.licenceTypeService.getLicenceTypes().subscribe(data => {
       this.licenceTypes = data;
-    },error => {
+    }, error => {
       console.log(error)
     })
   }
 
   saveDriver() {
-    this.driverService.saveDriver(this.driver)
-      .subscribe(data => {
-        this.driver = new Driver();
-        this.notifyService.showSuccess("Successfully Driver Saved", "Success");
-      })
+
+    // this.driverService.saveDriver(this.driver)
+    //   .subscribe(data => {
+    //     this.driver = new Driver();
+    //     this.notifyService.showSuccess("Successfully Driver Saved", "Success");
+    //   })
+
+
+    let formData = new FormData();
+    Object.entries(this.driver).forEach(
+      ([key, value]) => formData.append(key, value)
+    );
+
+    // @ts-ignore
+    // formData.append("nic_front", this.file);
+
+    console.log("Form data  --  " + formData)
+
+    this.http.post<any>(apiURL + "driver", formData,
+      {
+        headers: {
+
+        }
+      }).subscribe(data => {
+      console.log(data)
+    })
   }
 
 }

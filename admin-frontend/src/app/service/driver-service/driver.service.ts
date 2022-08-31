@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {environment} from "../../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
@@ -11,11 +11,19 @@ let apiURL = environment.apiURL;
 })
 export class DriverService {
 
-  constructor(private httpClient : HttpClient) {
+  constructor(private httpClient: HttpClient) {
   }
 
-  saveDriver(driver : Driver): Observable<Driver>{
-    return  this.httpClient.post<Driver>(apiURL+"driver", driver);
+  saveDriver(driver: Driver): Observable<Driver> {
+
+    let formData = new FormData();
+    Object.entries(driver).forEach(
+      ([key, value]) => formData.append(key, value)
+    );
+
+    console.log("Form data  --  " + formData)
+
+    return this.httpClient.post<Driver>(apiURL + "driver", formData);
   }
 
 }
