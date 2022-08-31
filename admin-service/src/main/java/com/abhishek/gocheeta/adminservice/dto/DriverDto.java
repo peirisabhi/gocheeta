@@ -39,7 +39,7 @@ public class DriverDto implements Transformer {
 
     private String contact2;
 
-    @JsonProperty("")
+    @JsonProperty("licence_type_id")
     private int licenceTypeId;
 
     @JsonProperty("licence_type")
