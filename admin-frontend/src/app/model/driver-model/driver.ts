@@ -3,12 +3,12 @@ export class Driver {
   fname?: string;
   lname?: string;
   email?: string;
-  gender?: string;
+  gender?: string = "0";
   nic?: string;
   dob?: string;
   contact1?: string;
   contact2?: string;
-  licence_type_id?: number;
+  licence_type_id?: string = "0";
   licence_type?: string;
   nic_front?: string;
   nic_back?: string;

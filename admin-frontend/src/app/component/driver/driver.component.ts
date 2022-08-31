@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {NotificationService} from "../../service/notification-service/notification.service";
 import {HttpClient} from "@angular/common/http";
@@ -6,6 +6,8 @@ import {environment} from "../../../environments/environment";
 import {City} from "../../model/city-model/city";
 import {Driver} from "../../model/driver-model/driver";
 import {DriverService} from "../../service/driver-service/driver.service";
+import {LicenceTypeService} from "../../service/licence-type-service/licence-type.service";
+import {LicenceType} from "../../model/licence-type-model/licence-type";
 
 let apiURL = environment.apiURL;
 
@@ -16,16 +18,19 @@ let apiURL = environment.apiURL;
 })
 export class DriverComponent implements OnInit {
 
-  driver : Driver = new Driver();
+  driver: Driver = new Driver();
+  licenceTypes?: LicenceType[];
 
   constructor(private modalService: NgbModal,
               private notifyService: NotificationService,
               private http: HttpClient,
-              private driverService: DriverService) {
+              private driverService: DriverService,
+              private licenceTypeService: LicenceTypeService) {
 
   }
 
   ngOnInit(): void {
+    this.getLicenceTypes();
   }
 
 
@@ -36,6 +41,14 @@ export class DriverComponent implements OnInit {
 
   close(content: any) {
     this.modalService.dismissAll();
+  }
+
+  getLicenceTypes() {
+    this.licenceTypeService.getLicenceTypes().subscribe(data => {
+      this.licenceTypes = data;
+    },error => {
+      console.log(error)
+    })
   }
 
   saveDriver() {
