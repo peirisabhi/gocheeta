@@ -34,36 +34,36 @@
           <div class="card-body">
             <div class="table-responsive">
 
-              <table datatable [dtOptions]="dtOptions" class="datatable table table-stripped " width="100%">
-                <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>City</th>
-                  <th>Actions</th>
-                </tr>
-                </thead>
-                <tbody *ngIf="vehicleCategories?.length != 0">
-                <tr *ngFor="let vehicleCategory of vehicleCategories">
-                  <td>{{ vehicleCategory.id }}</td>
-                  <td>{{ vehicleCategory.category }}</td>
-                  <td class="">
-                    <div class="actions">
-                      <a class="btn btn-sm bg-success-light" data-toggle="modal" href="#edit_specialities_details">
-                        <i class="fe fe-pencil"></i> Edit
-                      </a>
-                      <a  data-toggle="modal" href="#delete_modal" class="btn btn-sm bg-danger-light ml-1">
-                        <i class="fe fe-trash"></i> Delete
-                      </a>
-                    </div>
-                  </td>
-                </tr>
-                </tbody>
-                <tbody *ngIf="vehicleCategories?.length == 0">
-                <tr>
-                  <td colspan="3" class="no-data-available">No data!</td>
-                </tr>
-                </tbody>
-              </table>
+<!--              <table datatable [dtOptions]="dtOptions" class="datatable table table-stripped " width="100%">-->
+<!--                <thead>-->
+<!--                <tr>-->
+<!--                  <th>ID</th>-->
+<!--                  <th>City</th>-->
+<!--                  <th>Actions</th>-->
+<!--                </tr>-->
+<!--                </thead>-->
+<!--                <tbody *ngIf="vehicleCategories?.length != 0">-->
+<!--                <tr *ngFor="let vehicleCategory of vehicleCategories">-->
+<!--                  <td>{{ vehicleCategory.id }}</td>-->
+<!--                  <td>{{ vehicleCategory.category }}</td>-->
+<!--                  <td class="">-->
+<!--                    <div class="actions">-->
+<!--                      <a class="btn btn-sm bg-success-light" data-toggle="modal" href="#edit_specialities_details">-->
+<!--                        <i class="fe fe-pencil"></i> Edit-->
+<!--                      </a>-->
+<!--                      <a  data-toggle="modal" href="#delete_modal" class="btn btn-sm bg-danger-light ml-1">-->
+<!--                        <i class="fe fe-trash"></i> Delete-->
+<!--                      </a>-->
+<!--                    </div>-->
+<!--                  </td>-->
+<!--                </tr>-->
+<!--                </tbody>-->
+<!--                <tbody *ngIf="vehicleCategories?.length == 0">-->
+<!--                <tr>-->
+<!--                  <td colspan="3" class="no-data-available">No data!</td>-->
+<!--                </tr>-->
+<!--                </tbody>-->
+<!--              </table>-->
 
 
             </div>
@@ -84,14 +84,99 @@
   </div>
 
   <div class="modal-body">
-    <form (ngSubmit)="saveVehicleCategory()">
+    <form (ngSubmit)="saveDriver()">
       <div class="row form-row">
-        <div class="col-12">
+
+        <div class="col-12 col-sm-6">
           <div class="form-group">
-            <label>City Name</label>
-            <input type="text" name="fname" [(ngModel)]="vehicleCategory.category" class="form-control">
+            <label>First Name</label>
+            <input type="text" name="fname" [(ngModel)]="driver.fname" class="form-control">
           </div>
         </div>
+        <div class="col-12 col-sm-6">
+          <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" name="lname" [(ngModel)]="driver.lname" class="form-control">
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="form-group">
+            <label>Email</label>
+            <input type="text" name="email" [(ngModel)]="driver.email" class="form-control">
+          </div>
+        </div>
+        <div class="col-12 col-sm-6">
+          <div class="form-group">
+            <label>Gender</label>
+            <select class="form-control" name="gender" [(ngModel)]="driver.gender">
+              <option value="0" selected disabled>-- Select --</option>
+              <option value="male">Male</option>
+              <option value="fe-male">Fe-Male</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-12 col-sm-6">
+          <div class="form-group">
+            <label>NIC</label>
+            <input type="text" name="nic" [(ngModel)]="driver.nic" class="form-control">
+          </div>
+        </div>
+        <div class="col-12 col-sm-6">
+          <div class="form-group">
+            <label>DOB</label>
+            <input type="date" name="dob" [(ngModel)]="driver.dob" class="form-control">
+          </div>
+        </div>
+        <div class="col-12 col-sm-6">
+          <div class="form-group">
+            <label>licence Type</label>
+            <!--            <select class="form-control" name="user_role_id" [(ngModel)]="user.user_role_id">-->
+            <!--              <option value="0" selected disabled>&#45;&#45; Select &#45;&#45;</option>-->
+            <!--              <option *ngFor="let userRole of userRoles" value="{{userRole.id}}">{{userRole.role}}</option>-->
+            <!--            </select>-->
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="form-group">
+            <label>Contact 1</label>
+            <input type="tel" name="contact1" [(ngModel)]="driver.contact1" class="form-control">
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="form-group">
+            <label>Contact 2</label>
+            <input type="tel" name="contact2" [(ngModel)]="driver.contact2" class="form-control">
+          </div>
+        </div>
+
+        <div class="col-12">
+          <div class="form-group">
+            <label>NIC Front Image</label>
+            <input type="file" name="nic_front" [(ngModel)]="driver.nic_front" class="form-control">
+          </div>
+        </div>
+
+        <div class="col-12">
+          <div class="form-group">
+            <label>NIC Back Image</label>
+            <input type="file" name="nic_back" [(ngModel)]="driver.nic_back" class="form-control">
+          </div>
+        </div>
+
+        <div class="col-12">
+          <div class="form-group">
+            <label>Driving Licence Front Image</label>
+            <input type="file" name="driving_licence_front" [(ngModel)]="driver.driving_licence_front" class="form-control">
+          </div>
+        </div>
+
+        <div class="col-12">
+          <div class="form-group">
+            <label>Driving Licence Back Image</label>
+            <input type="file" name="driving_licence_back" [(ngModel)]="driver.driving_licence_back" class="form-control">
+          </div>
+        </div>
+
 
       </div>
       <button type="submit" class="btn btn-primary btn-block">Save Category</button>
