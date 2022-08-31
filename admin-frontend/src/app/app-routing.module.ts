@@ -7,6 +7,7 @@ import {CityComponent} from "./component/city/city.component";
 import {DistanceChargeComponent} from "./component/distance-charge/distance-charge.component";
 import {VehicleCategoryComponent} from "./component/vehicle-category/vehicle-category.component";
 import {DriverComponent} from "./component/driver/driver.component";
+import {TestComponent} from "./component/test/test.component";
 
 const routes: Routes = [
   {path: '', component: LoginComponent},
@@ -16,6 +17,7 @@ const routes: Routes = [
   {path: 'distance-charge', component:DistanceChargeComponent},
   {path: 'vehicle-category', component:VehicleCategoryComponent},
   {path: 'driver', component:DriverComponent},
+  {path: 'test', component:TestComponent},
 ];
 
 @NgModule({
