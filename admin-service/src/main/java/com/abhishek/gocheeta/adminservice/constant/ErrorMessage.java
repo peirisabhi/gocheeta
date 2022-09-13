@@ -12,12 +12,17 @@ public class ErrorMessage {
 
     public static final String VEHICLE_CATEGORY_NOT_FOUND = "Can not found this vehicle category!";
 
+
+    public static final String VEHICLE_NOT_FOUND = "Can not found this vehicle!";
+
     public static final String VEHICLE_CATEGORY_ALREADY_EXISTS = "This vehicle category already exists!";
+
+
+    public static final String VEHICLE_ALREADY_EXISTS = "This vehicle already exists!";
 
     public static final String LICENCE_TYPE_NOT_FOUND = "Can not found this licence type!";
 
     public static final String DISTANCE_CHARGE_NOT_FOUND = "Can not found this distance charge record!";
-
 
     public static final String CITY_CHARGE_NOT_FOUND = "Can not found this city charge record!";
 
