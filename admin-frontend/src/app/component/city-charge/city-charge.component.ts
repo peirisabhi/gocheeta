@@ -8,6 +8,7 @@ import {CityChargeService} from "../../service/city-charge-service/city-charge.s
 import {DistanceCharge} from "../../model/distance-charge-model/distance-charge";
 import {City} from "../../model/city-model/city";
 import {CityService} from "../../service/city-service/city.service";
+import {DataTablesResponse} from "../../model/data-tables-response-model/data-tables-response";
 
 let apiURL = environment.apiURL;
 
@@ -31,6 +32,7 @@ export class CityChargeComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCities()
+    this.loadDataTable()
   }
 
   getCities() {
@@ -57,6 +59,34 @@ export class CityChargeComponent implements OnInit {
         this.cityCharge = new CityCharge();
         this.notifyService.showSuccess("Successfully City Charge Saved", "Success");
       })
+  }
+
+  loadDataTable() {
+    this.dtOptions = {
+      serverSide: true,
+      processing: true,
+      ajax: (dataTablesParameters: any, callback) => {
+        this.http
+          .post<DataTablesResponse>(
+            apiURL + 'city-charge/data',
+            dataTablesParameters, {}
+          ).subscribe(resp => {
+          this.cityCharges = resp.data;
+
+          callback({
+            recordsTotal: resp.recordsTotal,
+            recordsFiltered: resp.recordsFiltered,
+            data: []
+          });
+        });
+      },
+      columns: [
+        {data: 'id'},
+        {data: 'city_from'},
+        {data: 'city_to'},
+        {data: 'km'},
+      ]
+    };
   }
 
 }
