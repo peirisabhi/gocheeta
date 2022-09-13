@@ -7,6 +7,8 @@ import {NotificationService} from "../../service/notification-service/notificati
 import {DataTablesResponse} from "../../model/data-tables-response-model/data-tables-response";
 import {environment} from "../../../environments/environment";
 import {HttpClient} from "@angular/common/http";
+import {VehicleCategory} from "../../model/vehicle-category-model/vehicle-category";
+import {VehicleCategoryService} from "../../service/vehicle-category-service/vehicle-category.service";
 
 let apiURL = environment.apiURL;
 
@@ -21,8 +23,11 @@ export class DistanceChargeComponent implements OnInit {
   dtOptions: DataTables.Settings = {};
   distanceCharges ?: any[];
 
+  vehicleCategories?: VehicleCategory[];
+
   constructor(private modalService: NgbModal,
               private distanceChargeService: DistanceChargeService,
+              private vehicleCategoryService: VehicleCategoryService,
               private notifyService: NotificationService,
               private http: HttpClient) {
 
@@ -30,6 +35,7 @@ export class DistanceChargeComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadDataTable();
+    this.getVehicleCategories();
   }
 
 
@@ -40,6 +46,15 @@ export class DistanceChargeComponent implements OnInit {
 
   close(content: any) {
     this.modalService.dismissAll();
+  }
+
+
+  getVehicleCategories() {
+    this.vehicleCategoryService.getVehicleCategories().subscribe(data => {
+      this.vehicleCategories = data;
+    }, error => {
+      console.log(error)
+    })
   }
 
   saveDistanceCharge() {

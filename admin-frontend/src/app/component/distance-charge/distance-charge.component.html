@@ -92,6 +92,17 @@
   <div class="modal-body">
     <form (ngSubmit)="saveDistanceCharge()">
       <div class="row form-row">
+
+        <div class="col-12">
+          <div class="form-group">
+            <label>Vehicle Category</label>
+            <select class="form-control" name="user_role_id" [(ngModel)]="distanceCharge.vehicle_category_id">
+              <option value="0" selected disabled>-- Select --</option>
+              <option *ngFor="let vehicleCategory of vehicleCategories" value="{{vehicleCategory.id}}">{{vehicleCategory.category}}</option>
+            </select>
+          </div>
+        </div>
+
         <div class="col-12">
           <div class="form-group">
             <label>Km From</label>

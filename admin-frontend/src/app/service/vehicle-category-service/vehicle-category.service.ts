@@ -3,6 +3,7 @@ import {environment} from "../../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {VehicleCategory} from "../../model/vehicle-category-model/vehicle-category";
+import {LicenceType} from "../../model/licence-type-model/licence-type";
 
 let apiURL = environment.apiURL;
 
@@ -15,5 +16,10 @@ export class VehicleCategoryService {
 
   saveVehicleCategory(vehicleCategory : VehicleCategory): Observable<VehicleCategory>{
     return  this.httpClient.post<VehicleCategory>(apiURL+"vehicle-category", vehicleCategory);
+  }
+
+
+  getVehicleCategories(): Observable<VehicleCategory[]>{
+    return this.httpClient.get<VehicleCategory[]>(apiURL + 'vehicle-category');
   }
 }

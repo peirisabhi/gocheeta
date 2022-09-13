@@ -25,6 +25,10 @@ public class DistanceChargeDto implements Transformer {
     @JsonProperty("km_to")
     private int kmTo;
 
+
+    @JsonProperty("vehicle_category_id")
+    private int vehicleCategoryId;
+
     private double price;
 
     @JsonProperty("last_update")
