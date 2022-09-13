@@ -1,6 +1,8 @@
 package com.abhishek.gocheeta.adminservice.service.impl;
 
 import com.abhishek.gocheeta.adminservice.dto.DriverDto;
+import com.abhishek.gocheeta.adminservice.dto.datatable.DataTableRequest;
+import com.abhishek.gocheeta.adminservice.dto.datatable.DataTableResponse;
 import com.abhishek.gocheeta.adminservice.exception.DataNotFoundException;
 import com.abhishek.gocheeta.adminservice.exception.DuplicateDataFoundException;
 import com.abhishek.gocheeta.adminservice.exception.FileManageException;
@@ -13,7 +15,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -24,10 +25,10 @@ import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import static com.abhishek.gocheeta.adminservice.config.Config.UPLOAD_URL;
 import static com.abhishek.gocheeta.adminservice.constant.ErrorMessage.*;
-import static com.abhishek.gocheeta.adminservice.constant.ErrorMessage.GENERAL_ERROR;
 
 /**
  * Created by Intellij.
@@ -44,7 +45,7 @@ public class DriverServiceImpl implements DriverService {
 
     @Override
     public DriverDto saveDriver(DriverDto driverDto) {
-        try{
+        try {
             String nicFront = new Date().getTime() + "_nic_front_" + UUID.randomUUID().toString()
                     .concat(".")
                     .concat(FilenameUtils.getExtension(driverDto.getNicFront().getOriginalFilename()));
@@ -111,7 +112,7 @@ public class DriverServiceImpl implements DriverService {
             e.printStackTrace();
             log.error(e.getLocalizedMessage());
             throw new GeneralException("Invalid Date Format");
-        }catch (DataIntegrityViolationException e) {
+        } catch (DataIntegrityViolationException e) {
             e.printStackTrace();
             log.error(e.getLocalizedMessage());
             throw new DuplicateDataFoundException(DRIVER_ALREADY_EXISTS);
@@ -128,7 +129,7 @@ public class DriverServiceImpl implements DriverService {
         final Driver driver = driverRepository.findById(driverDto.getId())
                 .orElseThrow(() -> new DataNotFoundException(DRIVER_NOT_FOUND));
 
-        try{
+        try {
             driver.setDob(DateUtil.getDate(driverDto.getDob()));
             driver.setContact1(driverDto.getContact1());
             driver.setContact2(driverDto.getContact2());
@@ -146,7 +147,7 @@ public class DriverServiceImpl implements DriverService {
         } catch (ParseException e) {
             log.error(e.getLocalizedMessage());
             throw new GeneralException("Invalid Date Format");
-        }catch (DataIntegrityViolationException e) {
+        } catch (DataIntegrityViolationException e) {
             log.error(e.getLocalizedMessage());
             throw new DuplicateDataFoundException(DRIVER_ALREADY_EXISTS);
         } catch (Exception e) {
@@ -168,5 +169,36 @@ public class DriverServiceImpl implements DriverService {
     @Override
     public DriverDto getDriver(int id) {
         return null;
+    }
+
+    @Override
+    public DataTableResponse<DriverDto> getDriversForDataTable(DataTableRequest dataTableRequest) {
+        final String value = dataTableRequest.getSearch().getValue();
+
+        final List<DriverDto> driverDtoList = driverRepository.findAllByStatus(1)
+                .stream()
+                .filter(driver ->
+                        String.valueOf(driver.getId()).startsWith(value)
+                                || driver.getFname().toLowerCase().startsWith(value)
+                                || driver.getLname().toLowerCase().startsWith(value)
+                                || driver.getEmail().toLowerCase().startsWith(value)
+                                || driver.getGender().toLowerCase().startsWith(value)
+                                || driver.getNic().toLowerCase().startsWith(value)
+                                || driver.getContact1().toLowerCase().startsWith(value)
+                                || driver.getContact2().toLowerCase().startsWith(value))
+                .map(driver -> {
+                    final DriverDto driverDto = driver.toDto(DriverDto.class);
+                    driverDto.setDob(DateUtil.getStringDate(driver.getDob()));
+                    return driverDto;
+                })
+                .collect(Collectors.toList());
+
+        DataTableResponse<DriverDto> driverDtoDataTableResponse = new DataTableResponse<>();
+        driverDtoDataTableResponse.setData(driverDtoList);
+        driverDtoDataTableResponse.setDraw(dataTableRequest.getDraw());
+        driverDtoDataTableResponse.setRecordsTotal(driverDtoList.size());
+        driverDtoDataTableResponse.setRecordsFiltered(driverDtoList.size());
+
+        return driverDtoDataTableResponse;
     }
 }

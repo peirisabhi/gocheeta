@@ -1,6 +1,8 @@
 package com.abhishek.gocheeta.adminservice.service;
 
 import com.abhishek.gocheeta.adminservice.dto.DriverDto;
+import com.abhishek.gocheeta.adminservice.dto.datatable.DataTableRequest;
+import com.abhishek.gocheeta.adminservice.dto.datatable.DataTableResponse;
 
 import java.util.List;
 
@@ -21,5 +23,8 @@ public interface DriverService {
     List<DriverDto> getDrivers();
 
     DriverDto getDriver(int id);
+
+
+    DataTableResponse<DriverDto> getDriversForDataTable(DataTableRequest dataTableRequest);
 
 }
