@@ -76,24 +76,27 @@ export class DriverComponent implements OnInit {
 
     this.driverService.saveDriver(formData).subscribe({
       next: (event: any) => {
-        // if (event.type === HttpEventType.UploadProgress) {
-        //   this.progress = Math.round(100 * event.loaded / event.total);
-        // } else if (event instanceof HttpResponse) {
-        //   this.message = event.body.message;
-        //   // this.fileInfos = this.testService.getFiles();
-        // }
-        console.log("success")
+        if (event.type === HttpEventType.UploadProgress) {
+          // this.progress = Math.round(100 * event.loaded / event.total);
+          console.log(Math.round(100 * event.loaded / event.total))
+        } else if (event instanceof HttpResponse) {
+          console.log("message- ", event.body.message)
+          // this.message = event.body.message;
+          // this.fileInfos = this.testService.getFiles();
+        }
+
+
       },
       error: (err: any) => {
         console.log(err);
-        // this.progress = 0;
-        // if (err.error && err.error.message) {
-        //   this.message = err.error.message;
-        // } else {
-        //   this.message = 'Could not upload the file!';
-        // }
-        // this.currentFile = undefined;
-      }
+        this.notifyService.showError("Something Went Wrong", "Error")
+        
+      },
+      complete: () => {
+        console.log("success")
+        this.notifyService.showSuccess("Driver Saved Successfully", "Success")
+      },
+
     });
   }
 
