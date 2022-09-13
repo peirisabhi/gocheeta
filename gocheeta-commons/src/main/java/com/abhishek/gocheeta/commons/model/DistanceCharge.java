@@ -27,6 +27,10 @@ public class DistanceCharge implements Transformer {
 
     private double price;
 
+
+    @Column(name = "vehicle_category_id")
+    private int vehicleCategoryId;
+
     @Column(name = "last_update", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date lastUpdate;
