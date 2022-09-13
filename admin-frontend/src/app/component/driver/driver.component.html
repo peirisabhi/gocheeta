@@ -29,41 +29,55 @@
       <div class="col-sm-12">
         <div class="card">
           <div class="card-header">
-            <h4 class="card-title">Vehicle Category Details</h4>
+            <h4 class="card-title">Registered Drivers Details</h4>
           </div>
           <div class="card-body">
             <div class="table-responsive">
 
-              <!--              <table datatable [dtOptions]="dtOptions" class="datatable table table-stripped " width="100%">-->
-              <!--                <thead>-->
-              <!--                <tr>-->
-              <!--                  <th>ID</th>-->
-              <!--                  <th>City</th>-->
-              <!--                  <th>Actions</th>-->
-              <!--                </tr>-->
-              <!--                </thead>-->
-              <!--                <tbody *ngIf="vehicleCategories?.length != 0">-->
-              <!--                <tr *ngFor="let vehicleCategory of vehicleCategories">-->
-              <!--                  <td>{{ vehicleCategory.id }}</td>-->
-              <!--                  <td>{{ vehicleCategory.category }}</td>-->
-              <!--                  <td class="">-->
-              <!--                    <div class="actions">-->
-              <!--                      <a class="btn btn-sm bg-success-light" data-toggle="modal" href="#edit_specialities_details">-->
-              <!--                        <i class="fe fe-pencil"></i> Edit-->
-              <!--                      </a>-->
-              <!--                      <a  data-toggle="modal" href="#delete_modal" class="btn btn-sm bg-danger-light ml-1">-->
-              <!--                        <i class="fe fe-trash"></i> Delete-->
-              <!--                      </a>-->
-              <!--                    </div>-->
-              <!--                  </td>-->
-              <!--                </tr>-->
-              <!--                </tbody>-->
-              <!--                <tbody *ngIf="vehicleCategories?.length == 0">-->
-              <!--                <tr>-->
-              <!--                  <td colspan="3" class="no-data-available">No data!</td>-->
-              <!--                </tr>-->
-              <!--                </tbody>-->
-              <!--              </table>-->
+              <table datatable [dtOptions]="dtOptions" class="datatable table table-stripped " width="100%">
+                <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>Email</th>
+                  <th>Gender</th>
+                  <th>NIC</th>
+                  <th>DOB</th>
+                  <th>Contact 1</th>
+                  <th>Contact 2</th>
+                  <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody *ngIf="drivers?.length != 0">
+                <tr *ngFor="let driver of drivers">
+                  <td>{{ driver.id }}</td>
+                  <td>{{ driver.fname }}</td>
+                  <td>{{ driver.lname }}</td>
+                  <td>{{ driver.email }}</td>
+                  <td>{{ driver.gender }}</td>
+                  <td>{{ driver.nic }}</td>
+                  <td>{{ driver.dob }}</td>
+                  <td>{{ driver.contact1 }}</td>
+                  <td>{{ driver.contact2 }}</td>
+                  <td class="">
+                    <div class="actions">
+                      <a class="btn btn-sm bg-success-light" data-toggle="modal" href="#edit_specialities_details">
+                        <i class="fe fe-pencil"></i> Edit
+                      </a>
+                      <a data-toggle="modal" href="#delete_modal" class="btn btn-sm bg-danger-light ml-1">
+                        <i class="fe fe-trash"></i> Delete
+                      </a>
+                    </div>
+                  </td>
+                </tr>
+                </tbody>
+                <tbody *ngIf="drivers?.length == 0">
+                <tr>
+                  <td colspan="3" class="no-data-available">No data!</td>
+                </tr>
+                </tbody>
+              </table>
 
 
             </div>

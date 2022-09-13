@@ -127,10 +127,8 @@ export class DriverComponent implements OnInit {
       },
       columns: [
         {data: 'id'},
-        {data: 'km_from'},
-        {data: 'km_to'},
-        {data: 'price'},
-        {data: 'last_update'},
+        {data: 'fname'},
+        {data: 'lname'},
       ]
     };
   }
