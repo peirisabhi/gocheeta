@@ -47,17 +47,17 @@ public class DriverDto implements Transformer {
     @JsonProperty("licence_type")
     private int licenceType;
 
-    @JsonProperty("nic_front")
     private MultipartFile nicFront;
 
-    @JsonProperty("nic_back")
+
     private MultipartFile nicBack;
 
-    @JsonProperty("driving_licence_front")
+
     private MultipartFile drivingLicenceFront;
 
-    @JsonProperty("driving_licence_back")
+
     private MultipartFile drivingLicenceBack;
+
 
     @JsonProperty("registered_at")
     private String registeredAt;

@@ -152,21 +152,30 @@
         <div class="col-12">
           <div class="form-group">
             <label>NIC Front Image</label>
-            <input type="file" name="nic_front" [(ngModel)]="driver.nicFront" class="form-control">
+            <input type="file" name="nic_front" (change)="selectNICFront($event)" class="form-control">
           </div>
         </div>
 
-        <div class="col-12">
-          <div class="form-group">
-            <label>NIC Back Image</label>
-            <input type="file" name="nic_back" [(ngModel)]="driver.nicBack" class="form-control">
+        <div class="row col-12">
+          <div class="col-10">
+            <div class="form-group">
+              <label>NIC Back Image</label>
+              <input type="file" name="nic_back" (change)="selectNICBack($event)" class="form-control">
+            </div>
           </div>
+
+          <div class="col-2 pt-2">
+            <button class="btn btn-success btn-sm mt-4" >
+              Upload
+            </button>
+          </div>
+
         </div>
 
         <div class="col-12">
           <div class="form-group">
             <label>Driving Licence Front Image</label>
-            <input type="file" name="driving_licence_front" [(ngModel)]="driver.drivingLicenceFront"
+            <input type="file" name="driving_licence_front" (change)="selectDrivingLicenceFront($event)"
                    class="form-control">
           </div>
         </div>
@@ -174,7 +183,7 @@
         <div class="col-12">
           <div class="form-group">
             <label>Driving Licence Back Image</label>
-            <input type="file" name="driving_licence_back" [(ngModel)]="driver.drivingLicenceBack"
+            <input type="file" name="driving_licence_back" (change)="selectDrivingLicenceBack($event)"
                    class="form-control">
           </div>
         </div>

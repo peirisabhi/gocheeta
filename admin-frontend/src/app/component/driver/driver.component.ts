@@ -1,9 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {NotificationService} from "../../service/notification-service/notification.service";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpEventType, HttpResponse} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
-import {City} from "../../model/city-model/city";
 import {Driver} from "../../model/driver-model/driver";
 import {DriverService} from "../../service/driver-service/driver.service";
 import {LicenceTypeService} from "../../service/licence-type-service/licence-type.service";
@@ -20,7 +19,6 @@ export class DriverComponent implements OnInit {
 
   driver: Driver = new Driver();
   licenceTypes?: LicenceType[];
-  // file?: File;
 
   constructor(private modalService: NgbModal,
               private notifyService: NotificationService,
@@ -44,6 +42,22 @@ export class DriverComponent implements OnInit {
     this.modalService.dismissAll();
   }
 
+  selectNICFront(event: any): void {
+    this.driver.nicFront = (event.target.files).item(0);
+  }
+
+  selectNICBack(event: any): void {
+    this.driver.nicBack = (event.target.files).item(0);
+  }
+
+  selectDrivingLicenceFront(event: any): void {
+    this.driver.drivingLicenceFront = (event.target.files).item(0);
+  }
+
+  selectDrivingLicenceBack(event: any): void {
+    this.driver.drivingLicenceBack = (event.target.files).item(0);
+  }
+
   getLicenceTypes() {
     this.licenceTypeService.getLicenceTypes().subscribe(data => {
       this.licenceTypes = data;
@@ -52,33 +66,35 @@ export class DriverComponent implements OnInit {
     })
   }
 
-  saveDriver() {
-
-    // this.driverService.saveDriver(this.driver)
-    //   .subscribe(data => {
-    //     this.driver = new Driver();
-    //     this.notifyService.showSuccess("Successfully Driver Saved", "Success");
-    //   })
 
 
-    let formData = new FormData();
+  saveDriver(): void {
+    const formData: FormData = new FormData();
     Object.entries(this.driver).forEach(
       ([key, value]) => formData.append(key, value)
     );
 
-    // @ts-ignore
-    // formData.append("nic_front", this.file);
-
-    console.log("Form data  --  " + formData)
-
-    this.http.post<any>(apiURL + "driver", formData,
-      {
-        headers: {
-
-        }
-      }).subscribe(data => {
-      console.log(data)
-    })
+    this.driverService.saveDriver(formData).subscribe({
+      next: (event: any) => {
+        // if (event.type === HttpEventType.UploadProgress) {
+        //   this.progress = Math.round(100 * event.loaded / event.total);
+        // } else if (event instanceof HttpResponse) {
+        //   this.message = event.body.message;
+        //   // this.fileInfos = this.testService.getFiles();
+        // }
+        console.log("success")
+      },
+      error: (err: any) => {
+        console.log(err);
+        // this.progress = 0;
+        // if (err.error && err.error.message) {
+        //   this.message = err.error.message;
+        // } else {
+        //   this.message = 'Could not upload the file!';
+        // }
+        // this.currentFile = undefined;
+      }
+    });
   }
 
 }
