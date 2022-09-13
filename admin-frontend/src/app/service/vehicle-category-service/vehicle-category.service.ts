@@ -15,11 +15,11 @@ export class VehicleCategoryService {
   constructor(private httpClient : HttpClient) { }
 
   saveVehicleCategory(vehicleCategory : VehicleCategory): Observable<VehicleCategory>{
-    return  this.httpClient.post<VehicleCategory>(apiURL+"vehicle-category", vehicleCategory);
+    return  this.httpClient.post<VehicleCategory>(apiURL+"vehicle-model-category", vehicleCategory);
   }
 
 
   getVehicleCategories(): Observable<VehicleCategory[]>{
-    return this.httpClient.get<VehicleCategory[]>(apiURL + 'vehicle-category');
+    return this.httpClient.get<VehicleCategory[]>(apiURL + 'vehicle-model-category');
   }
 }
