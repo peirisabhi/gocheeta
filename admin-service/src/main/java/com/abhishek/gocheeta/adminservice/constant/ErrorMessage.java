@@ -18,6 +18,9 @@ public class ErrorMessage {
 
     public static final String DISTANCE_CHARGE_NOT_FOUND = "Can not found this distance charge record!";
 
+
+    public static final String CITY_CHARGE_NOT_FOUND = "Can not found this city charge record!";
+
     public static final String USER_ALREADY_EXISTS = "This user already exists!";
 
     public static final String USER_NOT_FOUND = "Can not found this user!";
