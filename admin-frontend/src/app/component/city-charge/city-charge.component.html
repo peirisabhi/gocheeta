@@ -1,0 +1,135 @@
+<!-- Header -->
+<app-topbar></app-topbar>
+<!-- /Header -->
+
+<!-- Sidebar -->
+<app-side-navbar></app-side-navbar>
+<!-- /Sidebar -->
+
+<div class="page-wrapper">
+  <div class="content container-fluid">
+
+    <!-- Page Header -->
+    <div class="page-header">
+      <div class="row">
+        <div class="col-sm-7 col-auto">
+          <h3 class="page-title">Manage City Charges</h3>
+          <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a href="../../../index.html">Dashboard</a></li>
+            <li class="breadcrumb-item active">Manage City Charges</li>
+          </ul>
+        </div>
+        <div class="col-sm-5 col">
+          <button type="button" (click)="open(addmodal)" class="btn btn-primary float-right mt-2">Add</button>
+        </div>
+      </div>
+    </div>
+    <!-- /Page Header -->
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="card">
+          <div class="card-header">
+            <h4 class="card-title">City Charge Details</h4>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+
+<!--              <table datatable [dtOptions]="dtOptions" class="datatable table table-stripped " width="100%">-->
+<!--                <thead>-->
+<!--                <tr>-->
+<!--                  <th>ID</th>-->
+<!--                  <th>Vehicle Category</th>-->
+<!--                  <th>Km From</th>-->
+<!--                  <th>Km To</th>-->
+<!--                  <th>Price</th>-->
+<!--                  <th>Last Update</th>-->
+<!--                  <th>Actions</th>-->
+<!--                </tr>-->
+<!--                </thead>-->
+<!--                <tbody *ngIf="distanceCharges?.length != 0">-->
+<!--                <tr *ngFor="let distanceCharge of distanceCharges">-->
+<!--                  <td>{{ distanceCharge.id }}</td>-->
+<!--                  <td>{{ distanceCharge.vehicle_category }}</td>-->
+<!--                  <td>{{ distanceCharge.km_from }} Km</td>-->
+<!--                  <td>{{ distanceCharge.km_to }} Km</td>-->
+<!--                  <td>Rs.{{ distanceCharge.price }}.00</td>-->
+<!--                  <td>{{ distanceCharge.last_update }}</td>-->
+<!--                  <td class="">-->
+<!--                    <div class="actions">-->
+<!--                      <a class="btn btn-sm bg-success-light" data-toggle="modal" href="#edit_specialities_details">-->
+<!--                        <i class="fe fe-pencil"></i> Edit-->
+<!--                      </a>-->
+<!--                      <a data-toggle="modal" href="#delete_modal" class="btn btn-sm bg-danger-light ml-1">-->
+<!--                        <i class="fe fe-trash"></i> Delete-->
+<!--                      </a>-->
+<!--                    </div>-->
+<!--                  </td>-->
+<!--                </tr>-->
+<!--                </tbody>-->
+<!--                <tbody *ngIf="distanceCharges?.length == 0">-->
+<!--                <tr>-->
+<!--                  <td colspan="3" class="no-data-available">No data!</td>-->
+<!--                </tr>-->
+<!--                </tbody>-->
+<!--              </table>-->
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Add Modal -->
+<ng-template #addmodal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Add New City Charge</h4>
+    <button type="button" class="close" data-dismiss="modal" (click)="close(addmodal)" aria-label="Close">
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <form (ngSubmit)="saveCityCharge()">
+      <div class="row form-row">
+
+        <div class="col-12">
+          <div class="form-group">
+            <label>City From</label>
+            <select class="form-control" name="city_from" [(ngModel)]="cityCharge.city_from">
+              <option value="0" selected disabled>-- Select --</option>
+              <option *ngFor="let city of cities"
+                      value="{{city.id}}">{{city.city}}</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="col-12">
+          <div class="form-group">
+            <label>City To</label>
+            <select class="form-control" name="city_to" [(ngModel)]="cityCharge.city_to">
+              <option value="0" selected disabled>-- Select --</option>
+              <option *ngFor="let city of cities"
+                      value="{{city.id}}">{{city.city}}</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="col-12">
+          <div class="form-group">
+            <label>Km Amount</label>
+            <input type="number" name="km_amount" [(ngModel)]="cityCharge.km" class="form-control">
+          </div>
+        </div>
+
+      </div>
+      <button type="submit" class="btn btn-primary btn-block">Save Distance Charge</button>
+    </form>
+  </div>
+
+</ng-template>
+<!-- /ADD Modal -->
+
+
