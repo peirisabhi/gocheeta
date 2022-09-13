@@ -1,13 +1,15 @@
 package com.abhishek.gocheeta.adminservice.controller;
 
-import com.abhishek.gocheeta.adminservice.dto.CustomerDto;
 import com.abhishek.gocheeta.adminservice.dto.DriverDto;
 import com.abhishek.gocheeta.adminservice.service.impl.DriverServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * Created by Intellij.
