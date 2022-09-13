@@ -1,6 +1,5 @@
 package com.abhishek.gocheeta.adminservice.service.impl;
 
-import com.abhishek.gocheeta.adminservice.dto.CityDto;
 import com.abhishek.gocheeta.adminservice.dto.DistanceChargeDto;
 import com.abhishek.gocheeta.adminservice.dto.datatable.DataTableRequest;
 import com.abhishek.gocheeta.adminservice.dto.datatable.DataTableResponse;
@@ -8,6 +7,7 @@ import com.abhishek.gocheeta.adminservice.exception.DataNotFoundException;
 import com.abhishek.gocheeta.adminservice.exception.GeneralException;
 import com.abhishek.gocheeta.adminservice.repository.DistanceChargeRepository;
 import com.abhishek.gocheeta.adminservice.service.DistanceChargeService;
+import com.abhishek.gocheeta.adminservice.service.VehicleCategoryService;
 import com.abhishek.gocheeta.adminservice.util.DateUtil;
 import com.abhishek.gocheeta.commons.model.DistanceCharge;
 import lombok.extern.slf4j.Slf4j;
@@ -34,6 +34,9 @@ public class DistanceChargeServiceImpl implements DistanceChargeService {
 
     @Autowired
     DistanceChargeRepository distanceChargeRepository;
+
+    @Autowired
+    VehicleCategoryService vehicleCategoryService;
 
     @Override
     public DistanceChargeDto saveDistanceCharge(DistanceChargeDto distanceChargeDto) {
@@ -125,6 +128,8 @@ public class DistanceChargeServiceImpl implements DistanceChargeService {
                 .map(distanceCharge -> {
                     final DistanceChargeDto distanceChargeDto = distanceCharge.toDto(DistanceChargeDto.class);
                     distanceChargeDto.setLastUpdate(DateUtil.getStringDateWith12Time(distanceCharge.getLastUpdate()));
+                    distanceChargeDto.setVehicleCategory(vehicleCategoryService.getVehicleCategory(
+                            distanceCharge.getVehicleCategoryId()).getCategory());
                     return distanceChargeDto;
                 }).collect(Collectors.toList());
 

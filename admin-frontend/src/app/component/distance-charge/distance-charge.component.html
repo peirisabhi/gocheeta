@@ -38,6 +38,7 @@
                 <thead>
                 <tr>
                   <th>ID</th>
+                  <th>Vehicle Category</th>
                   <th>Km From</th>
                   <th>Km To</th>
                   <th>Price</th>
@@ -48,6 +49,7 @@
                 <tbody *ngIf="distanceCharges?.length != 0">
                 <tr *ngFor="let distanceCharge of distanceCharges">
                   <td>{{ distanceCharge.id }}</td>
+                  <td>{{ distanceCharge.vehicle_category }}</td>
                   <td>{{ distanceCharge.km_from }} Km</td>
                   <td>{{ distanceCharge.km_to }} Km</td>
                   <td>Rs.{{ distanceCharge.price }}.00</td>
@@ -57,7 +59,7 @@
                       <a class="btn btn-sm bg-success-light" data-toggle="modal" href="#edit_specialities_details">
                         <i class="fe fe-pencil"></i> Edit
                       </a>
-                      <a  data-toggle="modal" href="#delete_modal" class="btn btn-sm bg-danger-light ml-1">
+                      <a data-toggle="modal" href="#delete_modal" class="btn btn-sm bg-danger-light ml-1">
                         <i class="fe fe-trash"></i> Delete
                       </a>
                     </div>
@@ -98,7 +100,8 @@
             <label>Vehicle Category</label>
             <select class="form-control" name="user_role_id" [(ngModel)]="distanceCharge.vehicle_category_id">
               <option value="0" selected disabled>-- Select --</option>
-              <option *ngFor="let vehicleCategory of vehicleCategories" value="{{vehicleCategory.id}}">{{vehicleCategory.category}}</option>
+              <option *ngFor="let vehicleCategory of vehicleCategories"
+                      value="{{vehicleCategory.id}}">{{vehicleCategory.category}}</option>
             </select>
           </div>
         </div>
