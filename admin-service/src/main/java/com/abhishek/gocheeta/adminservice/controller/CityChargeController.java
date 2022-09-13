@@ -1,7 +1,8 @@
 package com.abhishek.gocheeta.adminservice.controller;
 
 import com.abhishek.gocheeta.adminservice.dto.CityChargeDto;
-import com.abhishek.gocheeta.adminservice.dto.DistanceChargeDto;
+import com.abhishek.gocheeta.adminservice.dto.datatable.DataTableRequest;
+import com.abhishek.gocheeta.adminservice.dto.datatable.DataTableResponse;
 import com.abhishek.gocheeta.adminservice.service.CityChargeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,4 +65,10 @@ public class CityChargeController {
         return ResponseEntity.ok(cityChargeService.getCityCharge(cityChargeId));
     }
 
+
+    @PostMapping("/data")
+    public DataTableResponse<CityChargeDto> getCityChargesForDataTable(
+            @RequestBody DataTableRequest dataTableRequest) {
+        return cityChargeService.getCityChargesForDataTable(dataTableRequest);
+    }
 }
