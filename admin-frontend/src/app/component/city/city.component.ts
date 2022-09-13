@@ -56,7 +56,7 @@ export class CityComponent implements OnInit {
       ajax: (dataTablesParameters: any, callback) => {
         this.http
           .post<DataTablesResponse>(
-            apiURL + 'city1/data',
+            apiURL + 'city/data',
             dataTablesParameters, {}
           ).subscribe(resp => {
           this.cities = resp.data;
