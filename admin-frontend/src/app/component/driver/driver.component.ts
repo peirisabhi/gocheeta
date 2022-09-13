@@ -7,6 +7,7 @@ import {Driver} from "../../model/driver-model/driver";
 import {DriverService} from "../../service/driver-service/driver.service";
 import {LicenceTypeService} from "../../service/licence-type-service/licence-type.service";
 import {LicenceType} from "../../model/licence-type-model/licence-type";
+import {DataTablesResponse} from "../../model/data-tables-response-model/data-tables-response";
 
 let apiURL = environment.apiURL;
 
@@ -20,6 +21,9 @@ export class DriverComponent implements OnInit {
   driver: Driver = new Driver();
   licenceTypes?: LicenceType[];
 
+  dtOptions: DataTables.Settings = {};
+  drivers ?: any[];
+
   constructor(private modalService: NgbModal,
               private notifyService: NotificationService,
               private http: HttpClient,
@@ -30,6 +34,7 @@ export class DriverComponent implements OnInit {
 
   ngOnInit(): void {
     this.getLicenceTypes();
+    this.loadDataTable();
   }
 
 
@@ -90,7 +95,7 @@ export class DriverComponent implements OnInit {
       error: (err: any) => {
         console.log(err);
         this.notifyService.showError("Something Went Wrong", "Error")
-        
+
       },
       complete: () => {
         console.log("success")
@@ -98,6 +103,36 @@ export class DriverComponent implements OnInit {
       },
 
     });
+  }
+
+
+  loadDataTable() {
+    this.dtOptions = {
+      serverSide: true,
+      processing: true,
+      ajax: (dataTablesParameters: any, callback) => {
+        this.http
+          .post<DataTablesResponse>(
+            apiURL + 'driver/data',
+            dataTablesParameters, {}
+          ).subscribe(resp => {
+          this.drivers = resp.data;
+
+          callback({
+            recordsTotal: resp.recordsTotal,
+            recordsFiltered: resp.recordsFiltered,
+            data: []
+          });
+        });
+      },
+      columns: [
+        {data: 'id'},
+        {data: 'km_from'},
+        {data: 'km_to'},
+        {data: 'price'},
+        {data: 'last_update'},
+      ]
+    };
   }
 
 }
