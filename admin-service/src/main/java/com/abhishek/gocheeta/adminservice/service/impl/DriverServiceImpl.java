@@ -158,17 +158,42 @@ public class DriverServiceImpl implements DriverService {
 
     @Override
     public DriverDto removeDriver(int id) {
-        return null;
+        final Driver driver = driverRepository.findById(id)
+                .orElseThrow(() -> new DataNotFoundException(DRIVER_NOT_FOUND));
+
+        try {
+            driver.setStatus(0);
+            return driverRepository.save(driver)
+                    .toDto(DriverDto.class);
+
+        } catch (Exception e) {
+            log.error(e.getLocalizedMessage());
+            throw new GeneralException(GENERAL_ERROR);
+        }
     }
 
     @Override
     public List<DriverDto> getDrivers() {
-        return null;
+        try{
+           return driverRepository.findAllByStatus(1)
+                    .stream()
+                    .map(driver -> {
+                        final DriverDto driverDto = driver.toDto(DriverDto.class);
+                        driverDto.setDob(DateUtil.getStringDate(driver.getDob()));
+                        return driverDto;
+                    })
+                    .collect(Collectors.toList());
+        }catch (Exception e) {
+            log.error(e.getLocalizedMessage());
+            throw new GeneralException(GENERAL_ERROR);
+        }
     }
 
     @Override
     public DriverDto getDriver(int id) {
-        return null;
+        return driverRepository.findById(id)
+                .orElseThrow(() -> new DataNotFoundException(DRIVER_NOT_FOUND))
+                .toDto(DriverDto.class);
     }
 
     @Override
