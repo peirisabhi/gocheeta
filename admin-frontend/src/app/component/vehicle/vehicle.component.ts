@@ -6,6 +6,8 @@ import {NotificationService} from "../../service/notification-service/notificati
 import {HttpClient} from "@angular/common/http";
 import {VehicleService} from "../../service/vehicle-service/vehicle.service";
 import {VehicleCategoryService} from "../../service/vehicle-category-service/vehicle-category.service";
+import {DriverService} from "../../service/driver-service/driver.service";
+import {Driver} from "../../model/driver-model/driver";
 
 @Component({
   selector: 'app-vehicle',
@@ -17,16 +19,19 @@ export class VehicleComponent implements OnInit {
   vehicle: Vehicle = new Vehicle();
   dtOptions: DataTables.Settings = {};
   vehicleCategories?: VehicleCategory[];
+  drivers?: Driver[];
 
   constructor(private modalService: NgbModal,
               private notifyService: NotificationService,
               private http: HttpClient,
               private vehicleService: VehicleService,
-              private vehicleCategoryService: VehicleCategoryService) {
+              private vehicleCategoryService: VehicleCategoryService,
+              private driverService: DriverService) {
   }
 
   ngOnInit(): void {
     this.getVehicleCategories()
+    this.getDrivers()
   }
 
   open(content: any) {
@@ -41,6 +46,14 @@ export class VehicleComponent implements OnInit {
   getVehicleCategories() {
     this.vehicleCategoryService.getVehicleCategories().subscribe(data => {
       this.vehicleCategories = data;
+    }, error => {
+      console.log(error)
+    })
+  }
+
+  getDrivers() {
+    this.driverService.getDrivers().subscribe(data => {
+      this.drivers = data;
     }, error => {
       console.log(error)
     })

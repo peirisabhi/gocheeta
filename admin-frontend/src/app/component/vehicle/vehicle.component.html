@@ -127,6 +127,18 @@
           </div>
         </div>
 
+
+        <div class="col-12">
+          <div class="form-group">
+            <label>Vehicle Category</label>
+            <select class="form-control" name="city_from" [(ngModel)]="vehicle.driver_id">
+              <option value="0" selected disabled>-- Select --</option>
+              <option *ngFor="let driver of drivers"
+                      value="{{driver.id}}">{{driver.fname}} {{driver.lname}}</option>
+            </select>
+          </div>
+        </div>
+
       </div>
       <button type="submit" class="btn btn-primary btn-block">Save Category</button>
     </form>

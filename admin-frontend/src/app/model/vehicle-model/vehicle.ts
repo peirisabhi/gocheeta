@@ -1,6 +1,6 @@
 export class Vehicle {
   id?: number;
-  vehicle_category_id?: number;
+  vehicle_category_id: number = 0;
   vehicle_category?: string;
   vehicle_make?: string;
   vehicle_model?: string;
@@ -8,6 +8,6 @@ export class Vehicle {
   mac_passengers?: number;
   registered_at?: string;
   registered_by?: string;
-  driver_id?: number;
+  driver_id: number = 0;
   driver?: string;
 }

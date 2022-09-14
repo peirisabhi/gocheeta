@@ -3,6 +3,7 @@ import {environment} from "../../../environments/environment";
 import {HttpClient, HttpEvent, HttpRequest} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Driver} from "../../model/driver-model/driver";
+import {VehicleCategory} from "../../model/vehicle-category-model/vehicle-category";
 
 let apiURL = environment.apiURL;
 
@@ -48,6 +49,11 @@ export class DriverService {
       responseType: 'json'
     });
     return this.httpClient.request(req);
+  }
+
+
+  getDrivers(): Observable<Driver[]>{
+    return this.httpClient.get<Driver[]>(apiURL + 'driver');
   }
 
 }
