@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import javax.persistence.Column;
 import java.util.Date;
 
 /**
@@ -49,6 +50,11 @@ public class VehicleDto implements Transformer {
     private int driverId;
 
     private String driver;
+
+    @JsonProperty("city_id")
+    private int cityId;
+
+    private String city;
 
 
 }
