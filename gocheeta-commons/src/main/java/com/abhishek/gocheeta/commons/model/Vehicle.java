@@ -34,6 +34,9 @@ public class Vehicle implements Transformer {
     @Column(name = "mac_passengers")
     private int maxPassengers;
 
+    @Column(name = "city_id")
+    private int cityId;
+
     @Column(name = "registered_at", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date registeredAt;

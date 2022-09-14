@@ -46,6 +46,9 @@ public class Driver implements Transformer {
     @Column(name = "licence_type_id")
     private int licenceTypeId;
 
+    @Column(name = "city_id")
+    private int cityId;
+
     @Column(name = "nic_front", length = 512)
     private String nicFront;
 
