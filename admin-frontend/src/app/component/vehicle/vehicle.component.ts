@@ -8,6 +8,10 @@ import {VehicleService} from "../../service/vehicle-service/vehicle.service";
 import {VehicleCategoryService} from "../../service/vehicle-category-service/vehicle-category.service";
 import {DriverService} from "../../service/driver-service/driver.service";
 import {Driver} from "../../model/driver-model/driver";
+import {DataTablesResponse} from "../../model/data-tables-response-model/data-tables-response";
+import {environment} from "../../../environments/environment";
+
+let apiURL = environment.apiURL;
 
 @Component({
   selector: 'app-vehicle',
@@ -20,6 +24,7 @@ export class VehicleComponent implements OnInit {
   dtOptions: DataTables.Settings = {};
   vehicleCategories?: VehicleCategory[];
   drivers?: Driver[];
+  vehicles?: Vehicle[];
 
   constructor(private modalService: NgbModal,
               private notifyService: NotificationService,
@@ -32,6 +37,7 @@ export class VehicleComponent implements OnInit {
   ngOnInit(): void {
     this.getVehicleCategories()
     this.getDrivers()
+    this.loadDataTable()
   }
 
   open(content: any) {
@@ -67,5 +73,33 @@ export class VehicleComponent implements OnInit {
       })
   }
 
+
+  loadDataTable() {
+    this.dtOptions = {
+      serverSide: true,
+      processing: true,
+      ajax: (dataTablesParameters: any, callback) => {
+        this.http
+          .post<DataTablesResponse>(
+            apiURL + 'vehicle/data',
+            dataTablesParameters, {}
+          ).subscribe(resp => {
+          this.vehicles = resp.data;
+
+          callback({
+            recordsTotal: resp.recordsTotal,
+            recordsFiltered: resp.recordsFiltered,
+            data: []
+          });
+        });
+      },
+      columns: [
+        {data: 'id'},
+        {data: 'city_from'},
+        {data: 'city_to'},
+        {data: 'km'},
+      ]
+    };
+  }
 
 }
