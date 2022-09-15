@@ -8,6 +8,7 @@ import com.abhishek.gocheeta.adminservice.exception.DuplicateDataFoundException;
 import com.abhishek.gocheeta.adminservice.exception.FileManageException;
 import com.abhishek.gocheeta.adminservice.exception.GeneralException;
 import com.abhishek.gocheeta.adminservice.repository.DriverRepository;
+import com.abhishek.gocheeta.adminservice.service.CityService;
 import com.abhishek.gocheeta.adminservice.service.DriverService;
 import com.abhishek.gocheeta.adminservice.util.DateUtil;
 import com.abhishek.gocheeta.commons.model.Driver;
@@ -42,6 +43,9 @@ public class DriverServiceImpl implements DriverService {
 
     @Autowired
     DriverRepository driverRepository;
+
+    @Autowired
+    CityService cityService;
 
     @Override
     public DriverDto saveDriver(DriverDto driverDto) {
@@ -174,8 +178,8 @@ public class DriverServiceImpl implements DriverService {
 
     @Override
     public List<DriverDto> getDrivers() {
-        try{
-           return driverRepository.findAllByStatus(1)
+        try {
+            return driverRepository.findAllByStatus(1)
                     .stream()
                     .map(driver -> {
                         final DriverDto driverDto = driver.toDto(DriverDto.class);
@@ -183,7 +187,7 @@ public class DriverServiceImpl implements DriverService {
                         return driverDto;
                     })
                     .collect(Collectors.toList());
-        }catch (Exception e) {
+        } catch (Exception e) {
             log.error(e.getLocalizedMessage());
             throw new GeneralException(GENERAL_ERROR);
         }
@@ -210,10 +214,12 @@ public class DriverServiceImpl implements DriverService {
                                 || driver.getGender().toLowerCase().startsWith(value)
                                 || driver.getNic().toLowerCase().startsWith(value)
                                 || driver.getContact1().toLowerCase().startsWith(value)
-                                || driver.getContact2().toLowerCase().startsWith(value))
+                                || driver.getContact2().toLowerCase().startsWith(value)
+                                || cityService.getCity(driver.getCityId()).getCity().toLowerCase().startsWith(value))
                 .map(driver -> {
                     final DriverDto driverDto = driver.toDto(DriverDto.class);
                     driverDto.setDob(DateUtil.getStringDate(driver.getDob()));
+                    driverDto.setCity(cityService.getCity(driver.getCityId()).getCity());
                     return driverDto;
                 })
                 .collect(Collectors.toList());
