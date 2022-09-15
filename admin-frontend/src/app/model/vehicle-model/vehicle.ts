@@ -10,6 +10,6 @@ export class Vehicle {
   registered_by?: string;
   driver_id: number = 0;
   driver?: string;
-  city_id?: number;
+  city_id?: number = 0;
   city?: string;
 }

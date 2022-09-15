@@ -45,6 +45,7 @@
                   <th>Max Passengers</th>
                   <th>Registered At</th>
                   <th>Driver</th>
+                  <th>Branch</th>
                   <th>Actions</th>
                 </tr>
                 </thead>
@@ -58,6 +59,7 @@
                   <td>{{ vehicle.mac_passengers }}</td>
                   <td>{{ vehicle.registered_at }}</td>
                   <td>{{ vehicle.driver }}</td>
+                  <td>{{ vehicle.city }}</td>
                   <td class="">
                     <div class="actions">
                       <a class="btn btn-sm bg-success-light" data-toggle="modal" href="#edit_specialities_details">
@@ -99,6 +101,15 @@
     <form (ngSubmit)="saveVehicle()">
       <div class="row form-row">
 
+        <div class="col-12">
+          <div class="form-group">
+            <label>Branch</label>
+            <select class="form-control" name="user_role_id" [(ngModel)]="vehicle.city_id">
+              <option value="0" selected disabled>-- Select --</option>
+              <option *ngFor="let city of cities" value="{{city.id}}">{{city.city}}</option>
+            </select>
+          </div>
+        </div>
 
         <div class="col-12">
           <div class="form-group">

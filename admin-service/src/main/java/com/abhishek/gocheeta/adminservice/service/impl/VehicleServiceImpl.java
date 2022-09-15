@@ -8,6 +8,7 @@ import com.abhishek.gocheeta.adminservice.exception.DataNotFoundException;
 import com.abhishek.gocheeta.adminservice.exception.DuplicateDataFoundException;
 import com.abhishek.gocheeta.adminservice.exception.GeneralException;
 import com.abhishek.gocheeta.adminservice.repository.VehicleRepository;
+import com.abhishek.gocheeta.adminservice.service.CityService;
 import com.abhishek.gocheeta.adminservice.service.DriverService;
 import com.abhishek.gocheeta.adminservice.service.VehicleCategoryService;
 import com.abhishek.gocheeta.adminservice.service.VehicleService;
@@ -43,11 +44,19 @@ public class VehicleServiceImpl implements VehicleService {
     final
     VehicleCategoryService vehicleCategoryService;
 
+    final
+    CityService cityService;
+
     @Autowired
-    public VehicleServiceImpl(VehicleRepository vehicleRepository, DriverService driverService, VehicleCategoryService vehicleCategoryService) {
+    public VehicleServiceImpl(VehicleRepository vehicleRepository,
+                              DriverService driverService,
+                              VehicleCategoryService vehicleCategoryService,
+                              CityService cityService) {
+
         this.vehicleRepository = vehicleRepository;
         this.driverService = driverService;
         this.vehicleCategoryService = vehicleCategoryService;
+        this.cityService = cityService;
     }
 
     @Override
@@ -152,7 +161,10 @@ public class VehicleServiceImpl implements VehicleService {
                         || driverService.getDriver(vehicle.getDriverId())
                         .getFname().toLowerCase().startsWith(value)
                         || driverService.getDriver(vehicle.getDriverId())
-                        .getLname().toLowerCase().startsWith(value))
+                        .getLname().toLowerCase().startsWith(value)
+                        || cityService.getCity(vehicle.getCityId())
+                        .getCity().toLowerCase().startsWith(value))
+
                 .map(vehicle -> {
                     final VehicleDto vehicleDto = vehicle.toDto(VehicleDto.class);
                     vehicleDto.setRegisteredAt(DateUtil.getStringDateWith12Time(vehicle.getRegisteredAt()));
@@ -162,6 +174,7 @@ public class VehicleServiceImpl implements VehicleService {
                     final DriverDto driver = driverService.getDriver(vehicleDto.getDriverId());
 
                     vehicleDto.setDriver(driver.getFname().concat(" ").concat(driver.getLname()));
+                    vehicleDto.setCity(cityService.getCity(vehicle.getCityId()).getCity());
 
                     return vehicleDto;
                 })

@@ -10,6 +10,8 @@ import {DriverService} from "../../service/driver-service/driver.service";
 import {Driver} from "../../model/driver-model/driver";
 import {DataTablesResponse} from "../../model/data-tables-response-model/data-tables-response";
 import {environment} from "../../../environments/environment";
+import {City} from "../../model/city-model/city";
+import {CityService} from "../../service/city-service/city.service";
 
 let apiURL = environment.apiURL;
 
@@ -25,18 +27,21 @@ export class VehicleComponent implements OnInit {
   vehicleCategories?: VehicleCategory[];
   drivers?: Driver[];
   vehicles?: Vehicle[];
+  cities?: City[];
 
   constructor(private modalService: NgbModal,
               private notifyService: NotificationService,
               private http: HttpClient,
               private vehicleService: VehicleService,
               private vehicleCategoryService: VehicleCategoryService,
-              private driverService: DriverService) {
+              private driverService: DriverService,
+              private cityService: CityService) {
   }
 
   ngOnInit(): void {
     this.getVehicleCategories()
     this.getDrivers()
+    this.getCities()
     this.loadDataTable()
   }
 
@@ -60,6 +65,14 @@ export class VehicleComponent implements OnInit {
   getDrivers() {
     this.driverService.getDrivers().subscribe(data => {
       this.drivers = data;
+    }, error => {
+      console.log(error)
+    })
+  }
+
+  getCities() {
+    this.cityService.getCities().subscribe(data => {
+      this.cities = data;
     }, error => {
       console.log(error)
     })
