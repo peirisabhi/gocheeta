@@ -60,7 +60,7 @@ public class DriverDto implements Transformer {
 
     @JsonProperty("registered_by")
     private int registeredBy;
-    
+
     @JsonProperty("city_id")
     private int cityId;
 

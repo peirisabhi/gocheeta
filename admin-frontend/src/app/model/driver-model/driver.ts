@@ -16,6 +16,7 @@ export class Driver {
   drivingLicenceBack?: File;
   registeredAt?: string;
   registeredBy?: string;
-
+  cityId?: string = "0";
+  city?: string;
 
 }

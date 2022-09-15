@@ -101,6 +101,16 @@
     <form (ngSubmit)="saveDriver()" enctype="multipart/form-data">
       <div class="row form-row">
 
+        <div class="col-12">
+          <div class="form-group">
+            <label>Branch</label>
+            <select class="form-control" name="user_role_id" [(ngModel)]="driver.cityId">
+              <option value="0" selected disabled>-- Select --</option>
+              <option *ngFor="let city of cities" value="{{city.id}}">{{city.city}}</option>
+            </select>
+          </div>
+        </div>
+
         <div class="col-12 col-sm-6">
           <div class="form-group">
             <label>First Name</label>

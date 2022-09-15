@@ -8,6 +8,8 @@ import {DriverService} from "../../service/driver-service/driver.service";
 import {LicenceTypeService} from "../../service/licence-type-service/licence-type.service";
 import {LicenceType} from "../../model/licence-type-model/licence-type";
 import {DataTablesResponse} from "../../model/data-tables-response-model/data-tables-response";
+import {City} from "../../model/city-model/city";
+import {CityService} from "../../service/city-service/city.service";
 
 let apiURL = environment.apiURL;
 
@@ -20,7 +22,7 @@ export class DriverComponent implements OnInit {
 
   driver: Driver = new Driver();
   licenceTypes?: LicenceType[];
-
+  cities?: City[];
   dtOptions: DataTables.Settings = {};
   drivers ?: any[];
 
@@ -28,12 +30,14 @@ export class DriverComponent implements OnInit {
               private notifyService: NotificationService,
               private http: HttpClient,
               private driverService: DriverService,
-              private licenceTypeService: LicenceTypeService) {
+              private licenceTypeService: LicenceTypeService,
+              private cityService: CityService) {
 
   }
 
   ngOnInit(): void {
     this.getLicenceTypes();
+    this.getCities();
     this.loadDataTable();
   }
 
@@ -71,6 +75,14 @@ export class DriverComponent implements OnInit {
     })
   }
 
+  getCities() {
+    this.cityService.getCities().subscribe(data => {
+      this.cities = data;
+    }, error => {
+      console.log(error)
+    })
+  }
+
 
 
   saveDriver(): void {
@@ -99,6 +111,7 @@ export class DriverComponent implements OnInit {
       },
       complete: () => {
         console.log("success")
+        this.driver = new Driver();
         this.notifyService.showSuccess("Driver Saved Successfully", "Success")
       },
 
