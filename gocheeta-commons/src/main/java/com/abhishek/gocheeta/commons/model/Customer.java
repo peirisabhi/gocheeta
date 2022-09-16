@@ -46,4 +46,6 @@ public class Customer implements Transformer {
     @Column(length = 1)
     private int status;
 
+    private String password;
+
 }

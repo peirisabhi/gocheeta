@@ -36,4 +36,6 @@ public class CustomerDto implements Transformer {
     @JsonProperty("registered_at")
     private String registeredAt;
 
+    private String password;
+
 }

@@ -11,6 +11,7 @@ import com.abhishek.gocheeta.customerservice.util.DateUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
@@ -40,6 +41,7 @@ public class CustomerServiceImpl implements CustomerService {
             }
             customer.setRegisteredAt(new Date());
             customer.setStatus(1);
+            customer.setPassword(new BCryptPasswordEncoder().encode(customerDto.getPassword()));
 
             return customerRepository.save(customer)
                     .toDto(CustomerDto.class);
