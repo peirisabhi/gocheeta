@@ -29,6 +29,9 @@ public class Customer implements Transformer {
     @Column(length = 16)
     private String gender;
 
+    @Column(length = 16)
+    private String mobile;
+
     @Column(unique = true, length = 16)
     private String nic;
 
