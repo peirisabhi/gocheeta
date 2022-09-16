@@ -38,7 +38,7 @@ public class CustomerController {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(customerService.updateCustomer(customerDto));
     }
-    
+
 
     @GetMapping("{customerId}")
     public ResponseEntity<CustomerDto> getCustomerDto(
