@@ -1,6 +1,6 @@
 <app-nav></app-nav>
 
-<div class="content mt-5">
+<div class="content mt-1">
   <div class="container-fluid" style="padding-left: 15%; padding-right: 15%">
     <div class="row">
       <div class="col-md-12 ">
@@ -23,7 +23,7 @@
               </div>
 
               <!-- Register Form -->
-              <form action="https://doccure-html.dreamguystech.com/template/doctor-dashboard.html">
+              <form (ngSubmit)="saveCustomer()">
                 <div class="row form-row">
                   <!--                <div class="form-group form-focus">-->
                   <!--                  <input type="text" class="form-control floating">-->
@@ -39,45 +39,45 @@
                   <!--                  <label class="focus-label">OTP Code</label>-->
                   <!--                </div>-->
 
-                  <div class="col-12 col-sm-6">
+                  <div class="col-12 col-sm-6 mb-4">
                     <div class="form-group form-focus">
-                      <input type="text" class="form-control floating">
-                      <label class="focus-label">First Name</label>
+                      <label class="label">First Name</label>
+                      <input placeholder="David" type="text" name="fname" [(ngModel)]="customer.fname" class="form-control">
                     </div>
                   </div>
 
-                  <div class="col-12 col-sm-6">
+                  <div class="col-12 col-sm-6 mb-4">
                     <div class="form-group form-focus">
-                      <input type="text" class="form-control floating">
-                      <label class="focus-label">Last Name</label>
+                      <label class="label">Last Name</label>
+                      <input placeholder="Perera" type="text" name="fname" [(ngModel)]="customer.lname" class="form-control floating">
                     </div>
                   </div>
 
-                  <div class="col-12">
+                  <div class="col-12 mb-4">
                     <div class="form-group form-focus">
-                      <input type="number" class="form-control floating">
-                      <label class="focus-label">Mobile</label>
+                      <label class="label">Mobile</label>
+                      <input placeholder="071 XXXXXXX" type="number" name="mobile" [(ngModel)]="customer.mobile" class="form-control floating">
                     </div>
                   </div>
 
-                  <div class="col-12">
+                  <div class="col-12 mb-4">
                     <div class="form-group form-focus">
-                      <input type="email" class="form-control floating">
-                      <label class="focus-label">Email</label>
+                      <label class="label">Email</label>
+                      <input placeholder="abc@gmail.com" type="email" name="email" [(ngModel)]="customer.email" class="form-control floating">
                     </div>
                   </div>
 
-                  <div class="col-12">
+                  <div class="col-12 mb-4">
                     <div class="form-group form-focus">
-                      <input type="password" class="form-control floating">
-                      <label class="focus-label">Password</label>
+                      <label class="label">Password</label>
+                      <input placeholder="*******" type="password" name="password" [(ngModel)]="customer.password" class="form-control floating">
                     </div>
                   </div>
 
-                  <div class="col-12">
+                  <div class="col-12 mb-4">
                     <div class="form-group form-focus">
-                      <input type="password" class="form-control floating">
-                      <label class="focus-label">Confirm Password</label>
+                      <label class="label">Confirm Password</label>
+                      <input placeholder="*******" type="password" name="confirm_password" [(ngModel)]="customer.confirm_password" class="form-control floating">
                     </div>
                   </div>
 
@@ -115,6 +115,9 @@
 
 </div>
 
+<br/>
+<br/>
+<br/>
 <br/>
 <br/>
 

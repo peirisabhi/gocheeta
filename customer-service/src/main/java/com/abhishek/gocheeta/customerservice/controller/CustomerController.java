@@ -19,6 +19,7 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/customer")
 @Slf4j
+@CrossOrigin
 public class CustomerController {
 
     @Autowired
@@ -27,6 +28,7 @@ public class CustomerController {
     @PostMapping()
     public ResponseEntity<CustomerDto> saveCustomer(
             @RequestBody CustomerDto customerDto) {
+        log.info(customerDto.toString());
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(customerService.saveCustomer(customerDto));
     }

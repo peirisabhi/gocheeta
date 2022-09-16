@@ -8,4 +8,6 @@ export class Customer {
   nic?: string;
   dob?: string;
   registered_at?: string;
+  password?: string;
+  confirm_password?: string;
 }

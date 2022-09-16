@@ -35,20 +35,25 @@ public class CustomerServiceImpl implements CustomerService {
     public CustomerDto saveCustomer(CustomerDto customerDto) {
         try {
             final Customer customer = customerDto.toEntity(Customer.class);
-            customer.setDob(DateUtil.getDate(customerDto.getDob()));
+            if(customerDto.getDob() != null && !customerDto.getDob().equals("")){
+                customer.setDob(DateUtil.getDate(customerDto.getDob()));
+            }
             customer.setRegisteredAt(new Date());
             customer.setStatus(1);
 
             return customerRepository.save(customer)
                     .toDto(CustomerDto.class);
         } catch (ParseException e) {
-            log.error(e.getLocalizedMessage());
+            log.error(e.getMessage());
+            e.printStackTrace();
             throw new GeneralException("Invalid Date Format");
         } catch (DataIntegrityViolationException e) {
             log.error(e.getLocalizedMessage());
+            e.printStackTrace();
             throw new DuplicateDataFoundException(CUSTOMER_ALREADY_EXISTS);
         } catch (Exception e) {
             log.error(e.getLocalizedMessage());
+            e.printStackTrace();
             throw new GeneralException(GENERAL_ERROR);
         }
     }

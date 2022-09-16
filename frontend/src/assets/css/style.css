@@ -1721,7 +1721,8 @@ button.bg-danger:hover {
 }
 .form-focus .form-control {
 	height: 50px;
-	padding: 21px 12px 6px;
+	/*padding: 21px 12px 6px;*/
+	padding: 12px 12px;
 }
 .form-focus .form-control::-webkit-input-placeholder {
 	color: transparent;

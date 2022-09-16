@@ -35,7 +35,7 @@ public class Customer implements Transformer {
     @Column(unique = true, length = 16)
     private String nic;
 
-    @Column(name = "dob", nullable = false)
+    @Column(name = "dob", nullable = true)
     @Temporal(TemporalType.DATE)
     private Date dob;
 
