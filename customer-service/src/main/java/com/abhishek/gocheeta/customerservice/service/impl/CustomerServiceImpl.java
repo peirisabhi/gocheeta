@@ -1,7 +1,7 @@
 package com.abhishek.gocheeta.customerservice.service.impl;
 
 import com.abhishek.gocheeta.commons.model.Customer;
-import com.abhishek.gocheeta.customerservice.controller.CustomerDto;
+import com.abhishek.gocheeta.customerservice.dto.CustomerDto;
 import com.abhishek.gocheeta.customerservice.exception.DataNotFoundException;
 import com.abhishek.gocheeta.customerservice.exception.DuplicateDataFoundException;
 import com.abhishek.gocheeta.customerservice.exception.GeneralException;

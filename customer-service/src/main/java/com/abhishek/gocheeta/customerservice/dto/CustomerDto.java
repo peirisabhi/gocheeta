@@ -1,4 +1,4 @@
-package com.abhishek.gocheeta.customerservice.controller;
+package com.abhishek.gocheeta.customerservice.dto;
 
 import com.abhishek.gocheeta.commons.util.Transformer;
 import com.fasterxml.jackson.annotation.JsonProperty;
