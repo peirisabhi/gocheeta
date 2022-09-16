@@ -1,9 +1,7 @@
 package com.abhishek.gocheeta.customerservice.service;
 
 
-import com.abhishek.gocheeta.customerservice.controller.CustomerDto;
-
-import java.util.List;
+import com.abhishek.gocheeta.customerservice.dto.CustomerDto;
 
 /**
  * Created by Intellij.
