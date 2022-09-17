@@ -18,6 +18,23 @@ export class AuthGuard implements CanActivate {
       window.alert('Access Denied, Login is Required to Access This Page!');
       this.router.navigate(['login']);
     }
+
+    // if (this.jwtService.getUser()) {
+    //   if (this.jwtService.isTokenExpired()) {
+    //     // Should Redirect Sig-In Page
+    //   } else {
+    //     return true;
+    //   }
+    // } else {
+    //   return new Promise((resolve) => {
+    //     this.loginService.signIncallBack().then((e) => {
+    //       resolve(true);
+    //     }).catch((e) => {
+    //       // Should Redirect Sign-In Page
+    //     });
+    //   });
+    // }
+
     return true;
   }
 

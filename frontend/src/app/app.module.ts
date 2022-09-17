@@ -10,12 +10,13 @@ import {RideComponent} from './components/ride/ride.component';
 import {LoginComponent} from './components/login/login.component';
 import {RegisterComponent} from './components/register/register.component';
 import {DriveComponent} from './components/drive/drive.component';
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {FormsModule} from "@angular/forms";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {ToastrModule} from "ngx-toastr";
 import {AuthService} from "./service/auth-service/auth.service";
 import {AuthGuard} from "./shared/auth.guard";
+import {RequestInterceptor} from "./helpers/request.interceptor";
 
 @NgModule({
   declarations: [
@@ -36,7 +37,11 @@ import {AuthGuard} from "./shared/auth.guard";
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
   ],
-  providers: [AuthService, AuthGuard],
+  providers: [
+    AuthService,
+    AuthGuard,
+    {provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true},
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

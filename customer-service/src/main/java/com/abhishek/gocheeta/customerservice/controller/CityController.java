@@ -18,7 +18,7 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/city")
 @Slf4j
-@CrossOrigin
+@CrossOrigin()
 public class CityController {
 
     @Autowired
