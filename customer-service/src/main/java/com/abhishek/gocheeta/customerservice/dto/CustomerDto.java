@@ -36,6 +36,7 @@ public class CustomerDto implements Transformer {
     @JsonProperty("registered_at")
     private String registeredAt;
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
 }

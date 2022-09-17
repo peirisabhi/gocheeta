@@ -17,6 +17,6 @@ public interface CustomerService {
 
     CustomerDto getCustomer(int id);
 
-
+    CustomerDto getCustomerByEmail(String email);
 
 }

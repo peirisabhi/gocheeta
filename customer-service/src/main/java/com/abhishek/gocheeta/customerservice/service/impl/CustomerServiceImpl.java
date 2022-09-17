@@ -93,4 +93,11 @@ public class CustomerServiceImpl implements CustomerService {
                 .orElseThrow(() -> new DataNotFoundException(CUSTOMER_NOT_FOUND))
                 .toDto(CustomerDto.class);
     }
+
+    @Override
+    public CustomerDto getCustomerByEmail(String email) {
+        return customerRepository.findByEmail(email)
+                .orElseThrow(() -> new DataNotFoundException(CUSTOMER_NOT_FOUND))
+                .toDto(CustomerDto.class);
+    }
 }

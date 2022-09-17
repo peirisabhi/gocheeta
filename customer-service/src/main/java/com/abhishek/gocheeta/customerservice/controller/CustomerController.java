@@ -56,33 +56,21 @@ public class CustomerController {
             @RequestBody LoginRequestDto loginRequestDto) throws Exception{
         log.info(loginRequestDto.toString());
 
-//        Authentication authentication = authenticationManager
-//                .authenticate(new UsernamePasswordAuthenticationToken(loginRequestDto.getEmail(), loginRequestDto.getPassword()));
-//
-//
-//        log.info("------- 1 ------");
-////        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
-//        log.info("------- 2 ------");
-//
-//        final String token = jwtTokenUtil.generateToken(new UserDetailsImpl(1,"abc","asa", "asa", "asa"));
-//
-//        log.info("Token --- "+ token);
 
         authenticate(loginRequestDto.getUsername(), loginRequestDto.getPassword());
-
-        System.out.println("----- 1 -------");
 
         final UserDetails userDetails = userDetailsService
                 .loadUserByUsername(loginRequestDto.getUsername());
 
-        System.out.println("-------- 2 --------- " + userDetails.getUsername());
-
         final String token = jwtTokenUtil.generateToken(userDetails);
 
-        System.out.println("token -- " + token);
-
-        final LoginResponseDto loginResponseDto = new LoginResponseDto();
+        final LoginResponseDto<CustomerDto> loginResponseDto = new LoginResponseDto<>();
         loginResponseDto.setJwtToken(token);
+
+
+        if(token != null){
+            loginResponseDto.setData(customerService.getCustomerByEmail(userDetails.getUsername()));
+        }
 
         return ResponseEntity.ok(loginResponseDto);
     }
@@ -112,7 +100,7 @@ public class CustomerController {
 
     @GetMapping("{customerId}")
     public ResponseEntity<CustomerDto> getCustomerDto(
-            @PathVariable(value = "customerId/**") int customerId) {
+            @PathVariable(value = "customerId") int customerId) {
         return ResponseEntity.ok(customerService.getCustomer(customerId));
     }
 

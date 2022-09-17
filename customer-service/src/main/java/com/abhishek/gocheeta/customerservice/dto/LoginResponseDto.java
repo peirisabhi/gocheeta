@@ -14,17 +14,9 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class LoginResponseDto {
+public class LoginResponseDto<T> {
 
-    private int id;
-
-    private String fname;
-
-    private String lname;
-
-    private String mobile;
-
-    private String email;
+    private T data;
 
     @JsonProperty("jwt_token")
     private String JwtToken;
