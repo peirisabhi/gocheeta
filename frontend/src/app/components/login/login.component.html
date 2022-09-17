@@ -10,12 +10,12 @@
           <div class="row align-items-center justify-content-center">
             <div class="col-md-7 col-lg-6 login-left">
               <img src="assets/img/auth/3682361.jpg" class="img-fluid" alt="Login Banner">
-<!--              <lottie-playerottie-player-->
-<!--                src="assets/img/lotties/man-waiting-car.json"-->
-<!--                style="width: 500px;"-->
-<!--                autoplay-->
-<!--                loop-->
-<!--              ></lottie-playerottie-player>-->
+              <!--              <lottie-playerottie-player-->
+              <!--                src="assets/img/lotties/man-waiting-car.json"-->
+              <!--                style="width: 500px;"-->
+              <!--                autoplay-->
+              <!--                loop-->
+              <!--              ></lottie-playerottie-player>-->
             </div>
             <div class="col-md-12 col-lg-6 login-right">
               <div class="login-header">
@@ -23,19 +23,23 @@
               </div>
 
               <!-- Register Form -->
-              <form action="https://doccure-html.dreamguystech.com/template/doctor-dashboard.html">
-                <div class="form-group form-focus">
-                  <input type="text" class="form-control floating">
-                  <label class="focus-label">Mobile Number</label>
-                </div>
+              <form (ngSubmit)="onSubmit()">
+                <div class="row form-row">
+                  <div class="col-12 mb-4">
+                    <div class="form-group form-focus">
+                      <label class="label">Email</label>
+                      <input placeholder="abc@gmail.com" type="email" name="email" [(ngModel)]="form.username"
+                             class="form-control floating">
+                    </div>
+                  </div>
 
-                <div class="text-right">
-                  <a class="" style="color: #eeaa1f" href="login.html">Send Code</a>
-                </div>
-
-                <div class="form-group form-focus">
-                  <input type="text" class="form-control floating">
-                  <label class="focus-label">OTP Code</label>
+                  <div class="col-12 mb-4">
+                    <div class="form-group form-focus">
+                      <label class="label">Password</label>
+                      <input placeholder="*******" type="password" name="password" [(ngModel)]="form.password"
+                             class="form-control floating">
+                    </div>
+                  </div>
                 </div>
 
 
