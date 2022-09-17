@@ -14,6 +14,6 @@ export class CustomerService {
   constructor(private httpClient : HttpClient) { }
 
   saveCustomer(customer : Customer): Observable<Customer>{
-    return  this.httpClient.post<Customer>(apiURL+"customer", customer);
+    return  this.httpClient.post<Customer>(apiURL+"customer/save", customer);
   }
 }
