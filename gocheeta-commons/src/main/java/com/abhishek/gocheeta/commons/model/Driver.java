@@ -70,4 +70,6 @@ public class Driver implements Transformer {
 
     @Column(length = 1)
     private int status;
+
+    private boolean availability;
 }

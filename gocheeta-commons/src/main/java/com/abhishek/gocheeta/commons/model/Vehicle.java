@@ -49,4 +49,6 @@ public class Vehicle implements Transformer {
 
     @Column(name = "driver_id")
     private int driverId;
+
+    private boolean availability;
 }
