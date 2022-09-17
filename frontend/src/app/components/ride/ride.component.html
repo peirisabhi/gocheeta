@@ -92,7 +92,8 @@
                 <div class="col-md-10">
                   <select class="form-control">
                     <option>-- Select --</option>
-                    <option *ngFor="let city of cities" value="{{city.id}}">{{city.city}}</option>
+                    <option *ngFor="let vehicleCategory of vehicleCategories"
+                            value="{{vehicleCategory.id}}">{{vehicleCategory.category}}</option>
                   </select>
                 </div>
               </div>
