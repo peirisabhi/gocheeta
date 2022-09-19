@@ -37,7 +37,7 @@ public class CityController {
 
     @GetMapping
     public ResponseEntity<List<CityDto>> getCities(){
-        return ResponseEntity.ok(cityService.getCities());
+        return ResponseEntity.ok().body(cityService.getCities());
     }
 
     @PutMapping

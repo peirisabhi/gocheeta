@@ -43,4 +43,14 @@ public class UserDto implements Transformer {
     private int cityId;
 
     private String city;
+
+    public UserDto(String fname, String lname, String email, String gender, String nic, int userRoleId, int cityId) {
+        this.fname = fname;
+        this.lname = lname;
+        this.email = email;
+        this.gender = gender;
+        this.nic = nic;
+        this.userRoleId = userRoleId;
+        this.cityId = cityId;
+    }
 }
