@@ -3288,7 +3288,7 @@ html.menu-opened body {
     padding: 15px 0;
 }
 .breadcrumb-bar .breadcrumb-title {
-    color: #000;
+    color: #FFFFFF;
     font-size: 22px;
     font-weight: 700;
     margin: 5px 0 0;
@@ -3300,13 +3300,13 @@ html.menu-opened body {
     padding: 0;
 }
 .page-breadcrumb ol li a {
-    color: #000;
+    color: #FFFFFF;
 }
 .page-breadcrumb ol li.active {
-    color: #000;
+    color: #FFFFFF;
 }
 .page-breadcrumb .breadcrumb-item + .breadcrumb-item:before {
-	color: #000;
+	color: #FFFFFF;
 	font-size: 10px;
 }
 .sort-by {
@@ -5715,7 +5715,7 @@ html.menu-opened body {
 }
 .dashboard-menu > ul > li:hover > a,
 .dashboard-menu > ul > li.active > a {
-	color:#0de0fe;
+	color:#eeaa1f;
 }
 .dashboard-menu ul li a i {
     font-size: 16px;

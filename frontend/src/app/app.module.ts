@@ -17,6 +17,8 @@ import {ToastrModule} from "ngx-toastr";
 import {AuthService} from "./service/auth-service/auth.service";
 import {AuthGuard} from "./shared/auth.guard";
 import {RequestInterceptor} from "./helpers/request.interceptor";
+import { PreviousTripsComponent } from './components/previous-trips/previous-trips.component';
+import { SideNavComponent } from './components/common/side-nav/side-nav.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import {RequestInterceptor} from "./helpers/request.interceptor";
     RideComponent,
     LoginComponent,
     RegisterComponent,
-    DriveComponent
+    DriveComponent,
+    PreviousTripsComponent,
+    SideNavComponent
   ],
   imports: [
     BrowserModule,
