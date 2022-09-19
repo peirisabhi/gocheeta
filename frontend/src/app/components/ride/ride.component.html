@@ -43,30 +43,51 @@
                 </div>
                 <div class="card-body">
                   <form action="#">
+
+                    <div class="form-group row">
+                      <label class="col-form-label col-md-3">Vehicle Type</label>
+                      <div class="col-md-9">
+                        <select class="form-control" name="vehicle_category"
+                                [(ngModel)]="vehicleAvailability.vehicle_category"
+                        (change)="checkAvailability()">
+                          <option value="0" selected disabled>-- Select --</option>
+                          <option *ngFor="let vehicleCategory of vehicleCategories"
+                                  value="{{vehicleCategory.id}}">{{vehicleCategory.category}}</option>
+                        </select>
+                      </div>
+                    </div>
+
                     <div class="form-group row">
                       <label class="col-form-label col-md-3">Pick-up City</label>
                       <div class="col-md-9">
-                        <select class="form-control">
-                          <option>-- Select --</option>
+                        <select class="form-control" name="from_city"
+                                [(ngModel)]="vehicleAvailability.from_city"
+                                (change)="checkAvailability()">
+                          <option value="0" selected disabled>-- Select --</option>
                           <option *ngFor="let city of cities" value="{{city.id}}">{{city.city}}</option>
                         </select>
                       </div>
                     </div>
+
+                    <div class="form-group row">
+                      <label class="col-form-label col-md-3">Drop-off City</label>
+                      <div class="col-md-9">
+                        <select class="form-control" name="to_city"
+                                [(ngModel)]="vehicleAvailability.to_city"
+                                (change)="checkAvailability()">
+                          <option value="0" selected disabled>-- Select --</option>
+                          <option *ngFor="let city of cities" value="{{city.id}}">{{city.city}}</option>
+                        </select>
+                      </div>
+                    </div>
+
                     <div class="form-group row">
                       <label class="col-form-label col-md-3">Pick-up Street <small>(optional)</small></label>
                       <div class="col-md-9">
                         <input type="text" class="form-control">
                       </div>
                     </div>
-                    <div class="form-group row">
-                      <label class="col-form-label col-md-3">Drop-off City</label>
-                      <div class="col-md-9">
-                        <select class="form-control">
-                          <option>-- Select --</option>
-                          <option *ngFor="let city of cities" value="{{city.id}}">{{city.city}}</option>
-                        </select>
-                      </div>
-                    </div>
+
                     <div class="form-group row">
                       <label class="col-form-label col-md-3">Drop-off Street <small>(optional)</small></label>
                       <div class="col-md-9">
@@ -88,16 +109,7 @@
                       </div>
                     </div>
 
-                    <div class="form-group row">
-                      <label class="col-form-label col-md-3">Vehicle Type</label>
-                      <div class="col-md-9">
-                        <select class="form-control">
-                          <option>-- Select --</option>
-                          <option *ngFor="let vehicleCategory of vehicleCategories"
-                                  value="{{vehicleCategory.id}}">{{vehicleCategory.category}}</option>
-                        </select>
-                      </div>
-                    </div>
+
 
                     <div class="form-group row">
                       <label class="col-form-label col-md-3">Special Note</label>

@@ -25,7 +25,7 @@ public class VehicleController {
     @Autowired
     VehicleService vehicleService;
 
-    @GetMapping("availability")
+    @PostMapping("availability")
     public ResponseEntity<VehicleAvailabilityDto> checkVehicleAvailability(@RequestBody
                                                                            VehicleAvailabilityDto vehicleAvailabilityDto) {
         log.info(vehicleAvailabilityDto.toString());
