@@ -17,7 +17,7 @@ const routes: Routes = [
   {path: 'user', component:UserComponent},
   {path: 'city', component:CityComponent},
   {path: 'distance-charge', component:DistanceChargeComponent},
-  {path: 'vehicle-model-category', component:VehicleCategoryComponent},
+  {path: 'vehicle-category', component:VehicleCategoryComponent},
   {path: 'driver', component:DriverComponent},
   {path: 'test', component:TestComponent},
   {path: 'city-charge', component:CityChargeComponent},

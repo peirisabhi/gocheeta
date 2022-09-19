@@ -57,7 +57,7 @@ export class VehicleCategoryComponent implements OnInit {
       ajax: (dataTablesParameters: any, callback) => {
         this.http
           .post<DataTablesResponse>(
-            apiURL + 'vehicle-model-category/data',
+            apiURL + 'vehicle-category/data',
             dataTablesParameters, {}
           ).subscribe(resp => {
           this.vehicleCategories = resp.data;
