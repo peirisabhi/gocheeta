@@ -17,7 +17,7 @@ import lombok.ToString;
 public class VehicleAvailabilityDto {
 
     @JsonProperty("vehicle_category")
-    private String vehicleCategory;
+    private int vehicleCategory;
 
     @JsonProperty("from_city")
     private int fromCity;
@@ -27,5 +27,6 @@ public class VehicleAvailabilityDto {
 
     private String price;
 
+    private boolean availability;
 
 }

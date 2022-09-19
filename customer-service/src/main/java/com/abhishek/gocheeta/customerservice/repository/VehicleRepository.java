@@ -7,6 +7,9 @@ import java.util.List;
 
 public interface VehicleRepository extends JpaRepository<Vehicle, Integer> {
 
+    List<Vehicle> findAllByCityIdAndAvailabilityAndVehicleCategoryId(int cityId,
+                                                                     boolean availability,
+                                                                     int vehicleCategoryId);
 
     List<Vehicle> findAllByStatus(int status);
 }
