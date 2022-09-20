@@ -12,11 +12,9 @@ public class ErrorMessage {
 
     public static final String VEHICLE_CATEGORY_NOT_FOUND = "Can not found this vehicle category!";
 
-
     public static final String VEHICLE_NOT_FOUND = "Can not found this vehicle!";
 
     public static final String VEHICLE_CATEGORY_ALREADY_EXISTS = "This vehicle category already exists!";
-
 
     public static final String VEHICLE_ALREADY_EXISTS = "This vehicle already exists!";
 

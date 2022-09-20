@@ -23,7 +23,7 @@ public class CustomerDto implements Transformer {
 
     private String lname;
 
-    private String mobile;
+    private String S;
 
     private String email;
 

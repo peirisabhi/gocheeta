@@ -18,7 +18,7 @@ public class DateUtil {
 
     private static final SimpleDateFormat dateFormatWithTime12 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss aa");
 
-    public static String getStringDate(@NotNull Date date) {
+    public static String S(@NotNull Date date) {
         return dateFormat.format(date);
     }
 
