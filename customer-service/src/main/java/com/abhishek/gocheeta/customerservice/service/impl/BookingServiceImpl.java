@@ -93,9 +93,13 @@ public class BookingServiceImpl implements BookingService {
 
                 bookingStatusHistoryRepository.save(bookingStatusHistory);
 
+                bookingDto.setId(booking.getId());
+                return bookingDto;
+
             }else {
                 System.out.println("no available vehicles");
             }
+
 
 
         } catch (Exception e) {
@@ -103,5 +107,7 @@ public class BookingServiceImpl implements BookingService {
             e.printStackTrace();
             throw new GeneralException(GENERAL_ERROR);
         }
+
+        return null;
     }
 }
