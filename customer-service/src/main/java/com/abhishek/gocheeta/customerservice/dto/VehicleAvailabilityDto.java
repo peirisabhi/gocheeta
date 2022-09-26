@@ -27,6 +27,10 @@ public class VehicleAvailabilityDto {
 
     private String price;
 
+    private double priceVal;
+
     private boolean availability;
+
+    private int vehicleId;
 
 }

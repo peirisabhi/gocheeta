@@ -97,6 +97,8 @@ public class VehicleServiceImpl implements VehicleService {
             System.out.println("total -- " + price);
             vehicleAvailabilityDto.setAvailability(true);
             vehicleAvailabilityDto.setPrice(String.valueOf(price));
+            vehicleAvailabilityDto.setPriceVal(price);
+            vehicleAvailabilityDto.setVehicleId(vehicleList.get(0).getId());
 
         }else{
             vehicleAvailabilityDto.setAvailability(false);
