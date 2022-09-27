@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "booking")
+@Table(name = "booking_history")
 @Getter
 @Setter
 @AllArgsConstructor

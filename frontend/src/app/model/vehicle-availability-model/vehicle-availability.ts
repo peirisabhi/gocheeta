@@ -4,4 +4,6 @@ export class VehicleAvailability {
   to_city: number = 0;
   price?: string;
   availability?: boolean;
+  date ?: string;
+  time?: string;
 }

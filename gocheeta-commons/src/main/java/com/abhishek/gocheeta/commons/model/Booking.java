@@ -25,7 +25,7 @@ public class Booking implements Transformer {
     @Column(name = "vehicle_id")
     private int vehicleId;
 
-    @Column(name = "date", nullable = false)
+    @Column(name = "date", nullable = true)
     @Temporal(TemporalType.DATE)
     private Date date;
 

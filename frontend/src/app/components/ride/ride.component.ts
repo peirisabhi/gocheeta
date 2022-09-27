@@ -8,6 +8,7 @@ import {VehicleAvailability} from "../../model/vehicle-availability-model/vehicl
 import {Booking} from "../../model/booking-model/booking";
 import {formatDate} from "@angular/common";
 import {NotificationService} from "../../service/notification-service/notification.service";
+import {BookingService} from "../../service/booking-service/booking.service";
 
 @Component({
   selector: 'app-ride',
@@ -29,7 +30,8 @@ export class RideComponent implements OnInit {
   constructor(private cityService: CityService,
               private vehicleCategoryService: VehicleCategoryService,
               private vehicleAvailabilityService: VehicleAvailabilityService,
-              private notificationService: NotificationService) {
+              private notificationService: NotificationService,
+              private bookingService: BookingService) {
   }
 
   ngOnInit(): void {
@@ -65,7 +67,7 @@ export class RideComponent implements OnInit {
 
         if (data.availability) {
           this.price = data.price;
-        }else {
+        } else {
           this.notificationService.showError("No riders are currently available", "Booking Unavailable")
         }
 
@@ -73,7 +75,23 @@ export class RideComponent implements OnInit {
         console.log(error)
       })
     }
-
-
   }
+
+  saveBooking() {
+
+    this.booking.from_city = this.vehicleAvailability.from_city;
+    this.booking.to_city = this.vehicleAvailability.to_city;
+    this.booking.vehicle_category = this.vehicleAvailability.vehicle_category;
+    this.booking.date = this.vehicleAvailability.date;
+    this.booking.time = this.vehicleAvailability.time;
+
+    this.bookingService.saveBooking(this.booking)
+      .subscribe(data => {
+          console.log(data)
+        },
+        error => {
+          console.log(error)
+        });
+  }
+
 }

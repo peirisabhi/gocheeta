@@ -81,6 +81,7 @@ public class BookingServiceImpl implements BookingService {
                 booking.setCustomerId(customerId);
                 booking.setPrice(vehicleAvailabilityDto.getPriceVal());
                 booking.setVehicleId(vehicleAvailabilityDto.getVehicleId());
+//                booking.setDate(new Date());
 
                 booking = bookingRepository.save(booking);
 

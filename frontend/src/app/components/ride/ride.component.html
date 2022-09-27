@@ -42,7 +42,7 @@
                   <h4 class="card-title">Plan your trip</h4>
                 </div>
                 <div class="card-body">
-                  <form action="#">
+                  <form (ngSubmit)="saveBooking()">
 
                     <div class="form-group row">
                       <label class="col-form-label col-md-3">Vehicle Type</label>
@@ -82,39 +82,39 @@
                     </div>
 
                     <div class="form-group row">
-                      <label class="col-form-label col-md-3">Pick-up Street <small>(optional)</small></label>
+                      <label class="col-form-label col-md-3" >Pick-up Street <small>(optional)</small></label>
                       <div class="col-md-9">
-                        <input type="text" class="form-control">
+                        <input type="text" name="pick_up_street" [(ngModel)]="booking.pick_up_street" class="form-control">
                       </div>
                     </div>
 
                     <div class="form-group row">
                       <label class="col-form-label col-md-3">Drop-off Street <small>(optional)</small></label>
                       <div class="col-md-9">
-                        <input type="text" class="form-control">
+                        <input type="text" name="drop_off_street" [(ngModel)]="booking.drop_off_street" class="form-control">
                       </div>
                     </div>
 
-<!--                    <div class="form-group row">-->
-<!--                      <label class="col-form-label col-md-3">Pick-up Date</label>-->
-<!--                      <div class="col-md-9">-->
-<!--                        <input type="date" name="date" [(ngModel)]="date" class="form-control" >-->
-<!--                      </div>-->
-<!--                    </div>-->
+                    <div class="form-group row">
+                      <label class="col-form-label col-md-3">Pick-up Date</label>
+                      <div class="col-md-9">
+                        <input type="date" name="date" [(ngModel)]="vehicleAvailability.date" class="form-control" >
+                      </div>
+                    </div>
 
-<!--                    <div class="form-group row">-->
-<!--                      <label class="col-form-label col-md-3">Pick-up Time</label>-->
-<!--                      <div class="col-md-9">-->
-<!--                        <input type="time" class="form-control">-->
-<!--                      </div>-->
-<!--                    </div>-->
+                    <div class="form-group row">
+                      <label class="col-form-label col-md-3">Pick-up Time</label>
+                      <div class="col-md-9">
+                        <input type="time" name="time" [(ngModel)]="vehicleAvailability.time" class="form-control">
+                      </div>
+                    </div>
 
 
 
                     <div class="form-group row">
                       <label class="col-form-label col-md-3">Special Note</label>
                       <div class="col-md-9">
-                        <textarea rows="5" cols="5" class="form-control" placeholder="Enter text here"></textarea>
+                        <textarea rows="5" cols="5" name="special_note" [(ngModel)]="booking.special_note" class="form-control" placeholder="Enter text here"></textarea>
                       </div>
                     </div>
 
