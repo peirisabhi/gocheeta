@@ -6,7 +6,6 @@ import {VehicleCategory} from "../../model/vehicle-category-model/vehicle-catego
 import {VehicleAvailabilityService} from "../../service/vehicle-availability-service/vehicle-availability.service";
 import {VehicleAvailability} from "../../model/vehicle-availability-model/vehicle-availability";
 import {Booking} from "../../model/booking-model/booking";
-import {formatDate} from "@angular/common";
 import {NotificationService} from "../../service/notification-service/notification.service";
 import {BookingService} from "../../service/booking-service/booking.service";
 
@@ -21,10 +20,11 @@ export class RideComponent implements OnInit {
   vehicleCategories?: VehicleCategory[];
   vehicleAvailability: VehicleAvailability = new VehicleAvailability();
   booking: Booking = new Booking();
-  date?: string;
 
   price?: string = "0.00"
   km?: string = "0";
+
+
 
 
   constructor(private cityService: CityService,
@@ -37,7 +37,6 @@ export class RideComponent implements OnInit {
   ngOnInit(): void {
     this.getCities()
     this.getVehicleCategories()
-    console.log(formatDate(new Date(), 'dd/MM/yyyy', 'en'))
   }
 
 

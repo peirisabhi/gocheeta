@@ -6,4 +6,12 @@ export class VehicleAvailability {
   availability?: boolean;
   date ?: string;
   time?: string;
+
+
+  constructor() {
+    let isoString = new Date().toISOString();
+    console.log("isoString", isoString)
+    this.date = isoString.split('T')[0];
+    this.time = isoString.split('T')[1].split('.')[0];
+  }
 }
