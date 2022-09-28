@@ -29,6 +29,14 @@ public class Booking implements Transformer {
     @Temporal(TemporalType.DATE)
     private Date date;
 
+    @Column(name = "time", nullable = true)
+    @Temporal(TemporalType.TIME)
+    private Date time;
+
+    @Column(name = "end_time", nullable = true)
+    @Temporal(TemporalType.TIME)
+    private Date endTime;
+
     private double price;
 
     @Column(name = "pick_up_city_id")
