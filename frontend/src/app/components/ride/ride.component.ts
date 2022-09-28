@@ -37,16 +37,15 @@ export class RideComponent implements OnInit {
   ngOnInit(): void {
     this.getCities()
     this.getVehicleCategories()
-    this.showSpinner()
   }
 
-  public showSpinner(): void {
-    this.spinnerService.show();
-
-    setTimeout(() => {
-      this.spinnerService.hide();
-    }, 5000); // 5 seconds
-  }
+  // public showSpinner(): void {
+  //   this.spinnerService.show();
+  //
+  //   setTimeout(() => {
+  //     this.spinnerService.hide();
+  //   }, 5000); // 5 seconds
+  // }
 
 
 
@@ -68,15 +67,21 @@ export class RideComponent implements OnInit {
 
   checkAvailability() {
 
+
     if (this.vehicleAvailability.from_city != 0
       && this.vehicleAvailability.to_city != 0
       && this.vehicleAvailability.vehicle_category != 0) {
+
+      this.spinnerService.show();
+
       this.vehicleAvailabilityService.getAvailability(this.vehicleAvailability).subscribe(data => {
         console.log(data)
 
         if (data.availability) {
           this.price = data.price;
+          this.spinnerService.hide();
         } else {
+          this.spinnerService.hide();
           this.notificationService.showError("No riders are currently available", "Booking Unavailable")
         }
 
@@ -88,6 +93,8 @@ export class RideComponent implements OnInit {
 
   saveBooking() {
 
+    this.spinnerService.show();
+
     this.booking.from_city = this.vehicleAvailability.from_city;
     this.booking.to_city = this.vehicleAvailability.to_city;
     this.booking.vehicle_category = this.vehicleAvailability.vehicle_category;
@@ -97,9 +104,11 @@ export class RideComponent implements OnInit {
     this.bookingService.saveBooking(this.booking)
       .subscribe(data => {
           console.log(data)
+          this.spinnerService.hide();
         },
         error => {
           console.log(error)
+          this.spinnerService.hide();
         });
   }
 
