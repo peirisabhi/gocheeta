@@ -27,4 +27,6 @@ public class CityCharge implements Transformer {
     private int cityTo;
 
     private double price;
+
+    private int duration;
 }
