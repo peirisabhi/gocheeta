@@ -41,6 +41,7 @@
                   <th>City From</th>
                   <th>City To</th>
                   <th>Km Amount</th>
+                  <th>Duration</th>
                   <th>Actions</th>
                 </tr>
                 </thead>
@@ -50,6 +51,7 @@
                   <td>{{ cityCharge.city_from_val }}</td>
                   <td>{{ cityCharge.city_to_val }}</td>
                   <td>{{ cityCharge.km }} Km</td>
+                  <td>{{ cityCharge.duration }} minutes</td>
                   <td class="">
                     <div class="actions">
                       <a class="btn btn-sm bg-success-light" data-toggle="modal" href="#edit_specialities_details">
@@ -120,8 +122,15 @@
           </div>
         </div>
 
+        <div class="col-12">
+          <div class="form-group">
+            <label>Duration <small>(Minutes)</small></label>
+            <input type="number" name="duration" [(ngModel)]="cityCharge.duration" class="form-control">
+          </div>
+        </div>
+
       </div>
-      <button type="submit" class="btn btn-primary btn-block">Save Distance Charge</button>
+      <button type="submit" class="btn btn-primary btn-block">Save City Charge</button>
     </form>
   </div>
 
