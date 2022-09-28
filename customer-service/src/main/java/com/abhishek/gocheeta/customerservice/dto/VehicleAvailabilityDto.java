@@ -33,4 +33,8 @@ public class VehicleAvailabilityDto {
 
     private int vehicleId;
 
+    private String date;
+
+    private String time;
+
 }
