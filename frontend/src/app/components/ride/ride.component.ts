@@ -8,6 +8,7 @@ import {VehicleAvailability} from "../../model/vehicle-availability-model/vehicl
 import {Booking} from "../../model/booking-model/booking";
 import {NotificationService} from "../../service/notification-service/notification.service";
 import {BookingService} from "../../service/booking-service/booking.service";
+import {NgxSpinnerService} from "ngx-spinner";
 
 @Component({
   selector: 'app-ride',
@@ -25,19 +26,28 @@ export class RideComponent implements OnInit {
   km?: string = "0";
 
 
-
-
   constructor(private cityService: CityService,
               private vehicleCategoryService: VehicleCategoryService,
               private vehicleAvailabilityService: VehicleAvailabilityService,
               private notificationService: NotificationService,
-              private bookingService: BookingService) {
+              private bookingService: BookingService,
+              private spinnerService: NgxSpinnerService) {
   }
 
   ngOnInit(): void {
     this.getCities()
     this.getVehicleCategories()
+    this.showSpinner()
   }
+
+  public showSpinner(): void {
+    this.spinnerService.show();
+
+    setTimeout(() => {
+      this.spinnerService.hide();
+    }, 5000); // 5 seconds
+  }
+
 
 
   getCities() {

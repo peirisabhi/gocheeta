@@ -19,6 +19,7 @@ import {AuthGuard} from "./shared/auth.guard";
 import {RequestInterceptor} from "./helpers/request.interceptor";
 import { PreviousTripsComponent } from './components/previous-trips/previous-trips.component';
 import { SideNavComponent } from './components/common/side-nav/side-nav.component';
+import {NgxSpinnerModule} from "ngx-spinner";
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { SideNavComponent } from './components/common/side-nav/side-nav.componen
     FormsModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
+    NgxSpinnerModule,
   ],
   providers: [
     AuthService,
