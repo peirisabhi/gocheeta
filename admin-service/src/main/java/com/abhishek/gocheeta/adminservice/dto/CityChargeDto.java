@@ -33,4 +33,7 @@ public class CityChargeDto implements Transformer {
 
     @JsonProperty("city_to_val")
     private String cityToVal;
+
+    private int duration;
+
 }

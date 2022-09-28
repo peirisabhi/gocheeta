@@ -62,6 +62,7 @@ public class CityChargeServiceImpl implements CityChargeService {
             cityCharge.setCityTo(cityChargeDto.getCityTo());
             cityCharge.setCityFrom(cityChargeDto.getCityFrom());
             cityCharge.setKm(cityChargeDto.getKm());
+            cityCharge.setDuration(cityChargeDto.getDuration());
 
             return cityChargeRepository.save(cityCharge)
                     .toDto(CityChargeDto.class);
