@@ -27,6 +27,9 @@ export class RideComponent implements OnInit {
   price?: string = "0.00"
   km?: string = "0";
 
+  condition: boolean = false;
+  vehicleAvailabilityStatus: boolean = false;
+
 
   constructor(private cityService: CityService,
               private vehicleCategoryService: VehicleCategoryService,
@@ -83,9 +86,14 @@ export class RideComponent implements OnInit {
 
         if (data.availability) {
           this.price = data.price;
+          this.vehicleAvailability.time_duration = data.time_duration;
           this.spinnerService.hide();
+          this.vehicleAvailabilityStatus = true;
         } else {
+          this.price = "0.00";
+          this.vehicleAvailability.time_duration = "0";
           this.spinnerService.hide();
+          this.vehicleAvailabilityStatus = false;
           this.notificationService.showError("No riders are currently available", "Booking Unavailable")
         }
 
@@ -97,56 +105,53 @@ export class RideComponent implements OnInit {
 
   saveBooking() {
 
-    // window.location.replace('/booking-success', {data: "abc"});
-    // this.router.navigate(['/booking-success'],
-    //   { state: {
-    //     example: {id: "asasa", ba:"asas", sasa: "Asasa" },
-    //     } });
+    if (!this.condition) {
+      Report.warning(
+        'Warning',
+        'Please accept Terms & Condition!',
+        'Okay',);
+    } else {
 
-    Confirm.show(
-      'Confirm',
-      'Do you want to book?',
-      'Yes', 'No',
-      () => {
+      Confirm.show(
+        'Confirm',
+        'Do you want to book?',
+        'Yes', 'No',
+        () => {
 
-        this.spinnerService.show();
+          this.spinnerService.show();
 
-        this.booking.from_city = this.vehicleAvailability.from_city;
-        this.booking.to_city = this.vehicleAvailability.to_city;
-        this.booking.vehicle_category = this.vehicleAvailability.vehicle_category;
-        this.booking.date = this.vehicleAvailability.date;
-        this.booking.time = this.vehicleAvailability.time;
+          this.booking.from_city = this.vehicleAvailability.from_city;
+          this.booking.to_city = this.vehicleAvailability.to_city;
+          this.booking.vehicle_category = this.vehicleAvailability.vehicle_category;
+          this.booking.date = this.vehicleAvailability.date;
+          this.booking.time = this.vehicleAvailability.time;
 
-        this.bookingService.saveBooking(this.booking)
-          .subscribe(data => {
-              console.log(data)
-              this.spinnerService.hide();
+          this.bookingService.saveBooking(this.booking)
+            .subscribe(data => {
+                console.log(data)
+                this.spinnerService.hide();
 
-              // Report.success(
-              //   'Success',
-              //   'Booking Success',
-              //   'Okay',);
+                this.router.navigate(['/booking-success'],
+                  {
+                    state: {
+                      booking: data,
+                    }
+                  });
 
-              // window.location.replace('/booking-success');
+              },
+              error => {
+                console.log(error)
+                this.spinnerService.hide();
 
-              this.router.navigate(['/booking-success'],
-                { state: {
-                    booking: data,
-                  } });
+                Report.failure(
+                  'Error',
+                  'Something went wrong please, please try again later',
+                  'Okay',);
 
-            },
-            error => {
-              console.log(error)
-              this.spinnerService.hide();
+              });
 
-              Report.failure(
-                'Error',
-                'Something went wrong please, please try again later',
-                'Okay',);
-
-            });
-
-      });
+        });
+    }
   }
 
 }

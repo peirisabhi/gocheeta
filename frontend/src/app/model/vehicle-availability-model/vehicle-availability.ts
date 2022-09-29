@@ -6,7 +6,7 @@ export class VehicleAvailability {
   availability?: boolean;
   date ?: string;
   time?: string;
-
+  time_duration: string = "0";
 
   constructor() {
     let isoString = new Date().toISOString();

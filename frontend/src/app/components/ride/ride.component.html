@@ -125,13 +125,13 @@
 
               <div class="terms-accept">
                 <div class="custom-checkbox">
-                  <input type="checkbox" id="terms_accept">
+                  <input type="checkbox" id="terms_accept" [checked]="condition">
                   <label for="terms_accept">&nbsp; I have read and accept <a href="#">Terms &amp; Conditions</a></label>
                 </div>
               </div>
 
               <div class="submit-section mt-4">
-                <button type="submit" class="btn btn-primary submit-btn">Book Now</button>
+                <button [disabled]="!vehicleAvailabilityStatus" type="submit" class="btn btn-primary submit-btn">Book Now</button>
               </div>
             </form>
 
@@ -155,6 +155,7 @@
                 <ul class="booking-date">
                   <li>Date <span>{{vehicleAvailability.date}}</span></li>
                   <li>Time <span>{{vehicleAvailability.time}}</span></li>
+                  <li>Estimated Time <span>{{vehicleAvailability.time_duration}} Mins</span></li>
                 </ul>
                 <ul class="booking-fee">
                   <li>Booking Fee <span>Rs.{{price}}</span></li>
@@ -164,7 +165,7 @@
                   <ul class="booking-total-list">
                     <li>
                       <span>Total</span>
-                      <span class="total-cost">Rs.0.00</span>
+                      <span class="total-cost">Rs.{{price}}</span>
                     </li>
                   </ul>
                 </div>
