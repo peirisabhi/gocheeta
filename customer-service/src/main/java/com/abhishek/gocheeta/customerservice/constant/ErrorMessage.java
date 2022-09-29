@@ -13,6 +13,6 @@ public class ErrorMessage {
     public static final String CUSTOMER_NOT_FOUND = "Can not found this Customer!";
     public static final String CITY_NOT_FOUND = "Can not found this city!";
     public static final String VEHICLE_CATEGORY_NOT_FOUND = "Can not found this vehicle category!";
-
     public static final String VEHICLE_NOT_FOUND = "Can not found this vehicle!";
+    public static final String DRIVER_NOT_FOUND = "Can not found this driver!";
 }

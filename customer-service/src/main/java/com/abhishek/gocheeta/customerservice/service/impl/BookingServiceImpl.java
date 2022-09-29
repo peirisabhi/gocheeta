@@ -1,9 +1,6 @@
 package com.abhishek.gocheeta.customerservice.service.impl;
 
-import com.abhishek.gocheeta.commons.model.Booking;
-import com.abhishek.gocheeta.commons.model.BookingStatus;
-import com.abhishek.gocheeta.commons.model.BookingStatusHistory;
-import com.abhishek.gocheeta.commons.model.Vehicle;
+import com.abhishek.gocheeta.commons.model.*;
 import com.abhishek.gocheeta.customerservice.dto.BookingDto;
 import com.abhishek.gocheeta.customerservice.dto.VehicleAvailabilityDto;
 import com.abhishek.gocheeta.customerservice.exception.DataNotFoundException;
@@ -60,6 +57,9 @@ public class BookingServiceImpl implements BookingService {
     @Autowired
     VehicleCategoryService vehicleCategoryService;
 
+    @Autowired
+    DriverService driverService;
+
     @Override
     public BookingDto saveBooking(BookingDto bookingDto) {
 
@@ -108,13 +108,14 @@ public class BookingServiceImpl implements BookingService {
                 bookingStatusHistoryRepository.save(bookingStatusHistory);
 
                 final Vehicle vehicle = vehicleService.getVehicle(vehicleAvailabilityDto.getVehicleId());
+                final Driver driver = driverService.getDriver(vehicle.getDriverId());
 
                 bookingDto.setId(booking.getId());
                 bookingDto.setVehicleCategoryVal(vehicleCategoryService.getVehicleCategory(bookingDto.getVehicleCategory()).getCategory());
                 bookingDto.setFromCityVal(cityService.getCity(bookingDto.getFromCity()).getCity());
                 bookingDto.setToCityVal(cityService.getCity(bookingDto.getToCity()).getCity());
                 bookingDto.setVehicleNo(vehicle.getVehicleNumber());
-//                bookingDto.setDriver();
+                bookingDto.setDriver(driver.getFname().concat(" ").concat(driver.getLname()));
                 bookingDto.setEndTime(DateUtil.getStringTime(booking.getEndTime()));
 
 
