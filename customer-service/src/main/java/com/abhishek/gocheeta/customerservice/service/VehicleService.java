@@ -1,5 +1,6 @@
 package com.abhishek.gocheeta.customerservice.service;
 
+import com.abhishek.gocheeta.commons.model.Vehicle;
 import com.abhishek.gocheeta.customerservice.dto.VehicleAvailabilityDto;
 
 /**
@@ -11,5 +12,7 @@ import com.abhishek.gocheeta.customerservice.dto.VehicleAvailabilityDto;
 public interface VehicleService {
 
     VehicleAvailabilityDto checkVehicleAvailability(VehicleAvailabilityDto vehicleAvailabilityDto);
+
+    Vehicle getVehicle(int id);
 
 }

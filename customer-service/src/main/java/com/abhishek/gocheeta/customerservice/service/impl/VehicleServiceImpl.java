@@ -3,7 +3,9 @@ package com.abhishek.gocheeta.customerservice.service.impl;
 import com.abhishek.gocheeta.commons.model.CityCharge;
 import com.abhishek.gocheeta.commons.model.DistanceCharge;
 import com.abhishek.gocheeta.commons.model.Vehicle;
+import com.abhishek.gocheeta.customerservice.dto.CityDto;
 import com.abhishek.gocheeta.customerservice.dto.VehicleAvailabilityDto;
+import com.abhishek.gocheeta.customerservice.exception.DataNotFoundException;
 import com.abhishek.gocheeta.customerservice.repository.*;
 import com.abhishek.gocheeta.customerservice.service.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,9 @@ import org.springframework.stereotype.Service;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static com.abhishek.gocheeta.customerservice.constant.ErrorMessage.CITY_NOT_FOUND;
+import static com.abhishek.gocheeta.customerservice.constant.ErrorMessage.VEHICLE_NOT_FOUND;
 
 /**
  * Created by Intellij.
@@ -103,6 +108,7 @@ public class VehicleServiceImpl implements VehicleService {
             vehicleAvailabilityDto.setPrice(String.valueOf(price));
             vehicleAvailabilityDto.setPriceVal(price);
             vehicleAvailabilityDto.setVehicleId(vehicleList.get(0).getId());
+            vehicleAvailabilityDto.setTimeDuration(cityChargeRecord.getDuration());
 
         }else{
             vehicleAvailabilityDto.setAvailability(false);
@@ -111,5 +117,11 @@ public class VehicleServiceImpl implements VehicleService {
 
 
         return vehicleAvailabilityDto;
+    }
+
+    @Override
+    public Vehicle getVehicle(int id) {
+       return vehicleRepository.findById(id)
+                .orElseThrow(() -> new DataNotFoundException(VEHICLE_NOT_FOUND));
     }
 }

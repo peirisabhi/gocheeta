@@ -22,11 +22,20 @@ public class BookingDto implements Transformer {
     @JsonProperty("vehicle_category")
     private int vehicleCategory;
 
+    @JsonProperty("vehicle_category_val")
+    private String vehicleCategoryVal;
+
     @JsonProperty("from_city")
     private int fromCity;
 
+    @JsonProperty("from_city_val")
+    private String fromCityVal;
+
     @JsonProperty("to_city")
     private int toCity;
+
+    @JsonProperty("to_city_val")
+    private String toCityVal;
 
     @JsonProperty("pick_up_street")
     private String pickUpStreet;
@@ -41,5 +50,12 @@ public class BookingDto implements Transformer {
 
     private String time;
 
+    @JsonProperty("vehicle_no")
+    private String vehicleNo;
+
+    private String driver;
+
+    @JsonProperty("end_time")
+    private String endTime;
 
 }

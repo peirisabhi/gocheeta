@@ -3,6 +3,7 @@ package com.abhishek.gocheeta.customerservice.service.impl;
 import com.abhishek.gocheeta.commons.model.Booking;
 import com.abhishek.gocheeta.commons.model.BookingStatus;
 import com.abhishek.gocheeta.commons.model.BookingStatusHistory;
+import com.abhishek.gocheeta.commons.model.Vehicle;
 import com.abhishek.gocheeta.customerservice.dto.BookingDto;
 import com.abhishek.gocheeta.customerservice.dto.VehicleAvailabilityDto;
 import com.abhishek.gocheeta.customerservice.exception.DataNotFoundException;
@@ -11,9 +12,7 @@ import com.abhishek.gocheeta.customerservice.repository.BookingRepository;
 import com.abhishek.gocheeta.customerservice.repository.BookingStatusHistoryRepository;
 import com.abhishek.gocheeta.customerservice.repository.BookingStatusRepository;
 import com.abhishek.gocheeta.customerservice.security.JwtTokenUtil;
-import com.abhishek.gocheeta.customerservice.service.BookingService;
-import com.abhishek.gocheeta.customerservice.service.CustomerService;
-import com.abhishek.gocheeta.customerservice.service.VehicleService;
+import com.abhishek.gocheeta.customerservice.service.*;
 import com.abhishek.gocheeta.customerservice.util.DateUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,6 +54,12 @@ public class BookingServiceImpl implements BookingService {
     @Autowired
     BookingStatusHistoryRepository bookingStatusHistoryRepository;
 
+    @Autowired
+    CityService cityService;
+
+    @Autowired
+    VehicleCategoryService vehicleCategoryService;
+
     @Override
     public BookingDto saveBooking(BookingDto bookingDto) {
 
@@ -85,6 +90,11 @@ public class BookingServiceImpl implements BookingService {
                 booking.setVehicleId(vehicleAvailabilityDto.getVehicleId());
                 booking.setDate(DateUtil.getDate(bookingDto.getDate()));
                 booking.setTime(DateUtil.getTime(bookingDto.getTime()));
+                booking.setDropOffCityId(bookingDto.getToCity());
+                booking.setDropOffStreetAddress(bookingDto.getDropOffStreet());
+                booking.setPickUpCityId(bookingDto.getFromCity());
+                booking.setPickUpStreetAddress(bookingDto.getPickUpStreet());
+                booking.setEndTime(DateUtil.getTripEndTime(bookingDto.getTime(), vehicleAvailabilityDto.getTimeDuration()));
 
                 booking = bookingRepository.save(booking);
 
@@ -97,7 +107,17 @@ public class BookingServiceImpl implements BookingService {
 
                 bookingStatusHistoryRepository.save(bookingStatusHistory);
 
+                final Vehicle vehicle = vehicleService.getVehicle(vehicleAvailabilityDto.getVehicleId());
+
                 bookingDto.setId(booking.getId());
+                bookingDto.setVehicleCategoryVal(vehicleCategoryService.getVehicleCategory(bookingDto.getVehicleCategory()).getCategory());
+                bookingDto.setFromCityVal(cityService.getCity(bookingDto.getFromCity()).getCity());
+                bookingDto.setToCityVal(cityService.getCity(bookingDto.getToCity()).getCity());
+                bookingDto.setVehicleNo(vehicle.getVehicleNumber());
+//                bookingDto.setDriver();
+                bookingDto.setEndTime(DateUtil.getStringTime(booking.getEndTime()));
+
+
                 return bookingDto;
 
             } else {

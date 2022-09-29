@@ -37,4 +37,7 @@ public class VehicleAvailabilityDto {
 
     private String time;
 
+    @JsonProperty("time_duration")
+    private int timeDuration;
+
 }

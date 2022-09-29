@@ -3,6 +3,7 @@ package com.abhishek.gocheeta.customerservice.util;
 import javax.validation.constraints.NotNull;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -38,5 +39,26 @@ public class DateUtil {
 
     public static Date getTime(@NotNull String time) throws ParseException {
         return timeFormat.parse(time);
+    }
+
+    public static String getStringTime(@NotNull Date time) throws ParseException {
+        return timeFormat.format(time);
+    }
+
+
+    public static Date getTripEndTime(String now, int duration) {
+        SimpleDateFormat df = new SimpleDateFormat("HH:mm");
+        Date d = null;
+        try {
+            d = df.parse(now);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(d);
+        cal.add(Calendar.MINUTE, duration);
+//        String newTime = df.format(cal.getTime());
+//        return newTime;
+        return cal.getTime();
     }
 }

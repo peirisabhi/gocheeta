@@ -27,13 +27,16 @@ export class BookingSuccessComponent implements OnInit {
     console.log(data);
 
     this.bookingId = data.id;
-    this.vehicleCategory = data.vehicleCategory;
-    this.pickupCity = data.from_city;
+    this.vehicleCategory = data.vehicle_category_val;
+    this.pickupCity = data.from_city_val;
     this.pickupStreet = data.pick_up_street;
-    this.dropOffCity = data.to_city;
+    this.dropOffCity = data.to_city_val;
     this.dropOffStreet = data.drop_off_street;
     this.date = data.date;
     this.time = data.time;
+    this.vehicleNo = data.vehicle_no;
+    this.driver = data.driver;
+    this.endTime = data.end_time;
   }
 
   ngOnInit(): void {
