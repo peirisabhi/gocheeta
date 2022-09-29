@@ -51,10 +51,10 @@ export class RideComponent implements OnInit {
 
   createForm(){
     this.bookingForm = new FormGroup({
-      name: new FormControl(this.vehicleAvailability.date, [
+      date: new FormControl(this.vehicleAvailability.date, [
         Validators.required,
-        Validators.minLength(4),
       ]),
+
     });
   }
 
