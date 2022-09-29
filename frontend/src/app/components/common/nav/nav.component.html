@@ -23,13 +23,13 @@
       </div>
       <ul class="main-nav">
         <li class="has-submenu">
-          <a routerLink="" routerLinkActive="active">Home </a>
+          <a [routerLink]="['/']" routerLinkActive="active">Home </a>
         </li>
         <li class="has-submenu">
-          <a routerLink="ride" routerLinkActive="active">Ride</a>
+          <a [routerLink]="['/ride']" routerLinkActive="active">Ride</a>
         </li>
         <li class="has-submenu">
-          <a href="#">Drive</a>
+          <a [routerLink]="['/drive']">Drive</a>
         </li>
         <li class="has-submenu">
           <a href="#">About Us</a>
@@ -39,7 +39,7 @@
         </li>
 
         <li class="login-link">
-          <a routerLink="login" routerLinkActive="active">Login / Signup</a>
+          <a [routerLink]="['/login']" routerLinkActive="active">Login / Signup</a>
         </li>
       </ul>
     </div>
@@ -54,7 +54,7 @@
         </div>
       </li>
             <li class="nav-item" *ngIf="!isLoggedIn">
-              <a class="nav-link header-login" routerLink="login" routerLinkActive="active">login / Signup </a>
+              <a class="nav-link header-login" [routerLink]="['/login']" routerLinkActive="active">login / Signup </a>
             </li>
 
       <li class="nav-item dropdown has-arrow logged-item" *ngIf="isLoggedIn">

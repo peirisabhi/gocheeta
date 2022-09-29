@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Observable} from "rxjs";
 import {TestService} from "../../service/test-service/test.service";
 import {HttpEventType, HttpResponse} from "@angular/common/http";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-test',
@@ -17,8 +18,23 @@ export class TestComponent implements OnInit {
   fileInfos?: Observable<any>;
   constructor(private testService: TestService) { }
 
+  hero = {name: 'Dr.', alterEgo: 'Dr. What'};
+
+  heroForm?: FormGroup;
+
   ngOnInit(): void {
+    this.heroForm = new FormGroup({
+      name: new FormControl(this.hero.name, [
+        Validators.required,
+        Validators.minLength(4),
+        // forbiddenNameValidator(/bob/i) // <-- Here's how you pass in the custom validator.
+      ]),
+      alterEgo: new FormControl(this.hero.alterEgo),
+    });
   }
+
+  // get name() { return this.heroForm.get('name'); }
+
 
   selectFile(event: any): void {
     this.selectedFiles = event.target.files;

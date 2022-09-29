@@ -11,6 +11,7 @@ import {BookingService} from "../../service/booking-service/booking.service";
 import {NgxSpinnerService} from "ngx-spinner";
 import {Confirm, Report} from "notiflix";
 import {ActivatedRoute, Router} from "@angular/router";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-ride',
@@ -30,6 +31,7 @@ export class RideComponent implements OnInit {
   condition: boolean = false;
   vehicleAvailabilityStatus: boolean = false;
 
+  bookingForm?: FormGroup;
 
   constructor(private cityService: CityService,
               private vehicleCategoryService: VehicleCategoryService,
@@ -46,6 +48,16 @@ export class RideComponent implements OnInit {
 
 
   }
+
+  createForm(){
+    this.bookingForm = new FormGroup({
+      name: new FormControl(this.vehicleAvailability.date, [
+        Validators.required,
+        Validators.minLength(4),
+      ]),
+    });
+  }
+
 
   // public showSpinner(): void {
   //   this.spinnerService.show();

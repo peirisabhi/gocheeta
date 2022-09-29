@@ -11,7 +11,7 @@ import {LoginComponent} from './components/login/login.component';
 import {RegisterComponent} from './components/register/register.component';
 import {DriveComponent} from './components/drive/drive.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {ToastrModule} from "ngx-toastr";
 import {AuthService} from "./service/auth-service/auth.service";
@@ -44,6 +44,7 @@ import { BookingSuccessComponent } from './components/booking-success/booking-su
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     NgxSpinnerModule,
+    ReactiveFormsModule
   ],
   providers: [
     AuthService,
