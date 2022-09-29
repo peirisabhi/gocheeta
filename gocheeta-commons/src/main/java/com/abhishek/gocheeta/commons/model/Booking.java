@@ -46,8 +46,8 @@ public class Booking implements Transformer {
     private int dropOffCityId;
 
     @Column(name = "pick_up_street_address")
-    private int pickUpStreetAddress;
+    private String pickUpStreetAddress;
 
     @Column(name = "drop_off_street_address")
-    private int dropOffStreetAddress;
+    private String dropOffStreetAddress;
 }
