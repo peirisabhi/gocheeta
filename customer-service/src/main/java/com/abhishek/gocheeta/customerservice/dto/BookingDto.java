@@ -36,4 +36,10 @@ public class BookingDto implements Transformer {
 
     @JsonProperty("special_note")
     private String specialNote;
+
+    private String date;
+
+    private String time;
+
+
 }

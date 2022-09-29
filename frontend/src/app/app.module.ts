@@ -20,6 +20,7 @@ import {RequestInterceptor} from "./helpers/request.interceptor";
 import { PreviousTripsComponent } from './components/previous-trips/previous-trips.component';
 import { SideNavComponent } from './components/common/side-nav/side-nav.component';
 import {NgxSpinnerModule} from "ngx-spinner";
+import { BookingSuccessComponent } from './components/booking-success/booking-success.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import {NgxSpinnerModule} from "ngx-spinner";
     RegisterComponent,
     DriveComponent,
     PreviousTripsComponent,
-    SideNavComponent
+    SideNavComponent,
+    BookingSuccessComponent
   ],
   imports: [
     BrowserModule,

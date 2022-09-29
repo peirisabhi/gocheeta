@@ -5,6 +5,7 @@ import com.abhishek.gocheeta.commons.model.BookingStatus;
 import com.abhishek.gocheeta.commons.model.BookingStatusHistory;
 import com.abhishek.gocheeta.customerservice.dto.BookingDto;
 import com.abhishek.gocheeta.customerservice.dto.VehicleAvailabilityDto;
+import com.abhishek.gocheeta.customerservice.exception.DataNotFoundException;
 import com.abhishek.gocheeta.customerservice.exception.GeneralException;
 import com.abhishek.gocheeta.customerservice.repository.BookingRepository;
 import com.abhishek.gocheeta.customerservice.repository.BookingStatusHistoryRepository;
@@ -13,6 +14,7 @@ import com.abhishek.gocheeta.customerservice.security.JwtTokenUtil;
 import com.abhishek.gocheeta.customerservice.service.BookingService;
 import com.abhishek.gocheeta.customerservice.service.CustomerService;
 import com.abhishek.gocheeta.customerservice.service.VehicleService;
+import com.abhishek.gocheeta.customerservice.util.DateUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -67,7 +69,7 @@ public class BookingServiceImpl implements BookingService {
         try {
 
 
-             Booking booking = bookingDto.toEntity(Booking.class);
+            Booking booking = bookingDto.toEntity(Booking.class);
 
             VehicleAvailabilityDto vehicleAvailabilityDto = new VehicleAvailabilityDto();
             vehicleAvailabilityDto.setVehicleCategory(bookingDto.getVehicleCategory());
@@ -76,12 +78,13 @@ public class BookingServiceImpl implements BookingService {
 
             vehicleAvailabilityDto = vehicleService.checkVehicleAvailability(vehicleAvailabilityDto);
 
-            if(vehicleAvailabilityDto.isAvailability()){
+            if (vehicleAvailabilityDto.isAvailability()) {
 
                 booking.setCustomerId(customerId);
                 booking.setPrice(vehicleAvailabilityDto.getPriceVal());
                 booking.setVehicleId(vehicleAvailabilityDto.getVehicleId());
-//                booking.setDate(new Date());
+                booking.setDate(DateUtil.getDate(bookingDto.getDate()));
+                booking.setTime(DateUtil.getTime(bookingDto.getTime()));
 
                 booking = bookingRepository.save(booking);
 
@@ -97,10 +100,10 @@ public class BookingServiceImpl implements BookingService {
                 bookingDto.setId(booking.getId());
                 return bookingDto;
 
-            }else {
+            } else {
                 System.out.println("no available vehicles");
+                throw new DataNotFoundException("no available vehicles");
             }
-
 
 
         } catch (Exception e) {
@@ -108,7 +111,5 @@ public class BookingServiceImpl implements BookingService {
             e.printStackTrace();
             throw new GeneralException(GENERAL_ERROR);
         }
-
-        return null;
     }
 }

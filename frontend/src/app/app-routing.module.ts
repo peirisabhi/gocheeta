@@ -7,6 +7,7 @@ import {RegisterComponent} from "./components/register/register.component";
 import {DriveComponent} from "./components/drive/drive.component";
 import {AuthGuard} from "./shared/auth.guard";
 import {PreviousTripsComponent} from "./components/previous-trips/previous-trips.component";
+import {BookingSuccessComponent} from "./components/booking-success/booking-success.component";
 
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -15,7 +16,8 @@ const routes: Routes = [
   {path: 'register', component: RegisterComponent},
   {path: 'ride', component: RideComponent, canActivate: [AuthGuard]},
   {path: 'drive', component: DriveComponent},
-  {path: 'previous-trips', component: PreviousTripsComponent}
+  {path: 'previous-trips', component: PreviousTripsComponent},
+  {path: 'booking-success', component: BookingSuccessComponent}
 ];
 
 @NgModule({

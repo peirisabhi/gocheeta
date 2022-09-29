@@ -9,6 +9,8 @@ import {Booking} from "../../model/booking-model/booking";
 import {NotificationService} from "../../service/notification-service/notification.service";
 import {BookingService} from "../../service/booking-service/booking.service";
 import {NgxSpinnerService} from "ngx-spinner";
+import {Confirm, Report} from "notiflix";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-ride',
@@ -31,12 +33,15 @@ export class RideComponent implements OnInit {
               private vehicleAvailabilityService: VehicleAvailabilityService,
               private notificationService: NotificationService,
               private bookingService: BookingService,
-              private spinnerService: NgxSpinnerService) {
+              private spinnerService: NgxSpinnerService,
+              public router: Router) {
   }
 
   ngOnInit(): void {
     this.getCities()
     this.getVehicleCategories()
+
+
   }
 
   // public showSpinner(): void {
@@ -46,7 +51,6 @@ export class RideComponent implements OnInit {
   //     this.spinnerService.hide();
   //   }, 5000); // 5 seconds
   // }
-
 
 
   getCities() {
@@ -93,23 +97,56 @@ export class RideComponent implements OnInit {
 
   saveBooking() {
 
-    this.spinnerService.show();
+    // window.location.replace('/booking-success', {data: "abc"});
+    // this.router.navigate(['/booking-success'],
+    //   { state: {
+    //     example: {id: "asasa", ba:"asas", sasa: "Asasa" },
+    //     } });
 
-    this.booking.from_city = this.vehicleAvailability.from_city;
-    this.booking.to_city = this.vehicleAvailability.to_city;
-    this.booking.vehicle_category = this.vehicleAvailability.vehicle_category;
-    this.booking.date = this.vehicleAvailability.date;
-    this.booking.time = this.vehicleAvailability.time;
+    Confirm.show(
+      'Confirm',
+      'Do you want to book?',
+      'Yes', 'No',
+      () => {
 
-    this.bookingService.saveBooking(this.booking)
-      .subscribe(data => {
-          console.log(data)
-          this.spinnerService.hide();
-        },
-        error => {
-          console.log(error)
-          this.spinnerService.hide();
-        });
+        this.spinnerService.show();
+
+        this.booking.from_city = this.vehicleAvailability.from_city;
+        this.booking.to_city = this.vehicleAvailability.to_city;
+        this.booking.vehicle_category = this.vehicleAvailability.vehicle_category;
+        this.booking.date = this.vehicleAvailability.date;
+        this.booking.time = this.vehicleAvailability.time;
+
+        this.bookingService.saveBooking(this.booking)
+          .subscribe(data => {
+              console.log(data)
+              this.spinnerService.hide();
+
+              // Report.success(
+              //   'Success',
+              //   'Booking Success',
+              //   'Okay',);
+
+              // window.location.replace('/booking-success');
+
+              this.router.navigate(['/booking-success'],
+                { state: {
+                    booking: data,
+                  } });
+
+            },
+            error => {
+              console.log(error)
+              this.spinnerService.hide();
+
+              Report.failure(
+                'Error',
+                'Something went wrong please, please try again later',
+                'Okay',);
+
+            });
+
+      });
   }
 
 }

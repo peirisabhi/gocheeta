@@ -18,6 +18,8 @@ public class DateUtil {
 
     private static final SimpleDateFormat dateFormatWithTime12 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss aa");
 
+    private static final SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
+
     public static String S(@NotNull Date date) {
         return dateFormat.format(date);
     }
@@ -32,5 +34,9 @@ public class DateUtil {
 
     public static Date getDate(@NotNull String date) throws ParseException {
         return dateFormat.parse(date);
+    }
+
+    public static Date getTime(@NotNull String time) throws ParseException {
+        return timeFormat.parse(time);
     }
 }
