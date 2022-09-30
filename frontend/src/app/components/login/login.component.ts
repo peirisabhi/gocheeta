@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {AuthService} from "../../service/auth-service/auth.service";
 import {StorageService} from "../../service/storage-service/storage.service";
 import {Router} from "@angular/router";
+import {NotificationService} from "../../service/notification-service/notification.service";
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,8 @@ export class LoginComponent implements OnInit {
 
   constructor(private authService: AuthService,
               private storageService: StorageService,
-              private router: Router) { }
+              private router: Router,
+              private notifyService: NotificationService) { }
 
   ngOnInit(): void {
   }
@@ -40,6 +42,7 @@ export class LoginComponent implements OnInit {
         // this.errorMessage = err.error.message;
         // this.isLoginFailed = true;
         console.log("error -- ", err)
+        this.notifyService.showError("Login Failed", "Error")
       }
     });
   }
