@@ -47,14 +47,14 @@
 
                     </div>
                   </div>
-                  <div *ngIf="fname.invalid && (fname.dirty || fname.touched)"
-                       class="alert">
+<!--                  <div *ngIf="fname.invalid && (fname.dirty || fname.touched)"-->
+<!--                       class="alert">-->
 
-                    <div *ngIf="fname.errors?.['required']">
-                      Name is required.
-                    </div>
+<!--                    <div *ngIf="fname.errors?.['required']">-->
+<!--                      Name is required.-->
+<!--                    </div>-->
 
-                  </div>
+<!--                  </div>-->
 
                   <div class="col-12 col-sm-6 mb-4">
                     <div class="form-group form-focus">
@@ -73,7 +73,7 @@
                   <div class="col-12 mb-4">
                     <div class="form-group form-focus">
                       <label class="label">Email</label>
-                      <input placeholder="abc@gmail.com" type="email" name="email" [(ngModel)]="customer.email" class="form-control floating">
+                      <input placeholder="abc@gmail.com" type="email" name="email" [(ngModel)]="customer.email" [email]="true" class="form-control floating">
                     </div>
                   </div>
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Customer} from "../../model/customer-model/customer";
 import {CustomerService} from "../../service/customer-service/customer.service";
 import {NotificationService} from "../../service/notification-service/notification.service";
@@ -16,7 +16,7 @@ export class RegisterComponent implements OnInit {
   registerForm?: FormGroup;
 
   constructor(private customerService: CustomerService,
-              private notifyService: NotificationService){
+              private notifyService: NotificationService) {
 
   }
 
@@ -25,7 +25,7 @@ export class RegisterComponent implements OnInit {
   }
 
 
-  createForm(){
+  createForm() {
     this.registerForm = new FormGroup({
       fname: new FormControl(this.customer.fname, [
         Validators.required,
@@ -55,11 +55,30 @@ export class RegisterComponent implements OnInit {
 
 
   saveCustomer() {
-    this.customerService.saveCustomer(this.customer)
-      .subscribe(data => {
-        this.customer = new Customer();
-        this.notifyService.showSuccess("Registration Success", "Success");
-      })
+
+    if (this.customer.fname == null || this.customer.fname.length == 0) {
+      this.notifyService.showWarning("First name not be empty", "Required Feild Missing")
+    } else if (this.customer.lname == null || this.customer.lname.length == 0) {
+      this.notifyService.showWarning("Last name not be empty", "Required Feild Missing")
+    } else if (this.customer.mobile == null || this.customer.mobile.length == 0) {
+      this.notifyService.showWarning("Mobile number not be empty", "Required Feild Missing")
+    } else if (this.customer.email == null || this.customer.email.length == 0) {
+      this.notifyService.showWarning("Email not be empty", "Required Feild Missing")
+    } else if (this.customer.password == null || this.customer.password.length < 6) {
+      this.notifyService.showWarning("Password should be minimum 6 characters", "Required Feild Missing")
+    } else if (this.customer.password != this.customer.confirm_password) {
+      this.notifyService.showWarning("Confirm Password not same", "Required Feild Missing")
+    } else {
+
+      this.customerService.saveCustomer(this.customer)
+        .subscribe(data => {
+            this.customer = new Customer();
+            this.notifyService.showSuccess("Registration Success, Please Login", "Success");
+          },
+          error => {
+            this.notifyService.showError("Something Went Wrong, Please try again", "Error")
+          })
+    }
   }
 
 }
