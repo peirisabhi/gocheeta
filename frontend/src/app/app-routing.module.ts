@@ -16,8 +16,8 @@ const routes: Routes = [
   {path: 'register', component: RegisterComponent},
   {path: 'ride', component: RideComponent, canActivate: [AuthGuard]},
   {path: 'drive', component: DriveComponent},
-  {path: 'previous-trips', component: PreviousTripsComponent},
-  {path: 'booking-success', component: BookingSuccessComponent}
+  {path: 'previous-trips', component: PreviousTripsComponent, canActivate: [AuthGuard]},
+  {path: 'booking-success', component: BookingSuccessComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({
