@@ -8,6 +8,7 @@ import {DriveComponent} from "./components/drive/drive.component";
 import {AuthGuard} from "./shared/auth.guard";
 import {PreviousTripsComponent} from "./components/previous-trips/previous-trips.component";
 import {BookingSuccessComponent} from "./components/booking-success/booking-success.component";
+import {ProfileSettingsComponent} from "./components/profile-settings/profile-settings.component";
 
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -17,7 +18,8 @@ const routes: Routes = [
   {path: 'ride', component: RideComponent, canActivate: [AuthGuard]},
   {path: 'drive', component: DriveComponent},
   {path: 'previous-trips', component: PreviousTripsComponent, canActivate: [AuthGuard]},
-  {path: 'booking-success', component: BookingSuccessComponent, canActivate: [AuthGuard]}
+  {path: 'booking-success', component: BookingSuccessComponent, canActivate: [AuthGuard]},
+  {path: 'profile-settings', component: ProfileSettingsComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({

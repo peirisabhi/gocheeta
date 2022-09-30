@@ -21,6 +21,7 @@ import { PreviousTripsComponent } from './components/previous-trips/previous-tri
 import { SideNavComponent } from './components/common/side-nav/side-nav.component';
 import {NgxSpinnerModule} from "ngx-spinner";
 import { BookingSuccessComponent } from './components/booking-success/booking-success.component';
+import { ProfileSettingsComponent } from './components/profile-settings/profile-settings.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { BookingSuccessComponent } from './components/booking-success/booking-su
     DriveComponent,
     PreviousTripsComponent,
     SideNavComponent,
-    BookingSuccessComponent
+    BookingSuccessComponent,
+    ProfileSettingsComponent
   ],
   imports: [
     BrowserModule,
