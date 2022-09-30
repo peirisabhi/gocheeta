@@ -42,8 +42,18 @@
                   <div class="col-12 col-sm-6 mb-4">
                     <div class="form-group form-focus">
                       <label class="label">First Name</label>
-                      <input placeholder="David" type="text" name="fname" [(ngModel)]="customer.fname" class="form-control">
+                      <input placeholder="David" type="text" name="fname" required [(ngModel)]="customer.fname" #fname="ngModel" class="form-control">
+
+
                     </div>
+                  </div>
+                  <div *ngIf="fname.invalid && (fname.dirty || fname.touched)"
+                       class="alert">
+
+                    <div *ngIf="fname.errors?.['required']">
+                      Name is required.
+                    </div>
+
                   </div>
 
                   <div class="col-12 col-sm-6 mb-4">

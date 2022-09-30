@@ -44,7 +44,7 @@ import { BookingSuccessComponent } from './components/booking-success/booking-su
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     NgxSpinnerModule,
-    ReactiveFormsModule
+    // ReactiveFormsModule
   ],
   providers: [
     AuthService,
