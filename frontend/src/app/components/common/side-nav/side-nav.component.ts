@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {StorageService} from "../../../service/storage-service/storage.service";
 
 @Component({
   selector: 'app-side-nav',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SideNavComponent implements OnInit {
 
-  constructor() { }
+  isLoggedIn = false;
+  loggedUsersName = "";
+  loggedUsersImg = "";
+
+  constructor(private storageService: StorageService) { }
 
   ngOnInit(): void {
+    if (this.storageService.isLoggedIn()) {
+      this.isLoggedIn = true;
+      this.loggedUsersName = this.storageService.getUser().data.fname;
+    }
+
   }
 
 }
