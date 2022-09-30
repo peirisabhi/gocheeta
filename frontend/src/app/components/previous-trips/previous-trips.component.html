@@ -7,7 +7,7 @@
       <div class="col-md-12 col-12">
         <nav aria-label="breadcrumb" class="page-breadcrumb">
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="index-2.html">Home</a></li>
+            <li class="breadcrumb-item"><a href="">Home</a></li>
             <li class="breadcrumb-item active" aria-current="page">Previous Trips</li>
           </ol>
         </nav>
@@ -44,56 +44,41 @@
                   <th>Driver</th>
                   <th>Vehicle Category</th>
                   <th>Price</th>
-                  <th>Km</th>
                   <th>Status</th>
-                  <th>Action</th>
+                  <th>Pickup City</th>
+                  <th>Drop Off City</th>
+                  <th>Pickup Street</th>
+                  <th>Drop Off Street</th>
                 </tr>
                 </thead>
                 <tbody>
 
-                <tr>
-                  <td>
-                    <a href="invoice-view.html">#BK-0001</a>
+                <tr *ngFor="let booking of bookings">
+                  <td>2
+                    <a href="">#{{booking.id}}</a>
                   </td>
                   <td>
                     <h2 class="table-avatar">
-                      <a href="patient-profile.html">Saman Kumara</a>
+                      {{booking.driver}}
                     </h2>
                   </td>
-                  <td>Tuk Tuk</td>
-                  <td>Rs.2789.00</td>
-                  <td>42Km</td>
-                  <td>Completed</td>
-                  <td class="text-right">
-                    <div class="table-action">
-                      <a href="invoice-view.html" class="btn btn-sm bg-info-light">
-                        <i class="far fa-eye"></i> View
-                      </a>
-                    </div>
-                  </td>
+                  <td>{{booking.vehicle_category_val}}</td>
+                  <td>Rs.{{booking.price}}</td>
+                  <td>{{booking.status}}</td>
+                  <td>{{booking.from_city_val}}</td>
+                  <td>{{booking.to_city_val}}</td>
+                  <td>{{booking.pick_up_street}}</td>
+                  <td>{{booking.drop_off_street}}</td>
+
+<!--                  <td class="text-right">-->
+<!--                    <div class="table-action">-->
+<!--                      <a href="" class="btn btn-sm bg-info-light">-->
+<!--                        <i class="far fa-eye"></i> View-->
+<!--                      </a>-->
+<!--                    </div>-->
+<!--                  </td>-->
                 </tr>
 
-                <tr>
-                  <td>
-                    <a href="invoice-view.html">#BK-0002</a>
-                  </td>
-                  <td>
-                    <h2 class="table-avatar">
-                      <a href="patient-profile.html">Perera Perera</a>
-                    </h2>
-                  </td>
-                  <td>Mini Van</td>
-                  <td>Rs.3480.00</td>
-                  <td>53Km</td>
-                  <td>Completed</td>
-                  <td class="text-right">
-                    <div class="table-action">
-                      <a href="invoice-view.html" class="btn btn-sm bg-info-light">
-                        <i class="far fa-eye"></i> View
-                      </a>
-                    </div>
-                  </td>
-                </tr>
 
                 </tbody>
               </table>

@@ -11,6 +11,7 @@ import com.abhishek.gocheeta.customerservice.repository.BookingStatusRepository;
 import com.abhishek.gocheeta.customerservice.security.JwtTokenUtil;
 import com.abhishek.gocheeta.customerservice.service.*;
 import com.abhishek.gocheeta.customerservice.util.DateUtil;
+import com.abhishek.gocheeta.customerservice.util.FormatUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +20,10 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 
+import java.text.ParseException;
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.abhishek.gocheeta.customerservice.constant.ErrorMessage.GENERAL_ERROR;
 
@@ -133,4 +137,51 @@ public class BookingServiceImpl implements BookingService {
             throw new GeneralException(GENERAL_ERROR);
         }
     }
+
+    @Override
+    public List<BookingDto> getBookingsByRider(int id) {
+
+        try{
+            return bookingRepository.findAllByCustomerId(id)
+                    .stream()
+                    .map(booking -> {
+                        final BookingDto bookingDto = booking.toDto(BookingDto.class);
+                        final Vehicle vehicle = vehicleService.getVehicle(booking.getVehicleId());
+                        final Driver driver = driverService.getDriver(vehicle.getDriverId());
+                        try {
+                            bookingDto.setDate(DateUtil.getStringDate(booking.getDate()));
+                            bookingDto.setFromCityVal(cityService.getCity(booking.getPickUpCityId()).getCity());
+                            bookingDto.setToCityVal(cityService.getCity(booking.getDropOffCityId()).getCity());
+                            bookingDto.setVehicleNo(vehicle.getVehicleNumber());
+                            bookingDto.setDriver(driver.getFname().concat(" ").concat(driver.getLname()));
+                            bookingDto.setVehicleCategoryVal(vehicleCategoryService.getVehicleCategory(vehicle.getVehicleCategoryId()).getCategory());
+                            bookingDto.setPrice(FormatUtil.getDoubleWithCents(booking.getPrice()));
+                            bookingDto.setPickUpStreet(booking.getPickUpStreetAddress());
+                            bookingDto.setDropOffStreet(booking.getDropOffStreetAddress());
+
+                            final List<BookingStatusHistory> statusHistories = bookingStatusHistoryRepository.findAllByBookingId(booking.getId());
+                            System.out.println("statusHistories -- " + statusHistories.size());
+                            final int bookingStatusId = statusHistories.get(statusHistories.size() - 1).getBookingStatusId();
+
+                            bookingDto.setStatus(bookingStatusRepository.findById(bookingStatusId).get().getStatus());
+
+                            return bookingDto;
+                        } catch (ParseException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }).collect(Collectors.toList());
+
+        }catch (Exception e) {
+            log.error(e.getLocalizedMessage());
+            e.printStackTrace();
+            throw new GeneralException(GENERAL_ERROR);
+        }
+
+    }
+
+
+
 }
+
+
+

@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * Created by Intellij.
  * Author: abhishekpeiris
@@ -30,6 +32,11 @@ public class BookingController {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(bookingService.saveBooking(bookingDto));
 
+    }
+
+    @GetMapping("{customerId}")
+    public ResponseEntity<List<BookingDto>> getBookingsByRider(@PathVariable(value = "customerId") int customerId){
+        return ResponseEntity.ok(bookingService.getBookingsByRider(customerId));
     }
 
 }

@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import {environment} from "../../../environments/environment";
-import {Customer} from "../../model/customer-model/customer";
 import {Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {Booking} from "../../model/booking-model/booking";
@@ -16,5 +15,9 @@ export class BookingService {
 
   saveBooking(booking : Booking): Observable<Booking>{
     return  this.httpClient.post<Booking>(apiURL+"booking", booking);
+  }
+
+  getBookings(customerId: string): Observable<Booking[]>{
+    return this.httpClient.get<Booking[]>(apiURL + 'booking/'+customerId);
   }
 }

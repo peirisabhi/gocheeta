@@ -58,4 +58,10 @@ public class BookingDto implements Transformer {
     @JsonProperty("end_time")
     private String endTime;
 
+    private String price;
+
+    private String status;
+
+    private int km;
+
 }

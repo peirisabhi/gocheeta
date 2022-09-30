@@ -36,6 +36,9 @@ public class DateUtil {
     public static Date getDate(@NotNull String date) throws ParseException {
         return dateFormat.parse(date);
     }
+    public static String getStringDate(@NotNull Date date) throws ParseException {
+        return dateFormat.format(date);
+    }
 
     public static Date getTime(@NotNull String time) throws ParseException {
         return timeFormat.parse(time);
