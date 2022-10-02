@@ -117,12 +117,12 @@ export class RideComponent implements OnInit {
 
   saveBooking() {
 
-    if (!this.condition) {
-      Report.warning(
-        'Warning',
-        'Please accept Terms & Condition!',
-        'Okay',);
-    } else {
+    // if (!this.condition) {
+    //   Report.warning(
+    //     'Warning',
+    //     'Please accept Terms & Condition!',
+    //     'Okay',);
+    // } else {
 
       Confirm.show(
         'Confirm',
@@ -163,7 +163,7 @@ export class RideComponent implements OnInit {
               });
 
         });
-    }
+    // }
   }
 
 }
