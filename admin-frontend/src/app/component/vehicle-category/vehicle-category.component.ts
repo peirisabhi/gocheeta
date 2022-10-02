@@ -3,10 +3,10 @@ import {environment} from "../../../environments/environment";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {VehicleCategory} from "../../model/vehicle-category-model/vehicle-category";
 import {VehicleCategoryService} from "../../service/vehicle-category-service/vehicle-category.service";
-import {City} from "../../model/city-model/city";
 import {NotificationService} from "../../service/notification-service/notification.service";
 import {DataTablesResponse} from "../../model/data-tables-response-model/data-tables-response";
 import {HttpClient} from "@angular/common/http";
+
 
 let apiURL = environment.apiURL;
 
@@ -32,7 +32,14 @@ export class VehicleCategoryComponent implements OnInit {
     this.loadDataTable()
   }
 
-  open(content: any) {
+  open(content: any, id: any|null) {
+
+    if (id != null){
+      this.getVehicleCategory(id)
+    }else {
+      this.vehicleCategory = new VehicleCategory();
+    }
+
     console.log(content)
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'});
   }
@@ -46,6 +53,7 @@ export class VehicleCategoryComponent implements OnInit {
     this.vehicleCategoryService.saveVehicleCategory(this.vehicleCategory)
       .subscribe(data => {
         this.vehicleCategory = new VehicleCategory();
+        window.location.reload()
         this.notifyService.showSuccess("Successfully Category Saved", "Success");
       })
   }
@@ -74,6 +82,23 @@ export class VehicleCategoryComponent implements OnInit {
         {data: 'city'}
       ]
     };
+  }
+
+  getVehicleCategory(id: any){
+    this.vehicleCategoryService.getVehicleCategory(id)
+      .subscribe(data => {
+        this.vehicleCategory = data;
+        console.log(data)
+      })
+  }
+
+  updateVehicleCategory(){
+    this.vehicleCategoryService.updateVehicleCategory(this.vehicleCategory)
+      .subscribe(data => {
+        this.vehicleCategory = new VehicleCategory();
+        window.location.reload()
+        this.notifyService.showSuccess("Successfully Category Saved", "Success");
+      })
   }
 
 }

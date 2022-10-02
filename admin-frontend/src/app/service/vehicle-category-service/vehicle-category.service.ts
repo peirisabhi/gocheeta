@@ -19,7 +19,17 @@ export class VehicleCategoryService {
   }
 
 
+  updateVehicleCategory(vehicleCategory : VehicleCategory): Observable<VehicleCategory>{
+    return  this.httpClient.put<VehicleCategory>(apiURL+"vehicle-category", vehicleCategory);
+  }
+
+
   getVehicleCategories(): Observable<VehicleCategory[]>{
     return this.httpClient.get<VehicleCategory[]>(apiURL + 'vehicle-category');
+  }
+
+
+  getVehicleCategory(id:any): Observable<VehicleCategory>{
+    return this.httpClient.get<VehicleCategory>(apiURL + 'vehicle-category/'+ id);
   }
 }
