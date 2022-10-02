@@ -75,9 +75,8 @@
               <p class="text-muted mb-0">Rider</p>
             </div>
           </div>
-          <a class="dropdown-item" href="doctor-dashboard.jsp">Dashboard</a>
-          <a class="dropdown-item" href="doctor-profile-settings.jsp">Profile Settings</a>
-          <a class="dropdown-item" href="Logout">Logout</a>
+          <a class="dropdown-item" [routerLink]="['/previous-trips']" routerLinkActive="active">Dashboard</a>
+          <a class="dropdown-item" (click)="logOut()">Logout</a>
         </div>
       </li>
     </ul>
