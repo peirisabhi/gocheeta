@@ -12,4 +12,8 @@ export class TopbarComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  logOut(){
+    window.location.replace('/')
+  }
+
 }
