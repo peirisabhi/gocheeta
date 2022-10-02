@@ -3,6 +3,7 @@ import {Customer} from "../../model/customer-model/customer";
 import {CustomerService} from "../../service/customer-service/customer.service";
 import {NotificationService} from "../../service/notification-service/notification.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {NgxSpinnerService} from "ngx-spinner";
 
 @Component({
   selector: 'app-register',
@@ -16,7 +17,8 @@ export class RegisterComponent implements OnInit {
   registerForm?: FormGroup;
 
   constructor(private customerService: CustomerService,
-              private notifyService: NotificationService) {
+              private notifyService: NotificationService,
+              private spinnerService: NgxSpinnerService) {
 
   }
 
@@ -70,12 +72,16 @@ export class RegisterComponent implements OnInit {
       this.notifyService.showWarning("Confirm Password not same", "Required Feild Missing")
     } else {
 
+      this.spinnerService.show();
+
       this.customerService.saveCustomer(this.customer)
         .subscribe(data => {
             this.customer = new Customer();
+            this.spinnerService.hide();
             this.notifyService.showSuccess("Registration Success, Please Login", "Success");
           },
           error => {
+            this.spinnerService.hide();
             this.notifyService.showError("Something Went Wrong, Please try again", "Error")
           })
     }
