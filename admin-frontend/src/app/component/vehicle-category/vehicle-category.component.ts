@@ -62,6 +62,7 @@ export class VehicleCategoryComponent implements OnInit {
     this.dtOptions = {
       serverSide: true,
       processing: true,
+      dom: 'Bfrtip',
       ajax: (dataTablesParameters: any, callback) => {
         this.http
           .post<DataTablesResponse>(
@@ -80,7 +81,7 @@ export class VehicleCategoryComponent implements OnInit {
       columns: [
         {data: 'id'},
         {data: 'city'}
-      ]
+      ],
     };
   }
 

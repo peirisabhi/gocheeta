@@ -8,7 +8,7 @@
         <li class="">
           <a [routerLink]="['/dashboard']" routerLinkActive="active"><i class="fe fe-home"></i> <span>Dashboard</span></a>
         </li>
-        <li>
+        <li *ngIf="admin">
           <a [routerLink]="['/user']" routerLinkActive="active"><i class="fe fe-user-plus"></i> <span>Users</span></a>
         </li>
         <li>

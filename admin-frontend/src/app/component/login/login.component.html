@@ -26,13 +26,13 @@
         </div>
         <h3>Login</h3>
         <p class="account-subtitle">login to your account to continue</p>
-        <form action="index.html">
+        <form (ngSubmit)="onSubmit()">
           <div class="form-group form-focus">
-            <input type="text" class="form-control floating">
+            <input type="email" class="form-control floating" name="email" [(ngModel)]="form.username">
             <label class="focus-label">Enter Email</label>
           </div>
           <div class="form-group form-focus">
-            <input type="password" class="form-control floating">
+            <input type="password" class="form-control floating" name="password" [(ngModel)]="form.password">
             <label class="focus-label">Enter Password</label>
           </div>
           <div class="form-group">
@@ -44,7 +44,7 @@
             </div>
           </div>
           <div class="d-grid">
-            <button class="btn btn-primary btn-block" type="submit" (click)="goToDashboard()">Login</button>
+            <button class="btn btn-primary btn-block" type="submit" >Login</button>
           </div>
 
         </form>

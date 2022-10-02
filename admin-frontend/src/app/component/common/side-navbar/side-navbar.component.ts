@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {StorageService} from "../../../service/storage-service/storage.service";
 
 @Component({
   selector: 'app-side-navbar',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SideNavbarComponent implements OnInit {
 
-  constructor() { }
+  admin: boolean = false;
+
+  constructor(private storageService: StorageService) { }
 
   ngOnInit(): void {
+    let role = this.storageService.get('role');
+    console.log(role)
+
+    if(role == "admin"){
+      this.admin = true;
+    }
+
   }
 
 }
