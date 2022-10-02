@@ -8,6 +8,7 @@ import {UserService} from "../../service/user-service/user.service";
 import {NotificationService} from "../../service/notification-service/notification.service";
 import {HttpClient} from "@angular/common/http";
 import {DataTablesResponse} from "../../model/data-tables-response-model/data-tables-response";
+import {Confirm} from "notiflix";
 
 
 let apiURL = environment.apiURL;
@@ -93,7 +94,26 @@ export class UserComponent implements OnInit {
         console.log("saving --- " + data);
         this.user = new User();
         this.notifyService.showSuccess("Successfully User Saved", "Success");
+        window.location.reload();
       })
+  }
+
+  removeUser(id: any){
+    console.log(id)
+
+    Confirm.show(
+      'Confirm',
+      'Do you want to book?',
+      'Yes', 'No',
+      () => {
+        this.userService.removeUser(id)
+          .subscribe(data => {
+            console.log("removing --- " + data);
+            this.notifyService.showSuccess("Successfully User Removed", "Success");
+            window.location.reload();
+          })
+      }
+    );
   }
 
 }

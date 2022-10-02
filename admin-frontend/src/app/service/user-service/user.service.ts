@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpEvent} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
 import {User} from "../../model/user-model/user";
 import {Observable} from "rxjs";
@@ -17,6 +17,10 @@ export class UserService {
    return  this.httpClient.post<User>(apiURL+"user", user);
   }
 
+
+  removeUser(id : any): Observable<User>{
+    return  this.httpClient.delete<User>(apiURL+"user/"+id);
+  }
 
 
 }
