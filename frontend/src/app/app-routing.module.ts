@@ -10,6 +10,7 @@ import {PreviousTripsComponent} from "./components/previous-trips/previous-trips
 import {BookingSuccessComponent} from "./components/booking-success/booking-success.component";
 import {ProfileSettingsComponent} from "./components/profile-settings/profile-settings.component";
 import {ChangePasswordComponent} from "./components/change-password/change-password.component";
+import {ForgotPasswordComponent} from "./components/forgot-password/forgot-password.component";
 
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -21,7 +22,8 @@ const routes: Routes = [
   {path: 'previous-trips', component: PreviousTripsComponent, canActivate: [AuthGuard]},
   {path: 'booking-success', component: BookingSuccessComponent, canActivate: [AuthGuard]},
   {path: 'profile-settings', component: ProfileSettingsComponent, canActivate: [AuthGuard]},
-  {path: 'change-password', component: ChangePasswordComponent, canActivate: [AuthGuard]}
+  {path: 'change-password', component: ChangePasswordComponent, canActivate: [AuthGuard]},
+  {path: 'forgot-password', component: ForgotPasswordComponent}
 ];
 
 @NgModule({
