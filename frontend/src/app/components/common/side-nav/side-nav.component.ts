@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {StorageService} from "../../../service/storage-service/storage.service";
+import {Confirm} from "notiflix";
 
 @Component({
   selector: 'app-side-nav',
@@ -20,6 +21,19 @@ export class SideNavComponent implements OnInit {
       this.loggedUsersName = this.storageService.getUser().data.fname;
     }
 
+  }
+
+
+  logOut(){
+    Confirm.show(
+      'Confirm',
+      'Do you want to log out?',
+      'Yes', 'No',
+      () => {
+        this.storageService.clean();
+        window.location.replace('/');
+      }
+    );
   }
 
 }
