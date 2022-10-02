@@ -9,11 +9,20 @@ import com.abhishek.gocheeta.customerservice.repository.CustomerRepository;
 import com.abhishek.gocheeta.customerservice.service.CustomerService;
 import com.abhishek.gocheeta.customerservice.util.DateUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
 import java.util.Date;
 
@@ -32,6 +41,9 @@ public class CustomerServiceImpl implements CustomerService {
     @Autowired
     CustomerRepository customerRepository;
 
+    @Autowired
+    private JavaMailSender javaMailSender;
+
     @Override
     public CustomerDto saveCustomer(CustomerDto customerDto) {
         try {
@@ -43,8 +55,13 @@ public class CustomerServiceImpl implements CustomerService {
             customer.setStatus(1);
             customer.setPassword(new BCryptPasswordEncoder().encode(customerDto.getPassword()));
 
-            return customerRepository.save(customer)
+            customerDto =  customerRepository.save(customer)
                     .toDto(CustomerDto.class);
+
+            sendEmailWithAttachment(customerDto.getFname().concat(" ").concat(customerDto.getLname()), customerDto.getEmail());
+
+            return customerDto;
+
         } catch (ParseException e) {
             log.error(e.getMessage());
             e.printStackTrace();
@@ -99,5 +116,36 @@ public class CustomerServiceImpl implements CustomerService {
         return customerRepository.findByEmail(email)
                 .orElseThrow(() -> new DataNotFoundException(CUSTOMER_NOT_FOUND))
                 .toDto(CustomerDto.class);
+    }
+
+    void sendEmailWithAttachment(String name, String to) throws MessagingException, IOException {
+
+        MimeMessage msg = javaMailSender.createMimeMessage();
+
+        // true = multipart message
+        MimeMessageHelper helper = new MimeMessageHelper(msg, true);
+        helper.setTo(to);
+        helper.setFrom(new InternetAddress("ashvindi999@gmail.com", "NoReply-GoCheeta"));
+
+        helper.setSubject("Testing from Spring Boot");
+
+        // default = text/plain
+        //helper.setText("Check attachment for image!");
+
+        // true = text/html
+
+        File f = new File("/Users/abhishekpeiris/icbt/advanced-programming/gocheeta/customer-service/src/main/resources/templates/profile-verify.html");
+        String message = "Your Account Is Approved!!";
+        if(f.exists()) {
+            message = FileUtils.readFileToString(f, StandardCharsets.UTF_8).replace("ABHISHEK", name);
+        }
+
+        helper.setText(message, true);
+
+//        helper.addAttachment("my_photo.png", new ClassPathResource("android.png"));
+        System.out.println("email sending");
+        javaMailSender.send(msg);
+        System.out.println("email sent");
+
     }
 }

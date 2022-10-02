@@ -22,6 +22,7 @@ import { SideNavComponent } from './components/common/side-nav/side-nav.componen
 import {NgxSpinnerModule} from "ngx-spinner";
 import { BookingSuccessComponent } from './components/booking-success/booking-success.component';
 import { ProfileSettingsComponent } from './components/profile-settings/profile-settings.component';
+import { ChangePasswordComponent } from './components/change-password/change-password.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { ProfileSettingsComponent } from './components/profile-settings/profile-
     PreviousTripsComponent,
     SideNavComponent,
     BookingSuccessComponent,
-    ProfileSettingsComponent
+    ProfileSettingsComponent,
+    ChangePasswordComponent
   ],
   imports: [
     BrowserModule,
