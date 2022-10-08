@@ -17,7 +17,7 @@ import java.util.List;
  * Time: 14:27
  */
 @RestController
-@RequestMapping(value = "/licence-type")
+@RequestMapping(value = "/api/licence-type")
 @Slf4j
 @CrossOrigin
 public class LicenceTypeController {

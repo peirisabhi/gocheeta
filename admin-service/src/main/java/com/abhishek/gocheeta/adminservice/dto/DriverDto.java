@@ -2,7 +2,6 @@ package com.abhishek.gocheeta.adminservice.dto;
 
 import com.abhishek.gocheeta.commons.util.Transformer;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.sun.xml.internal.ws.developer.Serialization;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,7 +18,6 @@ import org.springframework.web.multipart.MultipartFile;
 @Getter
 @Setter
 @ToString
-@Serialization
 @Data
 public class DriverDto implements Transformer {
 

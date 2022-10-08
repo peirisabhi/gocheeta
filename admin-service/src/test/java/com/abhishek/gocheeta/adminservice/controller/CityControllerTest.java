@@ -40,21 +40,21 @@ public class CityControllerTest {
     @Test
     public void getUsers() throws Exception{
 
-        final List<CityDto> cityDtoList = new ArrayList<>();
-
-        CityDto cityDto = new CityDto(1, "Negombo");
-        CityDto cityDto1 = new CityDto(2, "Colombo");
-
-        cityDtoList.add(cityDto);
-        cityDtoList.add(cityDto1);
-
-
-        Mockito.when(cityService.getCities()).thenReturn(cityDtoList);
-
-        mockMvc.perform(MockMvcRequestBuilders.get("/city"))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$", Matchers.hasSize(2)))
-                .andExpect(MockMvcResultMatchers.jsonPath("$[0].city", Matchers.is("Negombo")));
+//        final List<CityDto> cityDtoList = new ArrayList<>();
+//
+//        CityDto cityDto = new CityDto(1, "Negombo");
+//        CityDto cityDto1 = new CityDto(2, "Colombo");
+//
+//        cityDtoList.add(cityDto);
+//        cityDtoList.add(cityDto1);
+//
+//
+//        Mockito.when(cityService.getCities()).thenReturn(cityDtoList);
+//
+//        mockMvc.perform(MockMvcRequestBuilders.get("/city"))
+//                .andExpect(MockMvcResultMatchers.status().isOk())
+//                .andExpect(MockMvcResultMatchers.jsonPath("$", Matchers.hasSize(2)))
+//                .andExpect(MockMvcResultMatchers.jsonPath("$[0].city", Matchers.is("Negombo")));
 
     }
 

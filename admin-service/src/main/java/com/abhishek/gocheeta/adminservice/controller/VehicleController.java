@@ -19,7 +19,7 @@ import java.util.List;
  * Time: 12:36
  */
 @RestController
-@RequestMapping(value = "/vehicle")
+@RequestMapping(value = "/api/vehicle")
 @Slf4j
 @CrossOrigin
 public class VehicleController {

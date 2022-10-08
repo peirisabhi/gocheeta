@@ -22,7 +22,7 @@ import java.util.List;
  */
 
 @RestController
-@RequestMapping(value = "/city")
+@RequestMapping(value = "/api/city")
 @Slf4j
 @CrossOrigin
 public class CityController {

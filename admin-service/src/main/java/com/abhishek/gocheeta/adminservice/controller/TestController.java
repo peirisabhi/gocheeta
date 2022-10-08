@@ -15,7 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
  * Time: 13:53
  */
 @RestController
-@RequestMapping(value = "/test")
+@RequestMapping(value = "/api/test")
 @Slf4j
 @CrossOrigin
 public class TestController {

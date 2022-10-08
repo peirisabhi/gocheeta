@@ -20,7 +20,7 @@ import java.util.List;
  */
 
 @RestController
-@RequestMapping(value = "/distance-charge")
+@RequestMapping(value = "/api/distance-charge")
 @Slf4j
 @CrossOrigin
 public class DistanceChargeController {

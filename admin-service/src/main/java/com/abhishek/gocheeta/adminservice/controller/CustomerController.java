@@ -19,7 +19,7 @@ import java.util.List;
  * Time: 15:08
  */
 @RestController
-@RequestMapping(value = "/customer")
+@RequestMapping(value = "/api/customer")
 @Slf4j
 public class CustomerController {
 

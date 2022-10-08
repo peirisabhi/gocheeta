@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
  * Time: 15:31
  */
 @RestController
-@RequestMapping(value = "/user")
+@RequestMapping(value = "/api/user")
 @Slf4j
 @CrossOrigin
 public class UserController {

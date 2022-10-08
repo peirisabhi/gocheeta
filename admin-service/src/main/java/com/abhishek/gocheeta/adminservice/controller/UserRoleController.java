@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/user-role")
+@RequestMapping(value = "/api/user-role")
 @Slf4j
 @CrossOrigin
 public class UserRoleController {

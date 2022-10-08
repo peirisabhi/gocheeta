@@ -21,7 +21,7 @@ import java.util.List;
  */
 
 @RestController
-@RequestMapping(value = "/vehicle-category")
+@RequestMapping(value = "/api/vehicle-category")
 @Slf4j
 @CrossOrigin
 public class VehicleCategoryController {

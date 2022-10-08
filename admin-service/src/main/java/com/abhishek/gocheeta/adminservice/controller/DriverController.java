@@ -20,7 +20,7 @@ import java.util.List;
  * Time: 16:11
  */
 @RestController
-@RequestMapping(value = "/driver")
+@RequestMapping(value = "/api/driver")
 @Slf4j
 @CrossOrigin
 public class DriverController {
